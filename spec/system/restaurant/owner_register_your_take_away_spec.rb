@@ -49,6 +49,7 @@ describe 'Proprietário registra seu estabelecimento' do
       fill_in 'Cidade', with: 'Motta'
       fill_in 'Estado', with: 'MG'
       fill_in 'Telefone', with: '(11) 2100-0000'
+      fill_in 'CEP', with: '11000-000'
       fill_in 'E-mail', with: 'bigboss@email.com'
       click_on 'Criar Estabelecimento'
 
@@ -58,7 +59,7 @@ describe 'Proprietário registra seu estabelecimento' do
       expect(page).to have_content 'Motta, MG'
       expect(page).to have_content 'Brooklyn'
       expect(page).to have_content 'Loja 1'
-      expect(page).to have_content '(11) 2100-0000'
+      expect(page).to have_content 'bigboss@email.com | (11) 2100-0000'
     end
 
     it 'e falha ao não incluir campos obrigatórios' do
@@ -80,8 +81,8 @@ describe 'Proprietário registra seu estabelecimento' do
       fill_in 'E-mail', with: 'bigboss@email'
       click_on 'Criar Estabelecimento'
 
-      expect(page).to have_content 'Não foi possível registrar seu estabelcimento, reveja os campos abaixo:'
-      expect(page).to have_content '7 erros localizados'
+      expect(page).to have_content 'Não foi possível registrar seu estabelecimento, reveja os campos abaixo:'
+      expect(page).to have_content '9 erros localizados'
       expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
       expect(page).to have_content 'Razão Social não pode ficar em branco'
       expect(page).to have_content 'CNPJ inválido'
@@ -89,6 +90,8 @@ describe 'Proprietário registra seu estabelecimento' do
       expect(page).to have_content 'CNPJ incorreto: digitado 12 números, esperado 14'
       expect(page).to have_content 'Telefone com formato inválido'
       expect(page).to have_content 'E-mail deve ser em um formato válido'
+      expect(page).to have_content 'EP deve ser em um formato válido'
+      expect(page).to have_content 'CEP não pode ficar em branco'
     end
   end
 end

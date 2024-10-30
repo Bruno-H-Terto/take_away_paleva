@@ -14,8 +14,11 @@ pt-BR:
     out_range_length: "incorreto: digitado %{number} números, esperado de 10 à 11"
   take_away_store:
     new_register: 'Registre seu estabelecimento'
+    update: 'Atualize seu estabelecimento'
     create_register: "%{name} registrado(a) com sucesso"
-    failure_create: 'Não foi possível registrar seu estabelcimento, reveja os campos abaixo:'
+    failure_create: 'Não foi possível registrar seu estabelecimento, reveja os campos abaixo:'
+    failure_update: 'Não foi possível atualizar seu estabelecimento, reveja os campos abaixo:'
+    update_register: "%{name} atualizado(a) com sucesso"
   errors:
     alert:
       one: '1 erro localizado'

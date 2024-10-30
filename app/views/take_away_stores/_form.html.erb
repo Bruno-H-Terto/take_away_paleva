@@ -1,0 +1,66 @@
+  <%= render 'shared/errors', object: take_away_store %>
+  <%= form_with model: take_away_store do |form| %>
+    <div>
+      <%= form.label :trade_name %>
+      <%= form.text_field :trade_name %>
+    </div>
+
+    <div>
+      <%= form.label :corporate_name %>
+      <%= form.text_field :corporate_name %>
+    </div>
+
+    <div>
+      <%= form.label :register_number %>
+      <%= form.text_field :register_number %>
+    </div>
+
+    <div>
+      <%= form.label :phone_number %>
+      <%= form.text_field :phone_number %>
+    </div>
+
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div>
+      <%= form.label :zip_code %>
+      <%= form.text_field :zip_code %>
+    </div>
+
+    <div>
+      <%= form.label :street %>
+      <%= form.text_field :street %>
+    </div>
+
+    <div>
+      <%= form.label :number %>
+      <%= form.number_field :number, min: 0 %>
+    </div>
+
+    <div>
+      <%= form.label :city %>
+      <%= form.text_field :city %>
+    </div>
+
+    <div>
+      <%= form.label :district %>
+      <%= form.text_field :district %>
+    </div>
+
+    <div>
+      <%= form.label :state %>
+      <%= form.text_field :state %>
+    </div>
+
+    <div>
+      <%= form.label :complement %>
+      <%= form.text_field :complement %>
+    </div>
+
+    <div>
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>

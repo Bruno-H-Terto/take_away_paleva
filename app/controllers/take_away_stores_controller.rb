@@ -1,7 +1,7 @@
 class TakeAwayStoresController < ApplicationController
   before_action :authenticate_owner!
   before_action :take_away_store_register, except: %i[create]
-  before_action :set_take_away_store, only: %i[show]
+  before_action :set_take_away_store, only: %i[show edit update]
   def new
     @take_away_store = current_owner.build_take_away_store
   end
@@ -17,9 +17,18 @@ class TakeAwayStoresController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
-  def show
-  end
+  def show; end
 
+  def edit; end
+
+  def update
+    if @take_away_store.update(take_away_store_params)
+      return redirect_to @take_away_store, notice: t('take_away_store.update_register', name: @take_away_store.trade_name)
+    end
+
+    flash.now[:alert] = t('take_away_store.failure_update')
+    render :edit, status: :unprocessable_entity
+  end
   private
 
   def take_away_store_params

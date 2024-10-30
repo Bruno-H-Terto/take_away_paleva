@@ -1,7 +1,8 @@
 <section>
   <div>
     <span><%= @take_away_store.business_name %></span>
-    <span><%= @take_away_store.phone_number %></span>
+    <span><%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
+    <%= link_to 'Editar dados', edit_take_away_store_path(@take_away_store) %>
     <div>
       <address><%= @take_away_store.street_number %></address>
       <address><%= @take_away_store.city %>, <%= @take_away_store.state %></address>
