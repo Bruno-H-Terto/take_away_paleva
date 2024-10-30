@@ -35,4 +35,20 @@ describe 'Proprietário realiza seu cadastro' do
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
     expect(page).to have_content 'CPF não pode ficar em branco'
   end
+
+  it 'CPF inválido' do
+    visit root_path
+    click_on 'Sou Proprietário'
+    click_on 'Nova conta'
+    fill_in 'CPF', with: '111.111.111-11'
+    fill_in 'Nome', with: 'Dom'
+    fill_in 'Sobrenome', with: 'Corleone'
+    fill_in 'E-mail', with: 'bigboss@email.com'
+    fill_in 'Senha', with: 'treina_dev13'
+    fill_in 'Confirme sua senha', with: 'treina_dev13'
+    click_on 'Criar conta'
+
+    expect(page).to have_content 'Não foi possível salvar proprietário: 1 erro'
+    expect(page).to have_content 'CPF numeração inválida'
+  end
 end

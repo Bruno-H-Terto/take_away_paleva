@@ -3,3 +3,7 @@ pt-BR:
     characters_minimum: 'caracteres mínimos'
     account: 'Conta'
     create: "Criar conta"
+  register_validator:
+    invalid_registration: 'numeração inválida'
+    out_range_length: "número incorreto: digitado %{number} esperado %{length}"
+    not_is_a_number: 'digite apenas valores validos'
