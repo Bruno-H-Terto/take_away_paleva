@@ -7,3 +7,5 @@ pt-BR:
     invalid_registration: 'numeração inválida'
     out_range_length: "número incorreto: digitado %{number} esperado %{length}"
     not_is_a_number: 'digite apenas valores validos'
+  take_away_store:
+    new_register: 'Registre seu estabelecimento'

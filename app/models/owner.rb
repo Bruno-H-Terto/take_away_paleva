@@ -6,4 +6,6 @@ class Owner < ApplicationRecord
   validates :register_number, :name, :surname, presence: true
   validates :register_number, uniqueness: true
   validates_with RegisterValidator, field: :register_number, length: 11, if: -> { register_number.present? }
+
+  has_one :take_away_store
 end

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Owner, type: :model do
   context '#valid?' do
+    it { should have_one(:take_away_store) }
+    
     it 'todos os campos válidos' do
       owner = Owner.new(name: 'Finn', surname: 'Jake', register_number: '402.793.150-58',
              email: 'adventure@time.com', password: 'treina_dev13')

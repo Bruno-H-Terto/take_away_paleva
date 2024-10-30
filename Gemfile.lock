@@ -258,6 +258,8 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.3.1)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -326,6 +328,7 @@ DEPENDENCIES
   rails (~> 7.2.1, >= 7.2.1.2)
   rspec-rails
   sassc-rails
+  shoulda-matchers (~> 6.0)
   sprockets-rails
   sqlite3 (>= 1.4)
   stimulus-rails
