@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      owner: 'Proprietário'
+    attributes:
+      owner:
+        register_number: 'CPF'
+        name: 'Nome'
+        surname: 'Sobrenome'
