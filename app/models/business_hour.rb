@@ -9,9 +9,9 @@ class BusinessHour < ApplicationRecord
 
   def display_hours
     if open?
-      "#{I18n.t("day_of_week.#{day_of_week}")} de #{I18n.l(open_time, format: "%H:%M")} às #{I18n.l(close_time, format: "%H:%M")} (#{I18n.t status})"
+      "#{I18n.t("day_of_week.#{day_of_week}")} de #{I18n.l(open_time, format: "%H:%M")} às #{I18n.l(close_time, format: "%H:%M")}"
     else
-      "#{I18n.t("day_of_week.#{day_of_week}")} sem funcionamento (#{I18n.t status})"
+      "#{I18n.t("day_of_week.#{day_of_week}")} sem funcionamento"
     end
   end
 

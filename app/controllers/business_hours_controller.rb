@@ -1,5 +1,7 @@
 class BusinessHoursController < ApplicationController
+  before_action :authenticate_owner!
   before_action :set_take_away_store
+  before_action :set_business_hour, only: %i[edit update]
   def new
     BusinessHour.day_of_weeks.each do |key, _|
       @take_away_store.business_hours.build(day_of_week: key)
@@ -25,10 +27,29 @@ class BusinessHoursController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @business_hour.update(business_hour_params)
+      return redirect_to take_away_store_path(@take_away_store), notice: 'Horário atualizado com sucesso'
+    end
+
+    flash.now[:alert] = 'Não foi possível atualizar seu horário, revise os campos abaixo:'
+    render :edit, status: :unprocessable_entity
+  end
+
   private
 
   def set_take_away_store
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id]) 
+  end
+
+  def set_business_hour
+    @business_hour = BusinessHour.find(params[:id])
+    @take_away_store = set_take_away_store
+    if @take_away_store.owner != @owner
+      return redirect_to take_away_store.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
+    end
   end
 
   def business_hours_params
@@ -39,7 +60,7 @@ class BusinessHoursController < ApplicationController
 
   def business_hour_params
     params.require(:business_hour).permit(
-      permied_params.each {|param| param}
+      permited_params.each {|param| param}
     )
   end
 
