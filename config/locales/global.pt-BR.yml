@@ -3,9 +3,17 @@ pt-BR:
     characters_minimum: 'caracteres mínimos'
     account: 'Conta'
     create: "Criar conta"
+    become_a_partner: 'Seja um parceiro'
+    sign_in: 'Faça seu login'
   register_validator:
     invalid_registration: 'numeração inválida'
     out_range_length: "número incorreto: digitado %{number} esperado %{length}"
     not_is_a_number: 'digite apenas valores validos'
   take_away_store:
     new_register: 'Registre seu estabelecimento'
+    create_register: "%{name} registrado(a) com sucesso"
+    failure_create: 'Não foi possível registrar seu estabelcimento, reveja os campos abaixo:'
+  errors:
+    alert:
+      one: '1 erro localizado'
+      other: "%{count} erros localizados"

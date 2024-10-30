@@ -3,8 +3,7 @@ require 'rails_helper'
 describe 'Proprietário realiza seu cadastro' do
   it 'com sucesso' do
     visit root_path
-    click_on 'Sou Proprietário'
-    click_on 'Nova conta'
+    click_on 'Seja um parceiro'
     fill_in 'CPF', with: '759.942.990-57'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'
@@ -13,15 +12,28 @@ describe 'Proprietário realiza seu cadastro' do
     fill_in 'Confirme sua senha', with: 'treina_dev13'
     click_on 'Criar conta'
 
-    expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
-    # expect(page).to have_content 'Registre seu estabelecimento'
-    # # expect(current_path).to eq  new_establishment_path
+    expect(page).to have_css 'nav', text: 'Dom Corleone'
+    expect(page).to have_css 'nav', text: 'bigboss@email.com'
+  end
+
+  it 'realiza logout após registro' do
+    visit root_path
+    click_on 'Seja um parceiro'
+    fill_in 'CPF', with: '759.942.990-57'
+    fill_in 'Nome', with: 'Dom'
+    fill_in 'Sobrenome', with: 'Corleone'
+    fill_in 'E-mail', with: 'bigboss@email.com'
+    fill_in 'Senha', with: 'treina_dev13'
+    fill_in 'Confirme sua senha', with: 'treina_dev13'
+    click_on 'Criar conta'
+    click_on 'Sair'
+
+    expect(page).to have_content 'Logout efetuado com sucesso.'
   end
 
   it 'e falha ao não preencher informações obrigatórias' do
     visit root_path
-    click_on 'Sou Proprietário'
-    click_on 'Nova conta'
+    click_on 'Seja um parceiro'
     fill_in 'CPF', with: ''
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
@@ -38,8 +50,7 @@ describe 'Proprietário realiza seu cadastro' do
 
   it 'CPF inválido' do
     visit root_path
-    click_on 'Sou Proprietário'
-    click_on 'Nova conta'
+    click_on 'Seja um parceiro'
     fill_in 'CPF', with: '111.111.111-11'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'

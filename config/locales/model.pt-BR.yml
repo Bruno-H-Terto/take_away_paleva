@@ -2,8 +2,23 @@ pt-BR:
   activerecord:
     models:
       owner: 'Proprietário'
+      take_away_store: 'Estabelecimento'
     attributes:
       owner:
         register_number: 'CPF'
         name: 'Nome'
         surname: 'Sobrenome'
+      take_away_store:
+        trade_name: 'Nome Fantasia'
+        corporate_name: 'Razão Social'
+        register_number: 'CNPJ'
+        phone_number: 'Telefone'
+        street: 'Logradouro'
+        number: 'Número'
+        district: 'Bairro'
+        city: 'Cidade'
+        state: 'Estado'
+        zip_code: 'CEP'
+        complement: 'Complemento'
+        code: 'Código'
+        email: 'E-mail'

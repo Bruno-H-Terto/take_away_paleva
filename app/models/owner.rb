@@ -8,4 +8,9 @@ class Owner < ApplicationRecord
   validates_with RegisterValidator, field: :register_number, length: 11, if: -> { register_number.present? }
 
   has_one :take_away_store
+
+
+  def full_name
+    "#{name} #{surname}"
+  end
 end

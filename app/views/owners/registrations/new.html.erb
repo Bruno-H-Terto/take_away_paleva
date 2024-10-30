@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2><%= t('owner.become_a_partner') %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "owners/shared/error_messages", resource: resource %>
@@ -37,7 +37,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit t('owner.create') %>
+    <%= f.submit t('owner.create'), class: 'btn btn-primary d-grid' %>
   </div>
 <% end %>
 
