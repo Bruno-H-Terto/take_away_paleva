@@ -6,9 +6,12 @@ pt-BR:
     become_a_partner: 'Seja um parceiro'
     sign_in: 'Faça seu login'
   register_validator:
-    invalid_registration: 'numeração inválida'
-    out_range_length: "número incorreto: digitado %{number} esperado %{length}"
+    invalid_registration: 'inválido'
+    out_range_length: "incorreto: digitado %{number} números, esperado %{length}"
     not_is_a_number: 'digite apenas valores validos'
+  phone_validator:
+    invalid_registration: 'com formato inválido'
+    out_range_length: "incorreto: digitado %{number} números, esperado de 10 à 11"
   take_away_store:
     new_register: 'Registre seu estabelecimento'
     create_register: "%{name} registrado(a) com sucesso"

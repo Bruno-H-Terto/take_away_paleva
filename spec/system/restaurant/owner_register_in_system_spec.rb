@@ -60,6 +60,6 @@ describe 'Proprietário realiza seu cadastro' do
     click_on 'Criar conta'
 
     expect(page).to have_content 'Não foi possível salvar proprietário: 1 erro'
-    expect(page).to have_content 'CPF numeração inválida'
+    expect(page).to have_content 'CPF inválido'
   end
 end

@@ -2,14 +2,7 @@ class RegisterValidator < ActiveModel::Validator
   def validate(record)
     length = options[:length]
     field = options[:field]
-
-    if record.send(field).match(/\A(\d){3}[.](\d){3}[.](\d){3}[-](\d){2}$/)
-      digits = record.send(field).gsub(/[.-]/, '')
-    elsif record.send(field).match(/\A(\d){2}[.](\d){3}[.](\d){3}[\/](\d){4}[-](\d){2}$/)
-      digits = record.send(field).gsub(/[\/.-]/, '')
-    else
-      digits = record.send(field)
-    end
+    digits = record.send(field).gsub(/[\/.-]/, '')
     
     validate_register(record, field, length, digits)
   end

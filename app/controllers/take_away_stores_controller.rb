@@ -14,7 +14,7 @@ class TakeAwayStoresController < ApplicationController
     end
 
     flash.now[:alert] = t('take_away_store.failure_create')
-    render new:, status: :unprocessable_entity
+    render :new, status: :unprocessable_entity
   end
 
   def show

@@ -32,6 +32,7 @@ describe 'Proprietário registra seu estabelecimento' do
       expect(page).to have_content 'Registre seu estabelecimento'
       expect(current_path).to eq  new_take_away_store_path
     end
+
     it 'com sucesso' do
       owner = Owner.create!(name: 'Vito', surname: 'Corleone', register_number: '402.793.150-58',
               email: 'vito@email.com', password: 'treina_dev13')
@@ -43,12 +44,12 @@ describe 'Proprietário registra seu estabelecimento' do
       fill_in 'CNPJ', with: '43.087.854/0001-60'
       fill_in 'Logradouro', with: 'Brooklyn Beach'
       fill_in 'Complemento', with: 'Loja 1'
-      fill_in 'Número', with: '	42'
-      fill_in 'Bairro', with: '	Brooklyn'
-      fill_in 'Cidade', with: '	Motta'
-      fill_in 'Estado', with: '	MG'
-      fill_in 'Telefone', with: '	(11) 2100-0000'
-      fill_in 'E-mail', with: '	bigboss@email.com'
+      fill_in 'Número', with: '42'
+      fill_in 'Bairro', with: 'Brooklyn'
+      fill_in 'Cidade', with: 'Motta'
+      fill_in 'Estado', with: 'MG'
+      fill_in 'Telefone', with: '(11) 2100-0000'
+      fill_in 'E-mail', with: 'bigboss@email.com'
       click_on 'Criar Estabelecimento'
 
       expect(page).to have_content 'Big Boss Store registrado(a) com sucesso'
@@ -58,6 +59,36 @@ describe 'Proprietário registra seu estabelecimento' do
       expect(page).to have_content 'Brooklyn'
       expect(page).to have_content 'Loja 1'
       expect(page).to have_content '(11) 2100-0000'
+    end
+
+    it 'e falha ao não incluir campos obrigatórios' do
+      owner = Owner.create!(name: 'Vito', surname: 'Corleone', register_number: '402.793.150-58',
+              email: 'vito@email.com', password: 'treina_dev13')
+
+      login_as owner, scope: :owner
+      visit root_path
+      fill_in 'Nome Fantasia', with: ''
+      fill_in 'Razão Social', with: ''
+      fill_in 'CNPJ', with: '43.087.854/0001-'
+      fill_in 'Logradouro', with: ''
+      fill_in 'Complemento', with: ''
+      fill_in 'Número', with: '42'
+      fill_in 'Bairro', with: 'Brooklyn'
+      fill_in 'Cidade', with: 'Motta'
+      fill_in 'Estado', with: 'MG'
+      fill_in 'Telefone', with: '(11) 2100-000'
+      fill_in 'E-mail', with: 'bigboss@email'
+      click_on 'Criar Estabelecimento'
+
+      expect(page).to have_content 'Não foi possível registrar seu estabelcimento, reveja os campos abaixo:'
+      expect(page).to have_content '7 erros localizados'
+      expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
+      expect(page).to have_content 'Razão Social não pode ficar em branco'
+      expect(page).to have_content 'CNPJ inválido'
+      expect(page).to have_content 'Logradouro não pode ficar em branco'
+      expect(page).to have_content 'CNPJ incorreto: digitado 12 números, esperado 14'
+      expect(page).to have_content 'Telefone com formato inválido'
+      expect(page).to have_content 'E-mail deve ser em um formato válido'
     end
   end
 end
