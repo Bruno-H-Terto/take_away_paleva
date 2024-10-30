@@ -1,0 +1,29 @@
+<%= form_with model: @take_away_store, url: take_away_store_business_hours_path(@take_away_store), method: :post, data: {turbo: false} do |form| %>
+  <%= form.fields_for :business_hours do |business_hour_form| %>
+
+    <div id=<%= "#{business_hour_form.object.day_of_week}" %>>
+      
+      <%= business_hour_form.hidden_field :day_of_week, value: business_hour_form.object.day_of_week %>
+      <h3><%= t("day_of_week.#{business_hour_form.object.day_of_week}") %></h3>
+      <%= render 'shared/errors', object: business_hour_form.object %>
+
+      <div>
+        <%= business_hour_form.label :open_time %>
+        <%= business_hour_form.time_field :open_time, value: "%H:%M", min: 'hh:mm:ss', max: 'hh:mm:ss' %>
+      </div>
+
+      <div>
+        <%= business_hour_form.label :close_time %>
+        <%= business_hour_form.time_field :close_time, value: "%H:%M", min: 'hh:mm:ss', max: 'hh:mm:ss' %>
+      </div>
+
+      <div>
+        <%= business_hour_form.label :status %>
+        <%= business_hour_form.select :status, BusinessHour.statuses.keys.map { |status| ["#{I18n.t status}", status] } %>
+      </div>
+    </div>
+  <% end %>
+  <div>
+    <%= form.submit t('business_hour.registration'), class: 'btn-primary' %>
+  </div>
+<% end %>

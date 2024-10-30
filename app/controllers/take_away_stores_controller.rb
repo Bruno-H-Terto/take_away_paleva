@@ -3,11 +3,11 @@ class TakeAwayStoresController < ApplicationController
   before_action :take_away_store_register, except: %i[create]
   before_action :set_take_away_store, only: %i[show edit update]
   def new
-    @take_away_store = current_owner.build_take_away_store
+    @take_away_store = @owner.build_take_away_store
   end
 
   def create
-    @take_away_store = current_owner.build_take_away_store(take_away_store_params)
+    @take_away_store = @owner.build_take_away_store(take_away_store_params)
 
     if @take_away_store.save
       return redirect_to @take_away_store, notice: t('take_away_store.create_register', name: @take_away_store.trade_name)

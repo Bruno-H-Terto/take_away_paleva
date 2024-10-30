@@ -10,4 +10,20 @@
       <address><%= @take_away_store.complement %></address>
     </div>
   </div>
+
+ 
+  <div id="business-hours">
+    <div>
+      <% if @take_away_store.business_hours.any? %>
+        <p>Horário de funcionamento</p>
+        <% @take_away_store.business_hours.each do |business_hour| %>
+          <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
+            <p><%= business_hour.display_hours%></p>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Adicionar horário de funcionamento', new_take_away_store_business_hour_path(@take_away_store), class: 'text-blue-500 hover:underline' %>
+      <% end %>
+    </div>
+  </div>
 </section>

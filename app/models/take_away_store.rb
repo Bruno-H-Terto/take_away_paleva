@@ -1,5 +1,8 @@
 class TakeAwayStore < ApplicationRecord
   belongs_to :owner
+  has_many :business_hours
+  accepts_nested_attributes_for :business_hours
+
   before_validation :generate_code, on: :create
   validates :trade_name, :corporate_name, :register_number, :phone_number, :email,
             :street, :number, :state, :district, :city, :zip_code, presence: true

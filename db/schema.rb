@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_051537) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_30_092750) do
+  create_table "business_hours", force: :cascade do |t|
+    t.integer "day_of_week", null: false
+    t.integer "status", default: 0, null: false
+    t.time "open_time"
+    t.time "close_time"
+    t.integer "take_away_store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["take_away_store_id"], name: "index_business_hours_on_take_away_store_id"
+  end
+
   create_table "owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -46,5 +57,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_051537) do
     t.index ["owner_id"], name: "index_take_away_stores_on_owner_id"
   end
 
+  add_foreign_key "business_hours", "take_away_stores"
   add_foreign_key "take_away_stores", "owners"
 end

@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   }
   root "home#index"
 
-  resources :take_away_stores, only: %i[new create show edit update]
+  resources :take_away_stores, only: %i[new create show edit update] do
+    resources :business_hours, only: %i[new create edit update]
+  end
 end

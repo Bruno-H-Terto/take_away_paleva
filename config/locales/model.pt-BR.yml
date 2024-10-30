@@ -3,6 +3,7 @@ pt-BR:
     models:
       owner: 'Proprietário'
       take_away_store: 'Estabelecimento'
+      business_hour: 'Horário de funcionamento'
     attributes:
       owner:
         register_number: 'CPF'
@@ -22,3 +23,8 @@ pt-BR:
         complement: 'Complemento'
         code: 'Código'
         email: 'E-mail'
+      business_hour:
+        open_time: 'Hora de abertura'
+        close_time: 'Encerramento'
+        day_of_week: 'Dia da semana'
+        status: 'Funcionamento'
