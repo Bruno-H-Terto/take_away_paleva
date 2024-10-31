@@ -35,3 +35,7 @@ pt-BR:
         thursday: 'Quinta-feira'
         friday: 'Sexta-feira'
         saturday: 'Sábado'
+      menu:
+        name: 'Nome'
+        description: 'Descrição'
+        calories: 'Calorias'

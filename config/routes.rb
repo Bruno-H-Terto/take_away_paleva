@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :take_away_stores, only: %i[new create show edit update] do
     resources :business_hours, only: %i[new create edit update]
+    resources :menus, only: %i[index]
+    resources :dishes, only: %i[new create show]
   end
 end

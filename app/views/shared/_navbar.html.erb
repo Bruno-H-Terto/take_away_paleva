@@ -16,19 +16,21 @@
               <p><%= current_owner.full_name %></p>
               <p><%= current_owner.email %></p>
             </li>
-            <li>
               <% if current_owner.take_away_store.id.present? %>
-                <%= link_to 'My Store', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
+                <li>
+                  <%= link_to 'My Store', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
+                </li>
+
+                <li>
+                  <%= link_to 'Meu cardápio', take_away_store_menus_path(current_owner.take_away_store), class: 'nav-link active' %>
+                </li>
               <% end %>
-            </li>
           </ul>
             <%= button_to 'Sair', destroy_owner_session_path, method: :delete %>
           <% else %>
             <%= link_to t('owner.become_a_partner'), new_owner_registration_path, class: "btn btn-outline-secondary mr-2" %>
             <%= link_to t('owner.sign_in'), new_owner_session_path, class: "btn btn-outline-primary mr-2" %>
           <% end %>
-        
-        
       </div>
     </div>
   </nav>

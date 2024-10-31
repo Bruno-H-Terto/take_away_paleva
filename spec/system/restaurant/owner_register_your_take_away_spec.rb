@@ -54,12 +54,7 @@ describe 'Proprietário registra seu estabelecimento' do
       click_on 'Criar Estabelecimento'
 
       expect(page).to have_content 'Big Boss Store registrado(a) com sucesso'
-      expect(page).to have_content 'Big Boss Store - Corleone LTDA - 43.087.854/0001-60'
-      expect(page).to have_content 'Brooklyn Beach, nº 42'
-      expect(page).to have_content 'Motta, MG'
-      expect(page).to have_content 'Brooklyn'
-      expect(page).to have_content 'Loja 1'
-      expect(page).to have_content 'bigboss@email.com | (11) 2100-0000'
+      expect(page).to have_content 'Inclua seu horário de funcionamento'
     end
 
     it 'e falha ao não incluir campos obrigatórios' do

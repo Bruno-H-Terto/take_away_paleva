@@ -8,6 +8,10 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
             email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
           
     login_as owner, scope: :owner
     visit root_path
@@ -28,6 +32,10 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
             email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
           
     login_as owner, scope: :owner
     visit root_path
@@ -54,6 +62,10 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
             email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
           
     login_as owner, scope: :owner
     visit root_path

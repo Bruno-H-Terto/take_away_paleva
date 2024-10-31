@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_092750) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_070050) do
   create_table "business_hours", force: :cascade do |t|
     t.integer "day_of_week", null: false
     t.integer "status", default: 0, null: false
@@ -20,6 +20,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_092750) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["take_away_store_id"], name: "index_business_hours_on_take_away_store_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "calories"
+    t.string "type"
+    t.integer "take_away_store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["take_away_store_id"], name: "index_menus_on_take_away_store_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -58,5 +69,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_092750) do
   end
 
   add_foreign_key "business_hours", "take_away_stores"
+  add_foreign_key "menus", "take_away_stores"
   add_foreign_key "take_away_stores", "owners"
 end

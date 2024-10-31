@@ -1,0 +1,2 @@
+class Dish < Menu
+end

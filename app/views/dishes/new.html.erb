@@ -1,0 +1,20 @@
+<%= form_with(model: @dish, url: take_away_store_dishes_path(@take_away_store)) do |form| %>
+  <%= form.hidden_field :type, value: 'Dish' %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :calories %>
+    <%= form.text_field :calories %>
+  </div>
+
+  <%= form.submit "Cadastrar Prato" %>
+<% end %>

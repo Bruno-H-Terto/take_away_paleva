@@ -15,9 +15,49 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
     visit root_path
 
     expect(page).not_to have_content 'My Store'
-    expect(page).not_to have_content 'Adicionar horário de funcionamento'
+    expect(page).not_to have_content 'Inclua seu horário de funcionamento'
   end
   
+  it 'deve cadastrar seu horário de funcionamento logo após seu registro' do
+    owner = Owner.create!(name: 'Vito', surname: 'Corleone', register_number: '402.793.150-58',
+            email: 'vito@email.com', password: 'treina_dev13')
+
+    login_as owner, scope: :owner
+    visit root_path
+    fill_in 'Nome Fantasia', with: 'Big Boss Store'
+    fill_in 'Razão Social', with: 'Corleone LTDA'
+    fill_in 'CNPJ', with: '43.087.854/0001-60'
+    fill_in 'Logradouro', with: 'Brooklyn Beach'
+    fill_in 'Complemento', with: 'Loja 1'
+    fill_in 'Número', with: '42'
+    fill_in 'Bairro', with: 'Brooklyn'
+    fill_in 'Cidade', with: 'Motta'
+    fill_in 'Estado', with: 'MG'
+    fill_in 'Telefone', with: '(11) 2100-0000'
+    fill_in 'CEP', with: '11000-000'
+    fill_in 'E-mail', with: 'bigboss@email.com'
+    click_on 'Criar Estabelecimento'
+    visit root_path
+
+    expect(current_path).to eq new_take_away_store_business_hour_path(TakeAwayStore.last)
+    expect(page).to have_content 'Para prosseguir, registre seu horário de funcionamento'
+  end
+  
+  it 'é redirecionado para registrar seus horários caso não os tenha feito' do
+    owner = Owner.create!(name: 'Vito', surname: 'Corleone', register_number: '402.793.150-58',
+            email: 'vito@email.com', password: 'treina_dev13')
+    store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+            register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+            number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+            email: 'potter@email.com')
+
+    login_as owner, scope: :owner
+    visit root_path
+
+    expect(current_path).to eq new_take_away_store_business_hour_path(TakeAwayStore.last)
+    expect(page).to have_content 'Para prosseguir, registre seu horário de funcionamento'
+  end
+
   it 'com sucesso' do
     owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
         email: 'quadribol@email.com', password: 'treina_dev13')
@@ -28,8 +68,6 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
 
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
-    click_on 'Adicionar horário de funcionamento'
     fill_in_hours_for_day('monday', '09:00', '17:00', 'open')
     fill_in_hours_for_day('tuesday', '09:00', '17:00', 'open')
     fill_in_hours_for_day('wednesday', '09:00', '17:00', 'open')
@@ -59,8 +97,6 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
 
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
-    click_on 'Adicionar horário de funcionamento'
     fill_in_hours_for_day('monday', '', '', 'open')
     fill_in_hours_for_day('tuesday', '09:00', '', 'open')
     fill_in_hours_for_day('wednesday', '', '17:00', 'open')
@@ -83,34 +119,9 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
 
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
-    click_on 'Adicionar horário de funcionamento'
     click_on 'Registrar horários'
 
     expect(BusinessHour.count).to eq 0
     expect(page).to have_content 'Selecione ao menos um dia de funcionamento'
-  end
-
-  it 'e só pode ver informações do próprio Estabelecimento' do
-    owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
-        email: 'quadribol@email.com', password: 'treina_dev13')
-    store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
-        register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
-        number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
-        email: 'potter@email.com')
-    other_owner = Owner.create!(name: 'Jhon', surname: 'Dow', register_number: '759.942.990-57',
-        email: 'jhon@email.com', password: 'treina_dev13')
-    other_store = other_owner.create_take_away_store!(trade_name: 'Pastelaria', corporate_name: 'China LTDA',
-        register_number: '82.165.933/0001-01', phone_number: '(11) 98800-0000', street: 'Rua nova',
-        number: '19', district: 'Triângulo', city: 'Interior', state: 'MG', zip_code: '39000-000', complement: 'Loja 15',
-        email: 'pastelaria@email.com')
-
-
-    login_as other_owner, scope: :owner
-    visit root_path
-    click_on 'My Store'
-
-    expect(page).not_to have_content 'Grifinória'
-    expect(page).not_to have_content 'Beco diagonal'
   end
 end

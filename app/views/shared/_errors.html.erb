@@ -1,6 +1,6 @@
 <% if object.errors.any? %>
   <p><%= t('errors.alert', count: object.errors.count ) %></p>
-  <%= object.errors.full_messages.each do |msg| %>
+  <% object.errors.full_messages.each do |msg| %>
     <%= msg %>
   <% end %>
 <% end %>

@@ -1,5 +1,7 @@
 <%= render 'shared/errors', object: @take_away_store %>
 
+<h3>Inclua seu horário de funcionamento</h3>
+
 <%= form_with model: @take_away_store, url: take_away_store_business_hours_path(@take_away_store), method: :post, data: {turbo: false} do |form| %>
   <%= form.fields_for :business_hours do |business_hour_form| %>
 
