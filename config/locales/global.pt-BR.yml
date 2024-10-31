@@ -35,3 +35,6 @@ pt-BR:
     saturday: 'Sábado'
   business_hour:
     registration: 'Registrar horários'
+  forms:
+    items:
+      action: 'Salvar e continuar'

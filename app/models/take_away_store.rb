@@ -1,6 +1,6 @@
 class TakeAwayStore < ApplicationRecord
   belongs_to :owner
-  has_many :menus, class_name: 'Menu'
+  has_many :items, class_name: 'Item'
   has_many :business_hours
   accepts_nested_attributes_for :business_hours
 

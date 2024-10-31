@@ -1,0 +1,9 @@
+<% if items.any? %>
+  <% items.each do |item| %>
+    <%= link_to take_away_store_dish_path(item.take_away_store, item) do %>
+      <span><%= item.name %></span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Nenhum item cadastrado</p>
+<% end %>

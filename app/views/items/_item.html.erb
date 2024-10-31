@@ -1,0 +1,12 @@
+<div>
+  <span><%= item.name %></span>
+  <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
+  <span><%= item.description %></span>
+  <% if item.calories.present? %>
+    <span><%= item.calories %> Calorias</span>
+  <% end %>
+
+  <% if item.photo.attached? %>
+    <%= image_tag item.photo %>
+  <% end %>
+</div>

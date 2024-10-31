@@ -1,0 +1,5 @@
+<h3>Atualizar <%= @dish.name %></h3>
+
+<%= form_with(model: @dish, url: take_away_store_dish_path(@take_away_store, @dish)) do |form| %>
+  <%= render 'form', dish: @dish, take_away_store: @take_away_store, form: form %>
+<% end %>

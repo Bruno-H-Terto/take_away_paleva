@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_31_081443) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_173632) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,15 +50,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_081443) do
     t.index ["take_away_store_id"], name: "index_business_hours_on_take_away_store_id"
   end
 
-  create_table "menus", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.integer "calories"
-    t.string "type"
+    t.string "description"
+    t.string "calories"
     t.integer "take_away_store_id", null: false
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["take_away_store_id"], name: "index_menus_on_take_away_store_id"
+    t.index ["take_away_store_id"], name: "index_items_on_take_away_store_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -99,6 +99,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_081443) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_hours", "take_away_stores"
-  add_foreign_key "menus", "take_away_stores"
+  add_foreign_key "items", "take_away_stores"
   add_foreign_key "take_away_stores", "owners"
 end

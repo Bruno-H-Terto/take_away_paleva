@@ -5,12 +5,12 @@ class BeveragesController < ApplicationController
 
   def new
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
-    @beverage = @take_away_store.menus.build
+    @beverage = @take_away_store.items.build
   end
 
   def create
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
-    @beverage = @take_away_store.menus.build(beverages_params)
+    @beverage = @take_away_store.items.build(beverages_params)
 
     if @beverage.save
       return redirect_to take_away_store_beverage_path(@take_away_store, @beverage), notice: 'Bebida adicionada com sucesso!'
@@ -23,6 +23,6 @@ class BeveragesController < ApplicationController
   private
 
   def beverages_params
-    params.require(:menu).permit(:name, :description, :calories, :type, photos: [])
+    params.require(:item).permit(:name, :description, :calories, :type, :photo )
   end
 end

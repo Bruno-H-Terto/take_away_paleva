@@ -1,29 +1,3 @@
-<%= render 'shared/errors', object: @beverage %>
-
 <h3>Nova Bebida</h3>
 
-<%= form_with(model: @beverage, url: take_away_store_beverages_path(@take_away_store)) do |form| %>
-  <%= form.hidden_field :type, value: 'Beverage' %>
-
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :photos %>
-    <%= form.file_field :photos, multiple: true %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :calories %>
-    <%= form.text_field :calories %>
-  </div>
-
-  <%= form.submit "Cadastrar Bebida" %>
-<% end %>
+<%= render 'form', beverage: @beverage, take_away_store: @take_away_store %>

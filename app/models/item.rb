@@ -1,6 +1,6 @@
-class Menu < ApplicationRecord
+class Item < ApplicationRecord
   belongs_to :take_away_store
-  has_many_attached :photos
+  has_one_attached :photo
 
   validates :name, :description, presence: true
 end

@@ -1,2 +1,2 @@
-class Beverage < Menu
+class Beverage < Item
 end

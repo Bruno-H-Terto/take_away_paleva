@@ -1,0 +1,26 @@
+<%= render 'shared/errors', object: dish %>
+
+<%= form.hidden_field :type, value: 'Dish' %>
+
+<div>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
+
+<div>
+  <%= form.label :photo %>
+  <%= form.file_field :photo %>
+</div>
+
+
+<div>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+</div>
+
+<div>
+  <%= form.label :calories %>
+  <%= form.text_field :calories %>
+</div>
+
+<%= form.submit t('forms.items.action') %>
