@@ -1,27 +1,26 @@
 <%= render 'shared/errors', object: beverage %>
 
-<%= form_with(model: beverage, url: take_away_store_beverages_path(take_away_store)) do |form| %>
-  <%= form.hidden_field :type, value: 'Beverage' %>
+<%= form.hidden_field :type, value: 'Beverage' %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<div>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
 
-  <div>
-    <%= form.label :photo %>
-    <%= form.file_field :photo %>
-  </div>
+<div>
+  <%= form.label :photo %>
+  <%= form.file_field :photo %>
+</div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
 
-  <div>
-    <%= form.label :calories %>
-    <%= form.text_field :calories %>
-  </div>
+<div>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+</div>
 
-  <%= form.submit t('forms.items.action') %>
-<% end %>
+<div>
+  <%= form.label :calories %>
+  <%= form.text_field :calories %>
+</div>
+
+<%= form.submit t('forms.items.action') %>

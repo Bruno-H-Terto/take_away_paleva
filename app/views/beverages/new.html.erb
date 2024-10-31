@@ -1,3 +1,5 @@
 <h3>Nova Bebida</h3>
 
-<%= render 'form', beverage: @beverage, take_away_store: @take_away_store %>
+<%= form_with(model: @beverage, url: take_away_store_beverages_path(@take_away_store)) do |form| %>
+  <%= render 'form', beverage: @beverage, take_away_store: @take_away_store, form: form %>
+<% end %>

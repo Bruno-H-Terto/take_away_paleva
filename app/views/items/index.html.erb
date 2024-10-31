@@ -8,5 +8,11 @@
   </div>
 </section>
 <section>
-  <%= link_to 'Nova Bebida', new_take_away_store_beverage_path(@take_away_store) %>
+  <div>
+    <%= link_to 'Nova Bebida', new_take_away_store_beverage_path(@take_away_store) %>
+  </div>
+
+  <div>
+    <%= render 'items/items', items: @beverages %>
+  </div>
 </section>

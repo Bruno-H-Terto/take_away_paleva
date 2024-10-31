@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resources :business_hours, only: %i[new create edit update]
     resources :items, only: %i[index]
     resources :dishes, only: %i[new create show edit update]
-    resources :beverages, only: %i[new create show]
+    resources :beverages, only: %i[new create show edit update]
   end
 end
