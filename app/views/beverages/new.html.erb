@@ -1,9 +1,9 @@
-<%= render 'shared/errors', object: @dish %>
+<%= render 'shared/errors', object: @beverage %>
 
-<h3>Novo Prato</h3>
+<h3>Nova Bebida</h3>
 
-<%= form_with(model: @dish, url: take_away_store_dishes_path(@take_away_store)) do |form| %>
-  <%= form.hidden_field :type, value: 'Dish' %>
+<%= form_with(model: @beverage, url: take_away_store_beverages_path(@take_away_store)) do |form| %>
+  <%= form.hidden_field :type, value: 'Beverage' %>
 
   <div>
     <%= form.label :name %>
@@ -25,5 +25,5 @@
     <%= form.text_field :calories %>
   </div>
 
-  <%= form.submit "Cadastrar Prato" %>
+  <%= form.submit "Cadastrar Bebida" %>
 <% end %>

@@ -1,0 +1,2 @@
+class Beverage < Menu
+end
