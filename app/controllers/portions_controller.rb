@@ -1,7 +1,9 @@
 class PortionsController < ApplicationController
   include ApplicationHelper
+  before_action :authenticate_owner!
   before_action :set_take_away_store, only: %i[create]
   before_action :set_item, only: %i[create]
+  before_action :set_portion, only: %i[update show]
 
   def create
     @portion = @item.portions.build(portion_params)
@@ -15,8 +17,15 @@ class PortionsController < ApplicationController
     render "#{controller_name}/show", status: :unprocessable_entity
   end
 
-  def show
-    @portion = Portion.find(params[:id])
+  def show; end
+
+  def update
+    if @portion.update(portion_params)
+      return redirect_to @portion, notice: 'Porção atualizada com sucesso!'
+    end
+
+    flash.now[:alert] = 'Não foi possível atualizar sua porção'
+    render :show, status: :unprocessable_entity
   end
 
   private
@@ -34,5 +43,11 @@ class PortionsController < ApplicationController
 
   def portion_params
     params.require(:portion).permit(:option_name, :description, :value)
+  end
+
+  def set_portion
+    @portion = Portion.find(params[:id])
+    @owner = @portion.item.take_away_store.owner
+    redirect_to root_path, alert: 'Acesso não autorizado' if current_owner != @owner
   end
 end

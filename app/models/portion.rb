@@ -3,11 +3,11 @@ class Portion < ApplicationRecord
   validates :option_name, :value, presence: true
 
   def menu_option_name
-    "#{option_name} - #{formated_value(value)}"
+    "#{option_name} - #{formated_value}"
   end
 
-  def formated_value(value = self.value)
-    price = value.to_s.insert(-3, ',')
+  def formated_value
+    price = attribute_in_database(:value).to_s.insert(-3, ',')
     "R$ #{price}"
   end
 
