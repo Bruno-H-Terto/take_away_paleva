@@ -41,6 +41,8 @@ describe 'Proprietário edita items do Menu' do
       click_on 'Pizza'
       
       expect(page).to have_content 'Pizza'
+      expect(page).to have_content 'Ativo'
+      expect(page).to have_button 'Alterar status'
       expect(page).to have_content 'Quatro queijos'
       expect(page).to have_content 'Editar'
     end
@@ -74,6 +76,28 @@ describe 'Proprietário edita items do Menu' do
       expect(page).to have_content '120 Calorias'
       expect(page).not_to have_css('img[src*="pizza-1.jpg"]')
       expect(page).to have_css('img[src*="pizza-2.jpeg"]')
+    end
+
+    it 'e altera seu status' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      BusinessHour.day_of_weeks.each do |key, _|
+        store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+            close_time: '17:00')
+      end
+      dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+
+      login_as owner, scope: :owner
+      visit take_away_store_dish_path(store, dish)
+      click_on 'Alterar status'
+
+      expect(page).to have_content 'Pizza'
+      expect(page).to have_content 'Inativo'
+      expect(Item.find(dish.id).active?).to eq false
     end
 
     it 'e falha ao não incluir informações obrigatórias' do
@@ -145,7 +169,7 @@ describe 'Proprietário edita items do Menu' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
+      drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage').inactive!
 
       login_as owner, scope: :owner
       visit root_path
@@ -153,6 +177,8 @@ describe 'Proprietário edita items do Menu' do
       click_on 'Vinho'
       
       expect(page).to have_content 'Vinho tinto'
+      expect(page).to have_content 'Inativo'
+      expect(page).to have_button 'Alterar status'
       expect(page).to have_content '750ml'
       expect(page).to have_content 'Editar'
     end
@@ -186,6 +212,29 @@ describe 'Proprietário edita items do Menu' do
       expect(page).to have_content '120 Calorias'
       expect(page).not_to have_css('img[src*="vinho-tinto.jpg"]')
       expect(page).to have_css('img[src*="vinho-tinto-2.jpeg"]')
+    end
+
+    it 'e altera seu status' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      BusinessHour.day_of_weeks.each do |key, _|
+        store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+            close_time: '17:00')
+      end
+      drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
+      drink.inactive!
+
+      login_as owner, scope: :owner
+      visit take_away_store_beverage_path(store, drink)
+      click_on 'Alterar status'
+
+      expect(page).to have_content 'Vinho tinto'
+      expect(page).to have_content 'Ativo'
+      expect(Item.find(drink.id).active?).to eq true
     end
 
     it 'e falha ao não incluir informações obrigatórias' do
