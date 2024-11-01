@@ -49,7 +49,7 @@ class BusinessHoursController < ApplicationController
     @business_hour = BusinessHour.find(params[:id])
     @take_away_store = set_take_away_store
     if @take_away_store.owner != @owner
-      return redirect_to take_away_store.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
+      return redirect_to TakeAwayStore.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
     end
   end
 
