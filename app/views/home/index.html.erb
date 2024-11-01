@@ -1,0 +1,5 @@
+<section>
+  <% if owner_signed_in? %>
+    <%= render 'dashboard', owner: current_owner %>
+  <% end %>
+</section>

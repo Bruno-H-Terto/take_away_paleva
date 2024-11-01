@@ -1,0 +1,25 @@
+<div>
+  <h2>Bem-vindo <%= owner.name %></h2>
+  <div>
+    <span>Acesso rápido</span>
+    <div>
+      <ul>
+        <li>
+          <%= link_to 'Consultar dados cadastrais', owner_path %>
+        </li>
+
+        <li>
+          <%= link_to 'Acessar minha Loja', take_away_store_path(@owner.take_away_store) %>
+        </li>
+
+        <li>
+          Horário de Funcionamento
+        </li>
+
+        <li>
+          Históricos e consultas
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

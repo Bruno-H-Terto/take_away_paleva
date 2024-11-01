@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     registrations: 'owners/registrations'
   }
   root "home#index"
-
+  get "owner" => "home#owner", as: 'owner'
   resources :take_away_stores, only: %i[new create show edit update] do
     get 'search', on: :collection
     resources :business_hours, only: %i[new create edit update]

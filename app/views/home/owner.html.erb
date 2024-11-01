@@ -1,0 +1,17 @@
+<div>
+  <ul>
+    <li>
+      <%= @owner.full_name %>
+    </li>
+
+    <li>
+      <%= @owner.register_number %>
+    </li>
+    <li>
+      <%= @owner.email %>
+    </li>
+    <li>
+      Registrado desde <%= l(@owner.created_at, format: "%d/%m/%y") %>
+    </li>
+  </ul>
+</div>

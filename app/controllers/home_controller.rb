@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  def index
+  def index; end
 
+  def owner
+    @owner = current_owner
   end
 end

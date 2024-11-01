@@ -18,6 +18,8 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
     click_on 'Minha Loja'
 
     expect(page).to have_content 'Gerencie sua Loja'
+    expect(page).to have_content "Código #{store.code}"
+    expect(page).to have_content "Responsável: #{owner.full_name}"
     expect(page).to have_content 'Grifinória - Hogwarts LTDA - 76.898.265/0001-10'
     expect(page).to have_content 'Beco diagonal, nº 13'
     expect(page).to have_content 'Hogsmeade, SP'

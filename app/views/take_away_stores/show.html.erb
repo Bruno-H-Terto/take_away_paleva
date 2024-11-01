@@ -1,11 +1,19 @@
 <div>
   <h2>Gerencie sua Loja</h2>
+  <div>
+    <%= @take_away_store.trade_name %>
+    <span>Código <%= @take_away_store.code %></span>
+  </div>
 </div>
 
 <section>
+  <h3>Dados da loja</h3>
   <div>
-    <span><%= @take_away_store.business_name %></span>
-    <span><%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
+    <dl>
+      <dt><%= @take_away_store.business_name %></dt>
+      <dl>Responsável: <%= @owner.full_name %></dl>
+    </dl>
+    <span>Contato: <%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
     <%= link_to 'Editar dados', edit_take_away_store_path(@take_away_store) %>
     <div>
       <address><%= @take_away_store.street_number %></address>
