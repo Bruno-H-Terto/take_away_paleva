@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe TakeAwayStore, type: :model do
   context '#valid?' do
     it { should belong_to(:owner) }
+    it { should have_many(:items) }
 
     it 'todos os campos válidos' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
