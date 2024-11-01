@@ -28,9 +28,7 @@ class Portion < ApplicationRecord
   private
 
   def prevent_destroy
-    unless item.destroyed_by_association?
-      self.errors[:base] << 'Não é permitido a exclisão de porções de um item'
-      throw :abort
-    end
+    self.errors[:base] << 'Não é permitido a exclusão de porções de um item'
+    throw :abort
   end
 end
