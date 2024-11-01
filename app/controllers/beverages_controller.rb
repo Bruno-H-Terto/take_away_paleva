@@ -1,9 +1,9 @@
 class BeveragesController < ApplicationController
+  before_action :authenticate_owner!
   before_action :set_take_away_store_beverage
+  before_action :set_beverage, only: %i[show edit update destroy]
 
-  def show
-    @beverage = Beverage.find(params[:id])
-  end
+  def show; end
 
   def new
     @beverage = @take_away_store.items.build(type: 'Beverage')
@@ -20,13 +20,9 @@ class BeveragesController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
-  def edit
-    @beverage = Beverage.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @beverage = Beverage.find(params[:id])
-
     if @beverage.update(beverage_params)
       return redirect_to take_away_store_beverage_path(@take_away_store, @beverage), notice: 'Bebida atualizada com sucesso!'
     end
@@ -35,10 +31,23 @@ class BeveragesController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
+  def destroy
+    if @beverage.destroy
+      return redirect_to take_away_store_path(@take_away_store), notice: 'Bebida excluída com sucesso!'
+    end
+
+    flash.now[:alert] = 'Não foi possível excluir a bebida selecionada'
+    render :show, status: :unprocessable_entity
+  end
+
   private
 
   def beverage_params
     params.require(:beverage).permit(:name, :description, :calories, :type, :photo )
+  end
+
+  def set_beverage
+    @beverage = Beverage.find(params[:id])
   end
   
   def set_take_away_store_beverage

@@ -40,7 +40,7 @@ class TakeAwayStoresController < ApplicationController
 
   def set_take_away_store
     @take_away_store = TakeAwayStore.find(params[:id])
-    if @take_away_store.owner != @owner
+    if @take_away_store.owner != current_owner
       return redirect_to TakeAwayStore.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
     end
   end

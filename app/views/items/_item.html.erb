@@ -1,6 +1,9 @@
 <div>
   <span><%= item.name %></span>
   <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
+  <small><%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item) %></small>
+  <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete %>
+
   <span><%= item.description %></span>
   <% if item.calories.present? %>
     <span><%= item.calories %> Calorias</span>
