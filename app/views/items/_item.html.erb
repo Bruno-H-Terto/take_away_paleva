@@ -21,7 +21,7 @@
   <% end %>
 </div>
 
-<div>
+<div id="item_portions">
   <div>
     <h3>Adicionar porção para <%= item.name %></h3>
     <div>
@@ -41,8 +41,20 @@
           <%= form.text_field :value %>
         </div>
 
-        <%= form.submit 'Adicionar porção', class: 'btn btn-success' %>
+        <%= form.submit class: 'btn btn-success' %>
       <% end %>
     </div>
+  </div>
+
+  <div>
+    <% if item.portions.any? { |portion| portion.persisted? } %>
+      <% item.portions.select(&:persisted?).each do |portion| %>
+        <span>
+          <%= portion.menu_option_name %>
+        </span>
+      <% end %>
+    <% else %>
+      <p>Sem porções registradas</p>
+    <% end %>
   </div>
 </div>
