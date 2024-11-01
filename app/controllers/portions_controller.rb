@@ -1,7 +1,7 @@
 class PortionsController < ApplicationController
   include ApplicationHelper
-  before_action :set_take_away_store
-  before_action :set_item
+  before_action :set_take_away_store, only: %i[create]
+  before_action :set_item, only: %i[create]
 
   def create
     @portion = @item.portions.build(portion_params)
@@ -13,6 +13,10 @@ class PortionsController < ApplicationController
     controller_name = @item.class.name.underscore.pluralize
     flash.now[:alert] = 'Não foi possível adicionar sua porção'
     render "#{controller_name}/show", status: :unprocessable_entity
+  end
+
+  def show
+    @portion = Portion.find(params[:id])
   end
 
   private

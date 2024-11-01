@@ -1,0 +1,24 @@
+<h2><%= @portion.item_name %></h2>
+
+<section>
+  <div>
+    <h4><%= @portion.upload_date %></h4>
+    <small>Valor atual: <%= @portion.formated_value %></small>
+
+    <div>
+      <%= form_with model: @portion do |form| %>
+          <div>
+            <%= form.label :description %>
+            <%= form.text_field :description, placeholder: 'Até 15 caracteres' %>
+          </div>
+
+          <div>
+            <%= form.label :value %>
+            <%= form.text_field :value %>
+          </div>
+
+          <%= form.submit class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</section>

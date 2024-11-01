@@ -16,5 +16,5 @@ Rails.application.routes.draw do
     resources :beverages, only: %i[new create show edit update destroy]
   end
 
-  resources :portions, only: %i[edit update show]
+  resources :portions, only: %i[show edit update]
 end
