@@ -4,6 +4,8 @@ class Portion < ApplicationRecord
   validates :option_name, length: {maximum: 15, option_name: 'deve ter no máximo 15 caracteres'}
   validates :value, numericality: {only_integer: true}
   validates :value, numericality: {greater_than_or_equal_to: 100, message: 'Preço mínimo de R$ 1,00'}
+  before_destroy :prevent_destroy, unless: :destroyed_by_association
+
 
   def menu_option_name
     "#{option_name} - #{formated_value}"
@@ -20,5 +22,15 @@ class Portion < ApplicationRecord
 
   def created_date_portion
     "Porção cadastrada em #{I18n.l(created_at, format: "%d/%m/%y")}"
+  end
+
+
+  private
+
+  def prevent_destroy
+    unless item.destroyed_by_association?
+      self.errors[:base] << 'Não é permitido a exclisão de porções de um item'
+      throw :abort
+    end
   end
 end
