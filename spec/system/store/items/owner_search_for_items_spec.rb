@@ -32,8 +32,9 @@ describe 'Proprietário realiza busca por itens cadastrados' do
       store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
           close_time: '17:00')
     end
-    dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
-    dish = store.items.create!(name: 'Hamburguer com queijo', description: 'Artesanal', calories: 100, type: 'Dish')
+    store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+    store.items.create!(name: 'Hamburguer com queijo', description: 'Artesanal', calories: 100, type: 'Dish').inactive!
+
     beverage = store.items.create!(name: 'Coca-Cola', description: 'Zero açucar', calories: 30, type: 'Beverage')
 
     login_as owner, scope: :owner
@@ -43,8 +44,14 @@ describe 'Proprietário realiza busca por itens cadastrados' do
       click_on 'Enviar'
     end
 
-    expect(page).to have_content 'Pizza'
-    expect(page).to have_content 'Hamburguer com queijo'
+    within '#dish_1' do
+      expect(page).to have_content 'Pizza'
+      expect(page).to have_content 'Ativo'
+    end
+    within '#dish_2' do
+      expect(page).to have_content 'Hamburguer com queijo'
+      expect(page).to have_content 'Inativo'
+    end
     expect(page).not_to have_content 'Coca-Cola'
   end
 

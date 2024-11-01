@@ -40,3 +40,5 @@ pt-BR:
         description: 'Descrição'
         calories: 'Calorias'
         photo: 'Foto'
+        active: 'Ativo'
+        inactive: 'Inativo'

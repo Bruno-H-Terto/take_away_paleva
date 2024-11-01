@@ -1,7 +1,12 @@
 <% if items.any? %>
   <% items.each do |item| %>
     <%= link_to take_away_store_item_path(item.take_away_store, item) do %>
+    <div id="<%= dom_id(item) %>" %>
       <span><%= item.name %></span>
+      <small>
+        <%= Item.human_attribute_name(item.status) %> 
+      </small>
+    </div>
     <% end %>
   <% end %>
 <% else %>

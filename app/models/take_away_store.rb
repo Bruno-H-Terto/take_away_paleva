@@ -25,7 +25,7 @@ class TakeAwayStore < ApplicationRecord
   end
 
   def search_query(query)
-    self.items.where('name LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%")
+    self.items.where('name LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").order(name: :asc)
   end
 
   private
