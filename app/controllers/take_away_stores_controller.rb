@@ -3,6 +3,12 @@ class TakeAwayStoresController < ApplicationController
   before_action :take_away_store_register, except: %i[create]
   before_action :set_take_away_store, only: %i[show edit update]
 
+  def search
+    @take_away_store = TakeAwayStore.find_by(owner: current_owner)
+    @query = params[:query]
+    @results = @take_away_store.search_query(@query)
+  end
+
   def new
     @take_away_store = @owner.build_take_away_store
   end

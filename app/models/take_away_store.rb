@@ -24,6 +24,10 @@ class TakeAwayStore < ApplicationRecord
     "#{street}, nº #{number}"
   end
 
+  def search_query(query)
+    self.items.where('name LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%")
+  end
+
   private
 
   def generate_code

@@ -5,5 +5,9 @@
     <% end %>
   <% end %>
 <% else %>
-  <p>Nenhum item cadastrado</p>
+  <% if action_name == 'search' %>
+    <p><%= t('query.not_found', query: query )%></p>
+  <% else %>
+    <p>Nenhum item cadastrado</p>
+  <% end %>
 <% end %>

@@ -36,5 +36,9 @@ pt-BR:
   business_hour:
     registration: 'Registrar horários'
   forms:
+    query: 'Buscar'
     items:
       action: 'Salvar e continuar'
+  query:
+    not_found: "Sem resultados para a busca: %{query}"
+  
