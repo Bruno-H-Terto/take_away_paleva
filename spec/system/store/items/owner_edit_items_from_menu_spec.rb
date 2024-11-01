@@ -37,7 +37,7 @@ describe 'Proprietário edita items do Menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Pizza'
       
       expect(page).to have_content 'Pizza'
@@ -173,7 +173,7 @@ describe 'Proprietário edita items do Menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Vinho'
       
       expect(page).to have_content 'Vinho tinto'

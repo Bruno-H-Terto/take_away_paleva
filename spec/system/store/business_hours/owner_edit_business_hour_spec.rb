@@ -15,7 +15,7 @@ describe 'Proprietário atualiza se horário de funcionamento' do
 
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
+    click_on 'Minha Loja'
     click_on 'Segunda-feira de 09:00 às 17:00'
     select 'Aberto', from: 'Funcionamento'
     fill_in 'Hora de abertura', with: '12:35'
@@ -46,7 +46,7 @@ describe 'Proprietário atualiza se horário de funcionamento' do
 
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
+    click_on 'Minha Loja'
     click_on 'Segunda-feira de 09:00 às 17:00'
     select 'Aberto', from: 'Funcionamento'
     fill_in 'Hora de abertura', with: ''

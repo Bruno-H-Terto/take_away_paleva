@@ -34,7 +34,7 @@ describe 'Proprietário adiciona novos itens ao menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Novo Prato'
       fill_in 'Nome', with: 'Hamburguer'
       attach_file 'Foto', Rails.root.join('spec/support/files/hamburguer.jpg')
@@ -65,7 +65,7 @@ describe 'Proprietário adiciona novos itens ao menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Novo Prato'
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''
@@ -142,7 +142,7 @@ describe 'Proprietário adiciona novos itens ao menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Nova Bebida'
       fill_in 'Nome', with: 'Vinho tinto'
       attach_file 'Foto', Rails.root.join('spec', 'support', 'files', 'vinho-tinto.jpeg')
@@ -173,7 +173,7 @@ describe 'Proprietário adiciona novos itens ao menu' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Nova Bebida'
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''

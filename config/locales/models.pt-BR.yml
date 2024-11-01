@@ -4,6 +4,7 @@ pt-BR:
       owner: 'Proprietário'
       take_away_store: 'Estabelecimento'
       business_hour: 'Horário de funcionamento'
+      portion: 'Porção'
     attributes:
       owner:
         register_number: 'CPF'
@@ -42,3 +43,7 @@ pt-BR:
         photo: 'Foto'
         active: 'Ativo'
         inactive: 'Inativo'
+      portion:
+        option_name: 'Opção'
+        description: 'Descrição'
+        value: 'Preço'

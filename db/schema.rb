@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_01_060906) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_01_075110) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -77,6 +77,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_01_060906) do
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
+  create_table "portions", force: :cascade do |t|
+    t.string "oprion_name", null: false
+    t.string "description", limit: 15
+    t.integer "value", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_portions_on_item_id"
+  end
+
   create_table "take_away_stores", force: :cascade do |t|
     t.string "trade_name", null: false
     t.string "corporate_name", null: false
@@ -101,5 +111,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_01_060906) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_hours", "take_away_stores"
   add_foreign_key "items", "take_away_stores"
+  add_foreign_key "portions", "items"
   add_foreign_key "take_away_stores", "owners"
 end

@@ -18,7 +18,11 @@
             </li>
               <% if current_owner.take_away_store.id.present? %>
                 <li>
-                  <%= link_to 'My Store', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
+                  <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
+                </li>
+
+                <li>
+                  <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store), class: 'nav-link active' %>
                 </li>
 
                 <li>

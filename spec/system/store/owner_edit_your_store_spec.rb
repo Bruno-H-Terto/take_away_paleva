@@ -15,8 +15,9 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
           
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
+    click_on 'Minha Loja'
 
+    expect(page).to have_content 'Gerencie sua Loja'
     expect(page).to have_content 'Grifinória - Hogwarts LTDA - 76.898.265/0001-10'
     expect(page).to have_content 'Beco diagonal, nº 13'
     expect(page).to have_content 'Hogsmeade, SP'
@@ -39,7 +40,7 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
           
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
+    click_on 'Minha Loja'
     click_on 'Editar dados'
     fill_in 'Complemento', with: 'Loja 1'
     fill_in 'Número', with: '42'
@@ -69,7 +70,7 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
           
     login_as owner, scope: :owner
     visit root_path
-    click_on 'My Store'
+    click_on 'Minha Loja'
     click_on 'Editar dados'
     fill_in 'Número', with: ''
     fill_in 'Telefone', with: ''

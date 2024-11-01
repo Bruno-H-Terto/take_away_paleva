@@ -14,7 +14,7 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
   it 'deve estar autenticado' do
     visit root_path
 
-    expect(page).not_to have_content 'My Store'
+    expect(page).not_to have_content 'Minha Loja'
     expect(page).not_to have_content 'Inclua seu horário de funcionamento'
   end
   

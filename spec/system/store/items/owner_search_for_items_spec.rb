@@ -34,8 +34,7 @@ describe 'Proprietário realiza busca por itens cadastrados' do
     end
     store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
     store.items.create!(name: 'Hamburguer com queijo', description: 'Artesanal', calories: 100, type: 'Dish').inactive!
-
-    beverage = store.items.create!(name: 'Coca-Cola', description: 'Zero açucar', calories: 30, type: 'Beverage')
+    store.items.create!(name: 'Coca-Cola', description: 'Zero açucar', calories: 30, type: 'Beverage')
 
     login_as owner, scope: :owner
     visit root_path

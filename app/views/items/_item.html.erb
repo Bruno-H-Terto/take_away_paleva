@@ -6,9 +6,9 @@
   <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
 
   <div>
-    <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch %>
-    <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item) %>
-    <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete %>
+    <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
+    <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
+    <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
   </div>
 
   <span><%= item.description %></span>
@@ -19,4 +19,30 @@
   <% if item.photo.attached? %>
     <%= image_tag item.photo %>
   <% end %>
+</div>
+
+<div>
+  <div>
+    <h3>Adicionar porção para <%= item.name %></h3>
+    <div>
+      <%= form_with model: item.portions.build, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
+        <div>
+          <%= form.label :option_name %>
+          <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...' %>
+        </div>
+
+        <div>
+          <%= form.label :description %>
+          <%= form.text_field :description, placeholder: 'Até 15 caracteres' %>
+        </div>
+
+        <div>
+          <%= form.label :value %>
+          <%= form.text_field :value %>
+        </div>
+
+        <%= form.submit 'Adicionar porção', class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -17,7 +17,7 @@ describe 'Proprietário deleta items' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Pizza'
       click_on 'Excluir'
 
@@ -42,7 +42,7 @@ describe 'Proprietário deleta items' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Pizza'
       click_on 'Excluir'
 
@@ -69,7 +69,7 @@ describe 'Proprietário deleta items' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Vinho tinto'
       click_on 'Excluir'
 
@@ -94,7 +94,7 @@ describe 'Proprietário deleta items' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Meu cardápio'
+      click_on 'Meus produtos'
       click_on 'Vinho tinto'
       click_on 'Excluir'
 
