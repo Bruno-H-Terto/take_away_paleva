@@ -78,8 +78,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_01_075110) do
   end
 
   create_table "portions", force: :cascade do |t|
-    t.string "option_name", null: false
-    t.string "description", limit: 15
+    t.string "option_name", limit: 16, null: false
     t.integer "value", null: false
     t.integer "item_id", null: false
     t.datetime "created_at", null: false

@@ -42,8 +42,6 @@ describe 'Proprietário adiciona porções a um item' do
         expect(page).to have_content 'Adicionar porção para Hamburguer'
         expect(page).to have_field 'Opção'
         expect(page).to have_css 'input[placeholder="Ex.: Pequena, Média..."]'
-        expect(page).to have_field 'Descrição'
-        expect(page).to have_css 'input[placeholder="Até 15 caracteres"]'
         expect(page).to have_field 'Preço'
         expect(page).to have_content 'Sem porções registradas'
       end
@@ -65,7 +63,6 @@ describe 'Proprietário adiciona porções a um item' do
       login_as owner, scope: :owner
       visit take_away_store_dish_path(store, dish)
       fill_in 'Opção', with: 'Média'
-      fill_in 'Descrição', with: '2 pessoas'
       fill_in 'Preço', with: '3500'
       click_on 'Criar Porção'
 
@@ -87,13 +84,12 @@ describe 'Proprietário adiciona porções a um item' do
             close_time: '17:00')
       end
       dish = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 100, type: 'Dish')
-      dish.portions.create!(option_name: 'Pequena', description: '', value: 1800)
-      dish.portions.create!(option_name: 'Grande', description: '', value: 4400)
+      dish.portions.create!(option_name: 'Pequena', value: 1800)
+      dish.portions.create!(option_name: 'Grande', value: 4400)
 
       login_as owner, scope: :owner
       visit take_away_store_dish_path(store, dish)
       fill_in 'Opção', with: 'Média'
-      fill_in 'Descrição', with: '2 pessoas'
       fill_in 'Preço', with: '3500'
       click_on 'Criar Porção'
 
@@ -118,14 +114,12 @@ describe 'Proprietário adiciona porções a um item' do
       login_as owner, scope: :owner
       visit take_away_store_dish_path(store, dish)
       fill_in 'Opção', with: ''
-      fill_in 'Descrição', with: ''
       fill_in 'Preço', with: ''
       click_on 'Criar Porção'
 
       expect(page).to have_content 'Não foi possível adicionar sua porção'
       expect(page).to have_content 'Opção não pode ficar em branco'
       expect(page).to have_content 'Preço não pode ficar em branco'
-      expect(page).not_to have_content 'Descrição não pode ficar em branco'
     end
   end
 
@@ -159,7 +153,7 @@ describe 'Proprietário adiciona porções a um item' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      beverage = store.items.create!(name: 'Suco', description: 'Laranja', calories: 30, type: 'Beverage')
+      beverage = store.items.create!(name: 'Suco', description: 'Artesanal', calories: 30, type: 'Beverage')
 
       login_as owner, scope: :owner
       visit root_path
@@ -170,8 +164,6 @@ describe 'Proprietário adiciona porções a um item' do
         expect(page).to have_content 'Adicionar porção para Suco'
         expect(page).to have_field 'Opção'
         expect(page).to have_css 'input[placeholder="Ex.: Pequena, Média..."]'
-        expect(page).to have_field 'Descrição'
-        expect(page).to have_css 'input[placeholder="Até 15 caracteres"]'
         expect(page).to have_field 'Preço'
         expect(page).to have_content 'Sem porções registradas'
       end
@@ -188,12 +180,11 @@ describe 'Proprietário adiciona porções a um item' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      beverage = store.items.create!(name: 'Suco', description: 'Laranja', calories: 30, type: 'Beverage')
+      beverage = store.items.create!(name: 'Suco', description: 'Artesanal', calories: 30, type: 'Beverage')
 
       login_as owner, scope: :owner
       visit take_away_store_beverage_path(store, beverage)
       fill_in 'Opção', with: 'Média'
-      fill_in 'Descrição', with: '500ml'
       fill_in 'Preço', with: '1200'
       click_on 'Criar Porção'
 
@@ -201,6 +192,32 @@ describe 'Proprietário adiciona porções a um item' do
       within '#item_portions' do
         expect(page).to have_content 'Média - R$ 12,00'
       end
+    end
+
+    it 'multiplas porções' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Pastel Dev', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      BusinessHour.day_of_weeks.each do |key, _|
+        store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+            close_time: '17:00')
+      end
+      drink = store.items.create!(name: 'Suco', description: 'Artesanal', calories: 100, type: 'Beverage')
+      drink.portions.create!(option_name: 'Pequena', value: 1800)
+      drink.portions.create!(option_name: 'Grande', value: 4400)
+
+      login_as owner, scope: :owner
+      visit take_away_store_beverage_path(store, drink)
+      fill_in 'Opção', with: 'Média'
+      fill_in 'Preço', with: '3500'
+      click_on 'Criar Porção'
+
+      expect(page).to have_content 'Pequena - R$ 18,00'
+      expect(page).to have_content 'Média - R$ 35,00'
+      expect(page).to have_content 'Grande - R$ 44,00'
     end
 
     it 'falha ao não inserir dados obrigatórios' do
@@ -214,19 +231,17 @@ describe 'Proprietário adiciona porções a um item' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      beverage = store.items.create!(name: 'Suco', description: 'Laranja', calories: 30, type: 'Beverage')
+      beverage = store.items.create!(name: 'Suco', description: 'Artesanal', calories: 30, type: 'Beverage')
 
       login_as owner, scope: :owner
       visit take_away_store_beverage_path(store, beverage)
       fill_in 'Opção', with: ''
-      fill_in 'Descrição', with: ''
       fill_in 'Preço', with: ''
       click_on 'Criar Porção'
 
       expect(page).to have_content 'Não foi possível adicionar sua porção'
       expect(page).to have_content 'Opção não pode ficar em branco'
       expect(page).to have_content 'Preço não pode ficar em branco'
-      expect(page).not_to have_content 'Descrição não pode ficar em branco'
     end
   end
 end

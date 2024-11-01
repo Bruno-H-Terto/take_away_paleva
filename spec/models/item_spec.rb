@@ -27,8 +27,8 @@ RSpec.describe Item, type: :model do
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
-      dish = store.items.build(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Dish')
-      drink = store.items.build(name: 'Pizza', description: 'Quatro queijos', calories: 80, type: 'Beverage')
+      drink = store.items.build(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
+      dish = store.items.build(name: 'Pizza', description: 'Quatro queijos', calories: 80, type: 'Dish')
 
       expect(dish).to be_valid
       expect(drink).to be_valid

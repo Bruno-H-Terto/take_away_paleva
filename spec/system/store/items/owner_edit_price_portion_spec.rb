@@ -13,7 +13,7 @@ describe 'Proprietário edita preço de sua porção' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
-    portion = dish.portions.create!(option_name: 'Média', description: '4 pessoas', value: '5000')
+    portion = dish.portions.create!(option_name: 'Média', value: '5000')
 
     login_as owner, scope: :owner
     visit root_path
@@ -23,10 +23,9 @@ describe 'Proprietário edita preço de sua porção' do
 
     expect(page).to have_content 'Pizza - porção Média'
     formated_date = I18n.l(portion.created_at, format: "%d/%m/%y")
-    expect(page).to have_content "Valor cadastrado em #{formated_date}"
+    expect(page).to have_content "Porção cadastrada em #{formated_date}"
     expect(page).to have_content 'Valor atual: R$ 50,00'
     expect(page).to have_field 'Preço'
-    expect(page).to have_field 'Descrição'
     expect(page).to have_button 'Atualizar Porção'
   end
 
@@ -42,17 +41,14 @@ describe 'Proprietário edita preço de sua porção' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
-    portion = dish.portions.create!(option_name: 'Média', description: '4 pessoas', value: '5000')
+    portion = dish.portions.create!(option_name: 'Média', value: '5000')
 
     login_as owner, scope: :owner
     visit portion_path(portion)
-    fill_in 'Descrição', with: 'Desconto Especial'
     fill_in 'Preço', with: '4200'
     click_on 'Atualizar Porção'
 
     expect(page).to have_content 'Porção atualizada com sucesso!'
-    formated_date = I18n.l(Time.now, format: "%d/%m/%y")
-    expect(page).to have_content "Valor cadastrado em #{formated_date}"
     expect(page).to have_content 'Valor atual: R$ 42,00'
   end
 
@@ -68,11 +64,10 @@ describe 'Proprietário edita preço de sua porção' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
-    portion = dish.portions.create!(option_name: 'Média', description: '4 pessoas', value: '5000')
+    portion = dish.portions.create!(option_name: 'Média', value: '5000')
 
     login_as owner, scope: :owner
     visit portion_path(portion)
-    fill_in 'Descrição', with: 'Desconto Especial'
     fill_in 'Preço', with: ''
     click_on 'Atualizar Porção'
 
@@ -92,7 +87,7 @@ describe 'Proprietário edita preço de sua porção' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
-    portion = dish.portions.create!(option_name: 'Média', description: '4 pessoas', value: '5000')
+    portion = dish.portions.create!(option_name: 'Média', value: '5000')
     other_owner = Owner.create!(name: 'Jhon', surname: 'Doe', register_number: '307.331.850-02',
         email: 'jhon@email.com', password: 'treina_dev13')
     other_store = other_owner.create_take_away_store!(trade_name: 'Pastelaria Top', corporate_name: 'Pastel LTDA',
