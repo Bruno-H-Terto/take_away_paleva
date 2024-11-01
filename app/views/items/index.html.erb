@@ -2,21 +2,24 @@
   <p>Gerencie seu estoque e cadastre seus produtos para venda</p>
   <small>Nota: Itens inativos não são adicionados ao seu cardápio</small>
 </div>
-<section>
-  <div>
-    <%= link_to 'Novo Prato', new_take_away_store_dish_path(@take_away_store) %>
-  </div>
+<div class="row mt-3">
+  <section class="col">
+    <div>
+      <%= link_to 'Novo Prato', new_take_away_store_dish_path(@take_away_store) %>
+    </div>
 
-  <div>
-    <%= render 'items/items', items: @dishes %>
-  </div>
-</section>
-<section>
-  <div>
-    <%= link_to 'Nova Bebida', new_take_away_store_beverage_path(@take_away_store) %>
-  </div>
+    <div>
+      <%= render 'items/items', items: @dishes %>
+    </div>
+  </section>
 
-  <div>
-    <%= render 'items/items', items: @beverages %>
-  </div>
-</section>
+  <section class="col">
+    <div>
+      <%= link_to 'Nova Bebida', new_take_away_store_beverage_path(@take_away_store) %>
+    </div>
+
+    <div>
+      <%= render 'items/items', items: @beverages %>
+    </div>
+  </section>
+</div>

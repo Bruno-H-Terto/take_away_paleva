@@ -1,5 +1,6 @@
 class Portion < ApplicationRecord
   belongs_to :item, dependent: :destroy
+  validates :option_name, :value, presence: true
 
   def menu_option_name
     "#{option_name} - R$ #{formated_value(value)}"

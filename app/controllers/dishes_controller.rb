@@ -3,7 +3,10 @@ class DishesController < ApplicationController
   before_action :set_take_away_store_dish
   before_action :set_dish, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @item = @dish
+    @portion = @item.portions.build
+  end
 
   def new
     @dish = @take_away_store.items.build(type: 'Dish')

@@ -3,7 +3,10 @@ class BeveragesController < ApplicationController
   before_action :set_take_away_store_beverage
   before_action :set_beverage, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @item = @beverage
+    @portion = @item.portions.build
+  end
 
   def new
     @beverage = @take_away_store.items.build(type: 'Beverage')

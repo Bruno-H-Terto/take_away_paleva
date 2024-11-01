@@ -1,60 +1,63 @@
-<div>
-  <span><%= item.name %></span>
-  <small>
-    <%= Item.human_attribute_name(item.status) %> 
-  </small>
-  <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
+<section class="row">
+  <div class="col-8">
+    <span><%= item.name %></span>
+    <small>
+      <%= Item.human_attribute_name(item.status) %> 
+    </small>
+    <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
 
-  <div>
-    <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
-    <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
-    <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
+    <div>
+      <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
+      <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
+      <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
+    </div>
+
+    <span><%= item.description %></span>
+    <% if item.calories.present? %>
+      <span><%= item.calories %> Calorias</span>
+    <% end %>
+
+    <% if item.photo.attached? %>
+      <%= image_tag item.photo %>
+    <% end %>
   </div>
 
-  <span><%= item.description %></span>
-  <% if item.calories.present? %>
-    <span><%= item.calories %> Calorias</span>
-  <% end %>
-
-  <% if item.photo.attached? %>
-    <%= image_tag item.photo %>
-  <% end %>
-</div>
-
-<div id="item_portions">
-  <div>
-    <h3>Adicionar porção para <%= item.name %></h3>
+  <div id="item_portions" class="col-4">
     <div>
-      <%= form_with model: item.portions.build, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
-        <div>
-          <%= form.label :option_name %>
-          <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...' %>
-        </div>
+      <h3>Adicionar porção para <%= item.name %></h3>
+      <div>
+        <%= render 'shared/errors', object: portion %>
+        <%= form_with model: portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
+          <div>
+            <%= form.label :option_name %>
+            <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...' %>
+          </div>
 
-        <div>
-          <%= form.label :description %>
-          <%= form.text_field :description, placeholder: 'Até 15 caracteres' %>
-        </div>
+          <div>
+            <%= form.label :description %>
+            <%= form.text_field :description, placeholder: 'Até 15 caracteres' %>
+          </div>
 
-        <div>
-          <%= form.label :value %>
-          <%= form.text_field :value %>
-        </div>
+          <div>
+            <%= form.label :value %>
+            <%= form.text_field :value %>
+          </div>
 
-        <%= form.submit class: 'btn btn-success' %>
+          <%= form.submit class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <% if item.portions.any? { |portion| portion.persisted? } %>
+        <% item.portions.select(&:persisted?).each do |portion| %>
+          <span>
+            <%= portion.menu_option_name %>
+          </span>
+        <% end %>
+      <% else %>
+        <p>Sem porções registradas</p>
       <% end %>
     </div>
   </div>
-
-  <div>
-    <% if item.portions.any? { |portion| portion.persisted? } %>
-      <% item.portions.select(&:persisted?).each do |portion| %>
-        <span>
-          <%= portion.menu_option_name %>
-        </span>
-      <% end %>
-    <% else %>
-      <p>Sem porções registradas</p>
-    <% end %>
-  </div>
-</div>
+</section>

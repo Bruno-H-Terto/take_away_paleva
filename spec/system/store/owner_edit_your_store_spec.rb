@@ -106,6 +106,7 @@ describe 'Proprietário edita os dados de seu estabelecimento' do
       other_store.business_hours.create!(day_of_week: key, status: :open, open_time: '10:00',
           close_time: '18:00')
     end
+    
     login_as other_owner, scope: :owner
     visit take_away_store_path(store)
     

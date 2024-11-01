@@ -6,16 +6,16 @@
   </div>
 </div>
 
-<section>
+<section class="row">
   <h3>Dados da loja</h3>
-  <div>
+  <div class="col-8">
     <dl>
       <dt><%= @take_away_store.business_name %></dt>
       <dl>Responsável: <%= @owner.full_name %></dl>
     </dl>
     <span>Contato: <%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
     <%= link_to 'Editar dados', edit_take_away_store_path(@take_away_store) %>
-    <div>
+    <div class="container border mt-3">
       <address><%= @take_away_store.street_number %></address>
       <address><%= @take_away_store.city %>, <%= @take_away_store.state %></address>
       <address><%= @take_away_store.district %></address>
@@ -24,7 +24,7 @@
   </div>
 
  
-  <div id="business-hours">
+  <div id="business-hours" class="col-4">
     <div>
       <% if @take_away_store.business_hours.any? %>
         <p>Horário de funcionamento</p>
