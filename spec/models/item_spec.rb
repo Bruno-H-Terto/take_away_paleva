@@ -3,11 +3,14 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   context '#valid?' do
     it { should belong_to(:take_away_store) }
+    it { should have_many(:tags) }
+    it { should have_many(:characteristics).through(:tags) }
+    it { should have_many(:portions) }
 
     it 'todos os campos válidos' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
-      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
@@ -23,7 +26,7 @@ RSpec.describe Item, type: :model do
     it 'foto é opcional' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
-      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
@@ -37,7 +40,7 @@ RSpec.describe Item, type: :model do
     it 'nome é obrigatório' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
-      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
@@ -64,7 +67,7 @@ RSpec.describe Item, type: :model do
     it 'descrição é obrigatório' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
-      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
@@ -79,7 +82,7 @@ RSpec.describe Item, type: :model do
     it 'calorias é opcional' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
-      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
@@ -88,6 +91,25 @@ RSpec.describe Item, type: :model do
 
       expect(dish).to be_valid
       expect(drink).to be_valid
+    end
+
+    it 'caso um item seja excluído suas associações também são' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+            email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+            register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+            number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
+            email: 'potter@email.com')
+      drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
+      drink.portions.create!(option_name: '750ml', value: 8000)
+      characteristic = Characteristic.create!(quality_name: 'Alcoólico')
+      drink.tags.create!(characteristic: characteristic)
+
+      drink.destroy!
+
+      expect(Portion.count).to eq 0
+      expect(Tag.count).to eq 0
+      expect(Characteristic.count).to eq 1
     end
   end
 end

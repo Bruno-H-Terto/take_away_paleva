@@ -76,3 +76,7 @@ nav {
   gap: 8px;
   height: 5rem;
 }
+
+.list-items {
+  max-height: 21rem;
+}

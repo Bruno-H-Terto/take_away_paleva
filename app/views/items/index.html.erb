@@ -9,7 +9,7 @@
       <%= link_to 'Novo Prato', new_take_away_store_dish_path(@take_away_store) %>
     </div>
 
-    <div>
+    <div class="list-items overflow-scroll">
       <%= render 'items/items', items: @dishes %>
     </div>
   </section>
@@ -19,7 +19,7 @@
       <%= link_to 'Nova Bebida', new_take_away_store_beverage_path(@take_away_store) %>
     </div>
 
-    <div>
+    <div class="list-items overflow-scroll">
       <%= render 'items/items', items: @beverages %>
     </div>
   </section>
