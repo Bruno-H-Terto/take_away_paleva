@@ -42,7 +42,7 @@ class PortionsController < ApplicationController
   end
 
   def portion_params
-    params.require(:portion).permit(:option_name, :description, :value)
+    params.require(:portion).permit(:option_name, :value)
   end
 
   def set_portion

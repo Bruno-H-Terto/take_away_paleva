@@ -1,13 +1,28 @@
 <section class="row mt-3">
-  <div class="col-8">
+  <div class="col-4">
     <div>
-      <div>
-        <h3><%= item.name %></h3>
-        <small>
-          <%= Item.human_attribute_name(item.status) %> 
-        </small>
+      <div class="w-100">
+        <div>
+          <h3><%= item.name %></h3>
+          <small>
+            <%= Item.human_attribute_name(item.status) %> 
+          </small>
+        </div>
+
+        <div class="row">
+          <% if item.characteristics.any? { |tag| tag.persisted? } %>
+            <div>
+              <% item.characteristics.select(&:persisted?).each do |tag| %>
+                <%= tag.quality_name %>
+              <% end %>
+            </div>
+          <% else %>
+            <p>Sem marcadores</p>
+          <% end %>
+        </div>
       </div>
-      <div class="btn-group">
+
+      <div class="btn-group mt-3">
         <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
         <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
         <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
@@ -21,6 +36,7 @@
           <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
         <% end %>
       </div>
+
       <div class="row">
         <span><%= item.description %></span>
       </div>
@@ -32,9 +48,43 @@
     </div>
   </div>
 
-  <div id="item_portions" class="col-4">
+  <div class="col-3 border m-1 pt-2">
+    <h4>Adicionar Marcador</h4>
     <div>
-      <h3>Adicionar porção para <%= item.name %></h3>
+      <p>Selecionar marcador existe</p>
+      <div class="column">
+        <div class="row">
+          <small>Tag's disponíveis</small>
+        </div>
+        <div class="row">
+          <small>Adicionar nova tag</small>
+          <%= form_with model: item.tags.build, url: take_away_store_item_characteristics_path(take_away_store, item) do |form| %>
+            <% if Characteristic.any? %>
+              <div>
+                <%= form.label :existing_characteristic, "Selecionar uma característica existente" %>
+                <%= form.collection_select :characteristic_id, Characteristic.all, :id, :quality_name, prompt: "Escolha uma característica" %>
+              </div>
+            <% end %>
+
+            <div>
+              <small>Ou adicione uma nova característica</small>
+              <%= form.label :quality_name, 'Marcador' %>
+              <%= form.text_field :quality_name %>
+            </div>
+
+            <div>
+              <%= form.submit 'Criar Tag' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div id="item_portions" class="col-4 border m-1 p-2">
+    <div>
+      <h4>Adicionar porção para <%= item.name %></h4>
       <div>
         <%= render 'shared/errors', object: portion %>
         <%= form_with model: portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>

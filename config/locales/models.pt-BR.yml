@@ -5,6 +5,8 @@ pt-BR:
       take_away_store: 'Estabelecimento'
       business_hour: 'Horário de funcionamento'
       portion: 'Porção'
+      characteristic: 'Marcador'
+      tag: 'Tag'
     attributes:
       owner:
         register_number: 'CPF'
@@ -47,3 +49,7 @@ pt-BR:
         option_name: 'Opção'
         description: 'Descrição'
         value: 'Preço'
+      characteristic:
+        quality_name: 'Marcador'
+      tag:
+        quality_name: 'Marcador'

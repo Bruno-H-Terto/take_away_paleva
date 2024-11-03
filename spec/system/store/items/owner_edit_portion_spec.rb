@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Proprietário edita preço de sua porção' do
+describe 'Proprietário edita sua porção' do
   it 'a partir da página inicial' do
     owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
         email: 'quadribol@email.com', password: 'treina_dev13')
@@ -25,6 +25,7 @@ describe 'Proprietário edita preço de sua porção' do
     formated_date = I18n.l(portion.created_at, format: "%d/%m/%y")
     expect(page).to have_content "Porção cadastrada em #{formated_date}"
     expect(page).to have_content 'Valor atual: R$ 50,00'
+    expect(page).to have_field 'Opção'
     expect(page).to have_field 'Preço'
     expect(page).to have_button 'Atualizar Porção'
   end
@@ -45,6 +46,7 @@ describe 'Proprietário edita preço de sua porção' do
 
     login_as owner, scope: :owner
     visit portion_path(portion)
+    fill_in 'Opção', with: 'Promação'
     fill_in 'Preço', with: '4200'
     click_on 'Atualizar Porção'
 
@@ -68,6 +70,7 @@ describe 'Proprietário edita preço de sua porção' do
 
     login_as owner, scope: :owner
     visit portion_path(portion)
+    fill_in 'Opção', with: ''
     fill_in 'Preço', with: ''
     click_on 'Atualizar Porção'
 
