@@ -11,9 +11,14 @@
 
         <div class="row">
           <% if item.characteristics.any? { |tag| tag.persisted? } %>
-            <div>
+            <div class="d-inline-flex p-2 group-tags overflow-scroll">
               <% item.characteristics.select(&:persisted?).each do |tag| %>
-                <%= tag.quality_name %>
+                <div class="tag">
+                  <%= tag.quality_name %>
+                  <%= button_to take_away_store_item_tag_path(take_away_store, item, tag), data: {turbo: false}, id: dom_id(tag, :delete) , method: :delete do %>
+                    <%= image_tag 'remove_tag', class: 'close_icon' %>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           <% else %>
@@ -48,7 +53,7 @@
     </div>
   </div>
 
-  <%= render 'tags/tag', characteristic: item.characteristics.build, take_away_store: take_away_store, item: item %>
+  <%= render 'tags/new', characteristic: item.characteristics.build, take_away_store: take_away_store, item: item %>
 
   <%= render 'portions/new', portion: portion, take_away_store: take_away_store, item: item  %>
 

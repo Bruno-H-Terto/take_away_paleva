@@ -43,3 +43,36 @@ nav {
   width: 100%;
   font-size: 0.9rem;
 }
+
+.close_icon {
+  max-width: 15px;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+}
+
+.tag button {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.group-tags {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow: hidden;
+  gap: 8px;
+  height: 5rem;
+}

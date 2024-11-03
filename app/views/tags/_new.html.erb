@@ -1,0 +1,26 @@
+  <div class="col-3 border m-1 pt-2">
+    <h4>Adicionar Marcador</h4>
+    <div>
+      <p>Selecionar marcador existe</p>
+      <div class="column">
+        <% if Characteristic.any? %>
+          <div class="row">
+            <%= form_with model: characteristic, url: take_away_store_item_tags_path(take_away_store, item) do |form| %>
+              <div>
+                <%= form.collection_select :characteristic_id, Characteristic.all, :id, :quality_name, prompt: "Escolha uma característica" %>
+              </div>
+
+              <div>
+                <%= form.submit 'Adicionar Tag' %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+          <div class="row">
+            <%= link_to new_take_away_store_item_tag_path(take_away_store, item) do %>
+              <small>Ou crie uma nova tag</small>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>

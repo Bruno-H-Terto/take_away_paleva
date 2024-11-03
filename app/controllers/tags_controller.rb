@@ -1,8 +1,9 @@
 class TagsController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_owner!
-  before_action :set_take_away_store, only: %i[new create]
-  before_action :set_item, only: %i[new create]
+  before_action :set_take_away_store, only: %i[new create destroy]
+  before_action :set_item, only: %i[new create destroy]
+  before_action :set_tag, only: %i[destroy]
 
   def new
     @tag = @item.tags.build
@@ -26,6 +27,12 @@ class TagsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
   
+  def destroy
+    @tag = Tag.find_by(characteristic: @characteristic, item: @item)
+    @tag.destroy
+
+    return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Tag removida com sucesso!'
+  end
 
   private
 
@@ -43,5 +50,9 @@ class TagsController < ApplicationController
   def tag_params
     params.require(:characteristic).permit(
       :quality_name, :characteristic_id)
+  end
+
+  def set_tag
+    @characteristic = Characteristic.find(params[:id])
   end
 end
