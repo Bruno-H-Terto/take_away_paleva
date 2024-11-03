@@ -1,1 +1,10 @@
-<%= render 'items/items', items: @results, take_away_store: @take_away_store, query: @query %>
+<section class="container row mt-3">
+  
+  <div class="col">
+
+  </div>
+  <div class="col">
+    <p>Resultados para <%= @query %></p>
+    <%= render 'items/items', items: @results, take_away_store: @take_away_store, query: @query %>
+  </div>
+</section>

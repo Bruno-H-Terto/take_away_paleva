@@ -19,7 +19,17 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+.img-icon {
+  width: 10rem;
+}
+
 .img-icon:hover {
   filter: brightness(60%);
   transition: 0.8s, ease-in-out;
+}
+
+.item-img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
 }
