@@ -6,6 +6,8 @@ class BeveragesController < ApplicationController
   def show
     @item = @beverage
     @portion = @item.portions.build
+    @tag = @item.tags.build
+    @characteristic = @item.characteristics.build
   end
 
   def new

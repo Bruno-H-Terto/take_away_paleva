@@ -6,6 +6,8 @@ class DishesController < ApplicationController
   def show
     @item = @dish
     @portion = @item.portions.build
+    @tag = @item.tags.build
+    @characteristic = @tag.build_characteristic
   end
 
   def new

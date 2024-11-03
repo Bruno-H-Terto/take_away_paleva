@@ -6,19 +6,21 @@ class CharacteristicsController < ApplicationController
 
   def create
     if params[:tag][:characteristic_id].present?
-      characteristic = Characteristic.find(params[:tag][:characteristic_id])
+      @characteristic = Characteristic.find(params[:tag][:characteristic_id])
     else
-      characteristic = Characteristic.create(quality_name: tag_params[:quality_name])
+      @characteristic = Characteristic.create(quality_name: tag_params[:quality_name])
     end
   
-    @tag = @item.tags.build(characteristic: characteristic)
+    @tag = @item.tags.build(characteristic: @characteristic)
   
     if @tag.save
-      redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Marcador adicionado com sucesso!'
-    else
-      flash.now[:alert] = 'Não foi possível adicionar seu marcador'
-      render "#{controller_name}/show", status: :unprocessable_entity
+      return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Marcador adicionado com sucesso!'
     end
+
+    controller_name = @item.class.name.underscore.pluralize
+    @portion = @item.portions
+    flash.now[:alert] = 'Não foi possível adicionar seu marcador'
+    render "#{controller_name}/show", status: :unprocessable_entity
   end
   
 

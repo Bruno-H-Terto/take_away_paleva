@@ -53,3 +53,4 @@ pt-BR:
         quality_name: 'Marcador'
       tag:
         quality_name: 'Marcador'
+        existing_characteristic: "Tag's disponíveis"

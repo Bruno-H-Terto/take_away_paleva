@@ -1,4 +1,4 @@
-<% if object.errors.any? %>
+<% if object && object.respond_to?(:errors) && object.errors.any? %>
   <p class="bg-info"><%= t('errors.alert', count: object.errors.count ) %></p>
   <% object.errors.full_messages.each do |msg| %>
     <div class="bg-info">
