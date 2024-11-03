@@ -4,7 +4,6 @@
     <small>
       <%= Item.human_attribute_name(item.status) %> 
     </small>
-    <span>Adicionado em <%= l(item.created_at, format: "%d/%m/%Y") %></span>
 
     <div>
       <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_01_075110) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_01_172657) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,6 +48,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_01_075110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["take_away_store_id"], name: "index_business_hours_on_take_away_store_id"
+  end
+
+  create_table "characteristics", force: :cascade do |t|
+    t.string "quality_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quality_name"], name: "index_characteristics_on_quality_name", unique: true
   end
 
   create_table "items", force: :cascade do |t|

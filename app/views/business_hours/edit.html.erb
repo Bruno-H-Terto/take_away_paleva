@@ -1,26 +1,26 @@
 <%= render 'shared/errors', object: @business_hour %>
 
-<%= form_with model: @business_hour, url: take_away_store_business_hour_path(@take_away_store, @business_hour), data: {turbo: false} do |form| %>
+<%= form_with model: @business_hour, url: take_away_store_business_hour_path(@take_away_store, @business_hour), data: { turbo: false }, class: "form-inline" do |form| %>
   <div>
     <%= BusinessHour.human_attribute_name @business_hour.day_of_week %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :open_time %>
-    <%= form.time_field :open_time, value: "%H:%M", min: 'hh:mm:ss', max: 'hh:mm:ss' %>
+    <%= form.time_field :open_time, value: @business_hour.open_time&.strftime("%H:%M"), class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :close_time %>
-    <%= form.time_field :close_time, value: "%H:%M", min: 'hh:mm:ss', max: 'hh:mm:ss' %>
+    <%= form.time_field :close_time, value: @business_hour.close_time&.strftime("%H:%M"), class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :status %>
-    <%= form.select :status, BusinessHour.statuses.keys.map { |status| ["#{I18n.t status}", status] } %>
+    <%= form.select :status, BusinessHour.statuses.keys.map { |status| ["#{I18n.t status}", status] }, {}, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.submit class: 'btn-primary' %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

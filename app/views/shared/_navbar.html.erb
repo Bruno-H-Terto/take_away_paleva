@@ -1,10 +1,12 @@
 <div class="container-flouid">
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-      <%= link_to root_path do %>
-        <h3>Take Away</h3>
-        <h3>Paleva</h3>
-      <% end %>
+      <div class="navbar-brand">
+        <%= link_to root_path do %>
+          <h3>Take Away</h3>
+          <h3>Paleva</h3>
+        <% end %>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,7 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <% if owner_signed_in? %>
-            <li>
+            <li class="text-justify">
               <p><%= current_owner.full_name %></p>
               <p><%= current_owner.email %></p>
             </li>
@@ -35,13 +37,13 @@
           </div>
 
           <div>
-            <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }  do |form| %>
-              <div>
-                <%= form.label :query, t('forms.query') %>
-                <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição' %>
+            <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }, class: "navbar-form navbar-left"  do |form| %>
+              <div class="form-group">
+                <%= form.label :query, t('forms.query'), class: "sr-only" %>
+                <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição', class: "form-control" %>
               </div>
 
-              <%= form.submit 'Enviar' %>
+              <%= form.submit 'Enviar', class: "btn btn-default" %>
             <% end %>
           </div>
           <% else %>

@@ -42,10 +42,8 @@ describe 'Proprietário adiciona novos itens ao menu' do
       fill_in 'Calorias', with: 60
       click_on 'Salvar e continuar'
 
-      format_date = I18n.l(Date.today, format: "%d/%m/%Y")
       expect(page).to have_content 'Prato adicionado com sucesso!'
       expect(page).to have_content 'Hamburguer'
-      expect(page).to have_content "Adicionado em #{format_date}"
       expect(page).to have_content 'Hamburguer artesanal feito na chapa'
       expect(page).to have_content '60 Calorias'
       expect(page).to have_css('img[src*="hamburguer.jpg"]')
@@ -150,10 +148,8 @@ describe 'Proprietário adiciona novos itens ao menu' do
       fill_in 'Calorias', with: 70
       click_on 'Salvar e continuar'
 
-      format_date = I18n.l(Date.today, format: "%d/%m/%Y")
       expect(page).to have_content 'Bebida adicionada com sucesso!'
       expect(page).to have_content 'Bebida'
-      expect(page).to have_content "Adicionado em #{format_date}"
       expect(page).to have_content 'Safra de 1998'
       expect(page).to have_content '70 Calorias'
       expect(page).to have_css('img[src*="vinho-tinto.jpeg"]')

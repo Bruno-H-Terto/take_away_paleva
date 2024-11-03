@@ -1,17 +1,38 @@
 <% if items.any? %>
-  <% items.each do |item| %>
-    <%= link_to take_away_store_item_path(item.take_away_store, item) do %>
-    <div id="<%= dom_id(item) %>" %>
-      <span><%= item.name %></span>
-      <small>
-        <%= Item.human_attribute_name(item.status) %> 
-      </small>
+  <div class="container">
+    <div class="row">
+      <div class="card-group mt-3">
+        <% items.each do |item| %>
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <%= link_to take_away_store_item_path(item.take_away_store, item) do %>
+              <div class="card h-100" id="<%= dom_id(item) %>">
+                <div class="img-icon">
+                  <% if item.photo.attached? %>
+                    <%= image_tag item.photo, class: 'card-img-top fixed-img', alt: 'Card item image' %>
+                  <% else %>
+                    <%= image_tag 'default-item-img',  class: 'card-img-top fixed-img', alt: 'No image item' %>
+                  <% end %>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.name %></h5>
+                </div>
+
+                <div class="card-footer">
+                  <small class="text-muted">
+                    <%= Item.human_attribute_name(item.status) %> 
+                  </small>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <% end %>
-  <% end %>
+  </div>
 <% else %>
   <% if action_name == 'search' %>
-    <p><%= t('query.not_found', query: query )%></p>
+    <p><%= t('query.not_found', query: query) %></p>
   <% else %>
     <p>Nenhum item cadastrado</p>
   <% end %>

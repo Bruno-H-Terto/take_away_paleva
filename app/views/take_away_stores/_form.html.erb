@@ -1,66 +1,67 @@
-  <%= render 'shared/errors', object: take_away_store %>
-  <%= form_with model: take_away_store do |form| %>
-    <div>
-      <%= form.label :trade_name %>
-      <%= form.text_field :trade_name %>
-    </div>
+<%= render 'shared/errors', object: take_away_store %>
+<%= form_with model: take_away_store, class: 'form-container' do |form| %>
+  
+  <div class="form-group">
+    <%= form.label :trade_name, class: 'form-label' %>
+    <%= form.text_field :trade_name, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :corporate_name %>
-      <%= form.text_field :corporate_name %>
-    </div>
+  <div class="form-group">
+    <%= form.label :corporate_name, class: 'form-label' %>
+    <%= form.text_field :corporate_name, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :register_number %>
-      <%= form.text_field :register_number %>
-    </div>
+  <div class="form-group">
+    <%= form.label :register_number, class: 'form-label' %>
+    <%= form.text_field :register_number, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :phone_number %>
-      <%= form.text_field :phone_number %>
-    </div>
+  <div class="form-group">
+    <%= form.label :phone_number, class: 'form-label' %>
+    <%= form.text_field :phone_number, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :email %>
-      <%= form.email_field :email %>
-    </div>
+  <div class="form-group">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :zip_code %>
-      <%= form.text_field :zip_code %>
-    </div>
+  <div class="form-group">
+    <%= form.label :zip_code, class: 'form-label' %>
+    <%= form.text_field :zip_code, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :street %>
-      <%= form.text_field :street %>
-    </div>
+  <div class="form-group">
+    <%= form.label :street, class: 'form-label' %>
+    <%= form.text_field :street, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :number %>
-      <%= form.text_field :number, min: 0 %>
-    </div>
+  <div class="form-group">
+    <%= form.label :number, class: 'form-label' %>
+    <%= form.text_field :number, class: 'form-control', min: 0 %>
+  </div>
 
-    <div>
-      <%= form.label :city %>
-      <%= form.text_field :city %>
-    </div>
+  <div class="form-group">
+    <%= form.label :city, class: 'form-label' %>
+    <%= form.text_field :city, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :district %>
-      <%= form.text_field :district %>
-    </div>
+  <div class="form-group">
+    <%= form.label :district, class: 'form-label' %>
+    <%= form.text_field :district, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :state %>
-      <%= form.text_field :state %>
-    </div>
+  <div class="form-group">
+    <%= form.label :state, class: 'form-label' %>
+    <%= form.text_field :state, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.label :complement %>
-      <%= form.text_field :complement %>
-    </div>
+  <div class="form-group">
+    <%= form.label :complement, class: 'form-label' %>
+    <%= form.text_field :complement, class: 'form-control' %>
+  </div>
 
-    <div>
-      <%= form.submit class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary btn-lg btn-block' %>
+  </div>
+<% end %>
