@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Proprietário edita dados do Estabelecimento' do
-  context 'PATCH /take_away_stores/:take_away_store_id/business_hours/:id' do
+describe 'Proprietário adiciona uma porção' do
+  context 'POST /take_away_stores/:take_away_store_id/items/:item_id/portions' do
     it 'deve estar autenticado' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
@@ -13,17 +13,14 @@ describe 'Proprietário edita dados do Estabelecimento' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      business_hour = store.business_hours.first
+      dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
 
-      patch take_away_store_business_hour_path(store, business_hour), params: { business_hour: { open_time: '19:00'} }
+      post take_away_store_item_portions_path(store, dish), params: { portion: { option_name: 'Pequena', value: 1000 }}
 
-      expect(response).to redirect_to(new_owner_session_path)
-      format_time = I18n.l(business_hour.open_time, format: "%H:%M")
-      expect(format_time).not_to eq '19:00'
-      expect(format_time).to eq '09:00'
+      expect(response).to redirect_to new_owner_session_path
     end
 
-    it 'somente para o próprio estabelecimento' do
+    it 'só pode adicionar porções ao próprio estabelcimento' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
       store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
@@ -34,6 +31,7 @@ describe 'Proprietário edita dados do Estabelecimento' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
+      dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
       other_owner = Owner.create!(name: 'Jhon', surname: 'Doe', register_number: '307.331.850-02',
           email: 'jhon@email.com', password: 'treina_dev13')
       other_store = other_owner.create_take_away_store!(trade_name: 'Pastelaria Top', corporate_name: 'Pastel LTDA',
@@ -44,15 +42,11 @@ describe 'Proprietário edita dados do Estabelecimento' do
         other_store.business_hours.create!(day_of_week: key, status: :open, open_time: '10:00',
             close_time: '18:00')
       end
-      business_hour = store.business_hours.first
 
       login_as other_owner, scope: :owner
-      patch take_away_store_business_hour_path(store, business_hour), params: { business_hour: { open_time: '19:00'} }
+      post take_away_store_item_portions_path(store, dish), params: { portion: { option_name: 'Pequena', value: 1000 }}
 
-      expect(response).to redirect_to(take_away_store_path(other_store))
-      format_time = I18n.l(business_hour.open_time, format: "%H:%M")
-      expect(format_time).not_to eq '19:00'
-      expect(format_time).to eq '09:00'
+      expect(response).to redirect_to take_away_store_path(other_store)
     end
   end
 end

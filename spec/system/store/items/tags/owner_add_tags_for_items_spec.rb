@@ -40,7 +40,6 @@ describe 'Proprietário adiciona marcadores' do
     item = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
     Characteristic.create!(quality_name: 'Salgado')
     characteristic = item.characteristics.create!(quality_name: 'Doce')
-    item.tags.create!(characteristic: characteristic)
 
     login_as owner, scope: :owner
     visit root_path
