@@ -1,0 +1,14 @@
+<h2>Nova Tag</h2>
+
+<%= render 'shared/errors', object: @tag %>
+
+<%= form_with model: @characteristic, url: take_away_store_item_tags_path(@take_away_store, @item), data: { turbo: false } do |form| %>
+  <div>
+    <%= form.label :quality_name %>
+    <%= form.text_field :quality_name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

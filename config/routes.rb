@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :items, only: %i[index] do
       patch 'change_status', on: :member
       resources :portions, only: %i[create]
-      resources :characteristics, only: %i[new create]
+      resources :tags, only: %i[new create]
     end
     resources :dishes, only: %i[new create show edit update destroy]
     resources :beverages, only: %i[new create show edit update destroy]

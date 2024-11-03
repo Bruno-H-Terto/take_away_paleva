@@ -51,6 +51,7 @@ pt-BR:
         value: 'Preço'
       characteristic:
         quality_name: 'Marcador'
+        existing_characteristic: "Tag's disponíveis"
       tag:
         quality_name: 'Marcador'
-        existing_characteristic: "Tag's disponíveis"
+        

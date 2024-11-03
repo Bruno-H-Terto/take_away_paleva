@@ -18,8 +18,9 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
+    click_on 'Ou crie uma nova tag'
     fill_in 'Marcador', with: 'Alcoólica'
-    click_on 'Criar Tag'
+    click_on 'Criar Marcador'
 
     expect(page).to have_content 'Marcador adicionado com sucesso!'
     expect(page).to have_content 'Alcoólica'
@@ -45,8 +46,9 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
+    click_on 'Ou crie uma nova tag'
     fill_in 'Marcador', with: 'Alcoólica'
-    click_on 'Criar Tag'
+    click_on 'Criar Marcador'
 
     expect(page).to have_content 'Marcador adicionado com sucesso!'
     within '#item-details' do
@@ -75,7 +77,7 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
-    select 'Salgado', from: 'tag_characteristic_id'
+    select 'Salgado', from: 'characteristic_characteristic_id'
     click_on 'Adicionar Tag'
 
     expect(page).to have_content 'Marcador adicionado com sucesso!'
@@ -102,8 +104,9 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
+    click_on 'Ou crie uma nova tag'
     fill_in 'Marcador', with: ''
-    click_on 'Criar Tag'
+    click_on 'Criar Marcador'
 
     expect(page).to have_content 'Não foi possível adicionar seu marcador'
     expect(page).to have_content 'Marcador não pode ficar em branco'
