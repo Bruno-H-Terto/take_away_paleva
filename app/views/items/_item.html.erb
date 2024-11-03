@@ -18,7 +18,7 @@
         <% if item.photo.attached? %>
           <%= image_tag item.photo, class: 'fixed-img item-img', alt: 'Card item image' %>
         <% else %>
-          <%= image_tag 'default-item-img',  class: 'fixed-img', alt: 'No image item' %>
+          <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
         <% end %>
       </div>
       <div class="row">

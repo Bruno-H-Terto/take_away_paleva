@@ -4,7 +4,11 @@
 
   </div>
   <div class="col">
-    <p>Resultados para <%= @query %></p>
-    <%= render 'items/items', items: @results, take_away_store: @take_away_store, query: @query %>
+    <% if @query.blank? %>
+      <%= @results %>
+    <% else %>
+      <p>Resultados para <%= @query %></p>
+      <%= render 'items/items', items: @results, take_away_store: @take_away_store, query: @query %>
+    <% end %>
   </div>
 </section>

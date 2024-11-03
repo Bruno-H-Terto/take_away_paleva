@@ -6,6 +6,10 @@ class TakeAwayStoresController < ApplicationController
   def search
     @take_away_store = TakeAwayStore.find_by(owner: current_owner)
     @query = params[:query]
+    if @query.blank?
+      return @results = 'Valor de busca inválido'
+    end
+    
     @results = @take_away_store.search_query(@query)
   end
 

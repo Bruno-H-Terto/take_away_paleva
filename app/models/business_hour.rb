@@ -15,6 +15,14 @@ class BusinessHour < ApplicationRecord
     end
   end
 
+  def display_time(time)
+    if time.blank? || closed?
+      '--:--'
+    else
+      "#{I18n.l(time, format: "%H:%M")}"
+    end
+  end
+
   private
 
   def close_time_must_be_greater_or_equal

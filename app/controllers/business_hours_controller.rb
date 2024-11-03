@@ -3,6 +3,11 @@ class BusinessHoursController < ApplicationController
   before_action :set_take_away_store
   before_action :set_business_hour, only: %i[edit update]
   before_action :business_hours_register, except: %i[create]
+
+  def index
+    @business_hours = @take_away_store.business_hours
+  end
+
   def new
     BusinessHour.day_of_weeks.each do |key, _|
       @take_away_store.business_hours.build(day_of_week: key)
@@ -42,15 +47,14 @@ class BusinessHoursController < ApplicationController
   private
 
   def set_take_away_store
-    @take_away_store = TakeAwayStore.find(params[:take_away_store_id]) 
+    @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
+    if @take_away_store.owner != @owner
+      return redirect_to TakeAwayStore.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
+    end
   end
 
   def set_business_hour
     @business_hour = BusinessHour.find(params[:id])
-    @take_away_store = set_take_away_store
-    if @take_away_store.owner != @owner
-      return redirect_to TakeAwayStore.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
-    end
   end
 
   def business_hours_params

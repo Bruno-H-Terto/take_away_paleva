@@ -1,0 +1,25 @@
+<div class="container mt-3">
+  <h3>Gerencie seus horários</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">Dia da semana</th>
+        <th class="text-center">Horário de abertura</th>
+        <th class="text-center">Horário de fechamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @take_away_store.business_hours.each do |business_hour| %>
+        <tr>
+          <td class="text-center">
+            <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
+              <%= BusinessHour.human_attribute_name business_hour.day_of_week %>
+            <% end %>
+          </td>
+          <td class="text-center"><%= business_hour.display_time(business_hour.open_time) %></td>
+          <td class="text-center"><%= business_hour.display_time(business_hour.close_time) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,10 +1,9 @@
 <div class="container-flouid">
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-      <div class="navbar-brand">
+      <div class="navbar-brand img-brand">
         <%= link_to root_path do %>
-          <h3>Take Away</h3>
-          <h3>Paleva</h3>
+          <%= image_tag 'paleva' %>
         <% end %>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
@@ -12,40 +11,42 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
           <% if owner_signed_in? %>
-            <li class="text-justify">
-              <p><%= current_owner.full_name %></p>
-              <p><%= current_owner.email %></p>
-            </li>
-              <% if current_owner.take_away_store.id.present? %>
-                <li>
-                  <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
-                </li>
-
-                <li>
-                  <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store), class: 'nav-link active' %>
-                </li>
-
-                <li>
-                  <%= link_to 'Meu cardápio', take_away_store_items_path(current_owner.take_away_store), class: 'nav-link active' %>
-                </li>
+            <li>
+              <%= link_to owner_path do %>
+                <div class="nav-link active"><%= current_owner.card_name %> | <%= current_owner.email %></div>
               <% end %>
+            </li>
+            <% if current_owner.take_away_store.id.present? %>
+              <li>
+                <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store), class: 'nav-link active' %>
+              </li>
+              <li>
+                <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store), class: 'nav-link active' %>
+              </li>
+
+              <li>
+                <%= link_to 'Meu cardápio', take_away_store_items_path(current_owner.take_away_store), class: 'nav-link active' %>
+              </li>
+            <% end %>
           </ul>
           <div>
-            <%= button_to 'Sair', destroy_owner_session_path, method: :delete %>
+            <%= button_to 'Sair', destroy_owner_session_path, method: :delete, class: 'btn btn-default' %>
           </div>
 
-          <div>
-            <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }, class: "navbar-form navbar-left"  do |form| %>
-              <div class="form-group">
-                <%= form.label :query, t('forms.query'), class: "sr-only" %>
+          <div class="d-flex align-items-center">
+            <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }, class: 'd-inline-flex align-items-center' do |form| %>
+              <div class="form-group mb-0 me-2">
+                <%= form.label :query, t('forms.query'), class: "visually-hidden" %>
                 <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição', class: "form-control" %>
               </div>
-
-              <%= form.submit 'Enviar', class: "btn btn-default" %>
+              <div>
+                <%= form.submit 'Enviar', class: "btn btn-primary" %>
+              </div>
             <% end %>
           </div>
+
           <% else %>
             <%= link_to t('owner.become_a_partner'), new_owner_registration_path, class: "btn btn-outline-secondary mr-2" %>
             <%= link_to t('owner.sign_in'), new_owner_session_path, class: "btn btn-outline-primary mr-2" %>

@@ -33,3 +33,13 @@ h1, h2, h3, h4, h5, h6 {
   width: 200px;
   height: 200px;
 }
+
+.img-brand img {
+  height: 70px;
+}
+
+nav {
+  max-height: 100px;
+  width: 100%;
+  font-size: 0.9rem;
+}

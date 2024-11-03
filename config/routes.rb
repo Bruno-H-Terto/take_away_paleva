@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "owner" => "home#owner", as: 'owner'
   resources :take_away_stores, only: %i[new create show edit update] do
     get 'search', on: :collection
-    resources :business_hours, only: %i[new create edit update]
+    resources :business_hours, only: %i[new create edit update index]
     resources :items, only: %i[index] do
       patch 'change_status', on: :member
       resources :portions, only: %i[create]

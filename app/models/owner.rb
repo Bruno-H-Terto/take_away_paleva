@@ -13,4 +13,8 @@ class Owner < ApplicationRecord
   def full_name
     "#{name} #{surname}"
   end
+
+  def card_name
+    "#{name.split(' ').first[0].upcase}#{surname.split(' ').first[0].upcase}"
+  end
 end

@@ -12,8 +12,7 @@ describe 'Proprietário realiza seu cadastro' do
     fill_in 'Confirme sua senha', with: 'treina_dev13'
     click_on 'Criar conta'
 
-    expect(page).to have_css 'nav', text: 'Dom Corleone'
-    expect(page).to have_css 'nav', text: 'bigboss@email.com'
+    expect(page).to have_css 'nav', text: 'DC | bigboss@email.com'
   end
 
   it 'realiza logout após registro' do
