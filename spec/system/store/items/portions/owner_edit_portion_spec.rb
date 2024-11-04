@@ -23,7 +23,6 @@ describe 'Proprietário edita sua porção' do
 
     expect(page).to have_content 'Pizza - porção Média'
     formated_date = I18n.l(portion.created_at, format: "%d/%m/%y")
-    expect(page).to have_content "Porção cadastrada em #{formated_date}"
     expect(page).to have_content 'Valor atual: R$ 50,00'
     expect(page).to have_field 'Opção'
     expect(page).to have_field 'Preço'

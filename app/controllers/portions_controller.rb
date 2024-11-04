@@ -17,16 +17,21 @@ class PortionsController < ApplicationController
     render "#{controller_name}/show", status: :unprocessable_entity
   end
 
-  def show; end
+  def show
+    historical = @portion.historics
+    @registers = historical.group_by { |register| register.portion }
+  end
 
   def update
     if @portion.update(portion_params)
       return redirect_to @portion, notice: 'Porção atualizada com sucesso!'
     end
-
+  
+    historical = @portion.historics
+    @registers = historical.group_by { |register| register.portion }
     flash.now[:alert] = 'Não foi possível atualizar sua porção'
     render :show, status: :unprocessable_entity
-  end
+  end  
 
   private
 

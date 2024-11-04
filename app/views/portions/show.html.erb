@@ -25,7 +25,19 @@
   </div>
 
   <div id="historic" class="col-8">
-    <h3>Histórico</h3>
-    <small><%= @portion.created_date_portion %></small>
+    <% if @registers.any? %>
+      <h2>Histórico - Porção <%= @portion.option_name %></h2>
+      <% @registers.each do |portion, register| %>
+        <div class="column border m-2 p-4 overflow-auto historical-list">
+          <div class="column">
+            <% register.each do |r| %>
+              <div class="row">
+                <%= r.historical_list %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </section>

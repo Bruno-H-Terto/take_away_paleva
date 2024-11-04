@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_owner!
-  before_action :set_take_away_store_item, only: %i[change_status]
+  before_action :set_take_away_store_item, only: %i[change_status historical]
   before_action :set_take_away_store
   def index
     @dishes = @take_away_store.items.where(type: 'Dish')
@@ -16,6 +16,11 @@ class ItemsController < ApplicationController
     end
 
     redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Status atualizado com sucesso!'
+  end
+
+  def historical
+    historical = @item.historics
+    @registers = historical.group_by { |register| register.portion }
   end
 
   private

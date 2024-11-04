@@ -1,0 +1,19 @@
+<% if @registers.any? %>
+  <h2>Histórico - <%= @item.name %></h2>
+  <% @registers.each do |portion, register| %>
+    <%= link_to portion do %>
+      <small>Porção <%= portion.option_name %></small>
+    <% end %>
+    <div class="column border m-2 p-4 overflow-auto historical-list" id="<%= dom_id(portion) %>">
+      <div class="column">
+        <% register.each do |r| %>
+          <div class="row">
+            <%= r.historical_list %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <h5>Sem registros no momento</h5>
+<% end %>

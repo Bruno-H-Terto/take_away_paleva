@@ -103,3 +103,8 @@ nav {
   width: 10rem;
   margin: 5px;
 }
+
+.historical-list {
+  height: 10rem;
+  width: 30rem;
+}

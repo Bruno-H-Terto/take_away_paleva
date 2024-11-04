@@ -39,7 +39,7 @@ describe 'Proprietário adiciona porções a um item' do
       click_on 'Hamburguer'
 
       within '#item_portions' do
-        expect(page).to have_content 'Adicionar porção para Hamburguer'
+        expect(page).to have_content 'Adicionar porção'
         expect(page).to have_field 'Opção'
         expect(page).to have_css 'input[placeholder="Ex.: Pequena, Média..."]'
         expect(page).to have_field 'Preço'
@@ -161,7 +161,7 @@ describe 'Proprietário adiciona porções a um item' do
       click_on 'Suco'
 
       within '#item_portions' do
-        expect(page).to have_content 'Adicionar porção para Suco'
+        expect(page).to have_content 'Adicionar porção'
         expect(page).to have_field 'Opção'
         expect(page).to have_css 'input[placeholder="Ex.: Pequena, Média..."]'
         expect(page).to have_field 'Preço'

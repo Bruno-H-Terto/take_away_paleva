@@ -3,10 +3,10 @@ class CreateHistorics < ActiveRecord::Migration[7.2]
     create_table :historics do |t|
       t.references :item, null: false, foreign_key: true
       t.references :portion, null: false, foreign_key: true
-      t.string :name_item
       t.string :description_portion
       t.string :price_portion
       t.date :upload_date
+      t.integer :status, null: false, default: 0
 
       t.timestamps
     end
