@@ -18,7 +18,7 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
-    click_on 'Ou crie uma nova tag'
+    click_on 'Nova tag'
     fill_in 'Marcador', with: 'Alcoólica'
     click_on 'Criar Marcador'
 
@@ -45,7 +45,7 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
-    click_on 'Ou crie uma nova tag'
+    click_on 'Nova tag'
     fill_in 'Marcador', with: 'Alcoólica'
     click_on 'Criar Marcador'
 
@@ -125,7 +125,7 @@ describe 'Proprietário adiciona marcadores' do
     visit root_path
     click_on 'Meus produtos'
     click_on 'Vinho tinto'
-    click_on 'Ou crie uma nova tag'
+    click_on 'Nova tag'
     fill_in 'Marcador', with: ''
     click_on 'Criar Marcador'
 
