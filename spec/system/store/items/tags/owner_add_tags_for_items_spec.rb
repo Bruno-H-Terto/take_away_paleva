@@ -106,6 +106,8 @@ describe 'Proprietário adiciona marcadores' do
 
     expect(page).not_to have_select 'characteristic_characteristic_id'
     expect(page).not_to have_button 'Adicionar Tag'
+    expect(page).to have_content 'Nenhuma característica disponível. Crie uma nova tag abaixo.'
+    expect(page).to have_link 'Nova tag'
   end
 
   it 'falha ao não preencher valor' do

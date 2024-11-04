@@ -108,3 +108,34 @@ nav {
   height: 10rem;
   width: 30rem;
 }
+
+.flashs {
+  position: fixed;
+  width: 30rem;
+  top: 5rem;
+  left: 10rem;
+  height: 4rem;
+  z-index: 1000;
+}
+
+.bg-notice, .bg-alert {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: opacity 0.5s ease;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bg-notice img, .bg-alert img {
+  max-width: 1rem;
+}
+
+.bg-notice {
+  background-color: #99dba9; 
+  color: #07571a;
+}
+
+.bg-alert {
+  background-color: #cf989d;
+  color: #64121a;
+}

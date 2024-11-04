@@ -10,20 +10,20 @@
         </div>
 
         <div class="row">
-          <% if item.characteristics.any? { |tag| tag.persisted? } %>
             <div class="d-inline-flex p-2 group-tags overflow-scroll">
-              <% item.characteristics.select(&:persisted?).each do |tag| %>
-                <div class="tag">
-                  <%= tag.quality_name %>
-                  <%= button_to take_away_store_item_tag_path(take_away_store, item, tag), data: {turbo: false}, id: dom_id(tag, :delete) , method: :delete do %>
-                    <%= image_tag 'remove_tag', class: 'close_icon' %>
+              <% if item.characteristics.any? { |tag| tag.persisted? } %>
+                  <% item.characteristics.select(&:persisted?).each do |tag| %>
+                    <div class="tag">
+                      <%= tag.quality_name %>
+                      <%= button_to take_away_store_item_tag_path(take_away_store, item, tag), data: {turbo: false}, id: dom_id(tag, :delete) , method: :delete do %>
+                        <%= image_tag 'remove_tag', class: 'close_icon' %>
+                      <% end %>
+                    </div>
                   <% end %>
-                </div>
+              <% else %>
+                <p>Sem marcadores</p>
               <% end %>
             </div>
-          <% else %>
-            <p>Sem marcadores</p>
-          <% end %>
         </div>
       </div>
 

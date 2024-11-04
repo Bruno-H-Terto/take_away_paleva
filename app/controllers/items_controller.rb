@@ -3,9 +3,23 @@ class ItemsController < ApplicationController
   before_action :authenticate_owner!
   before_action :set_take_away_store_item, only: %i[change_status historical]
   before_action :set_take_away_store
+
   def index
-    @dishes = @take_away_store.items.where(type: 'Dish')
-    @beverages = @take_away_store.items.where(type: 'Beverage')
+    if params[:select_tag].present?
+      tag = Characteristic.find(params[:select_tag])
+      items = tag.items
+
+      if items&.any?
+        @dishes = items.where(type: 'Dish')
+        @beverages = items.where(type: 'Beverage')
+      else
+        flash[:notice] = "Sem resultados para #{tag.quality_name}"
+      end
+    else
+      @dishes = @take_away_store.items.where(type: 'Dish')
+      @beverages = @take_away_store.items.where(type: 'Beverage')
+    end
+    @tags = Characteristic.all.order(quality_name: :asc)
   end
 
   def change_status
