@@ -3,9 +3,9 @@
     <div class="row">
       <div class="card-group mt-3">
         <% items.each do |item| %>
-          <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="d-flex-inline justify-content-between">
             <%= link_to take_away_store_item_path(item.take_away_store, item) do %>
-              <div class="card h-100" id="<%= dom_id(item) %>">
+              <div class="card h-100 item-card" id="<%= dom_id(item) %>">
                 <div class="img-icon">
                   <% if item.photo.attached? %>
                     <%= image_tag item.photo, class: 'card-img-top fixed-img', alt: 'Card item image' %>
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title"><%= item.name %></h5>
+                  <h6 class="card-title text-truncate"><%= item.name %></h6>
                 </div>
 
                 <div class="card-footer">

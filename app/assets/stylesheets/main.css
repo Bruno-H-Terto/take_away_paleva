@@ -80,3 +80,26 @@ nav {
 .list-items {
   max-height: 21rem;
 }
+
+.list-portions {
+  max-height: 10rem;
+  padding: 1rem;
+}
+
+#item-portions {
+  width: max-content;
+}
+
+.item-portions__form {
+  max-width: max-content;
+}
+
+.box-item__description {
+  max-width: max-content;
+  height: 8rem;
+}
+
+.item-card {
+  width: 10rem;
+  margin: 5px;
+}

@@ -23,7 +23,11 @@ class TagsController < ApplicationController
       return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Marcador adicionado com sucesso!'
     end
 
-    flash.now[:alert] = 'Não foi possível adicionar seu marcador'
+    flash[:alert] = 'Não foi possível adicionar seu marcador'
+    if tag_params[:characteristic_id].present?
+      return redirect_to take_away_store_item_path(@take_away_store, @item)
+    end
+
     render :new, status: :unprocessable_entity
   end
   

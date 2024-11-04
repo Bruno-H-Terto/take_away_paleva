@@ -1,9 +1,10 @@
 <div class="col-3 border m-1 pt-2">
-  <h4>Adicionar Marcador</h4>
+  <h4 class="text-center">Adicionar Marcador</h4>
   <div>
     <p>Selecionar marcador existente</p>
     <div class="column">
       <% if Characteristic.any? %>
+        <%= render 'shared/errors', object: @characteristic %>
         <div class="row mb-3">
           <%= form_with model: @characteristic, url: take_away_store_item_tags_path(take_away_store, item) do |form| %>
             <div>

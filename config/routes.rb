@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     resources :business_hours, only: %i[new create edit update index]
     resources :items, only: %i[index] do
+      get 'historical', on: :member
       patch 'change_status', on: :member
       resources :portions, only: %i[create]
       resources :tags, only: %i[new create destroy]

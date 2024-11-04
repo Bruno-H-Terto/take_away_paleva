@@ -1,5 +1,5 @@
-<section class="row mt-3">
-  <div class="col-4" id="item-details">
+<section class="row mt-3 w-100 justify-content-center">
+  <div class="col-5" id="item-details">
     <div>
       <div class="w-100">
         <div>
@@ -27,50 +27,38 @@
         </div>
       </div>
 
-      <div class="btn-group mt-3">
+      <div class="btn-group mt-3 gap-2">
         <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
         <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
         <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
+        <%= link_to 'Histórico', historical_take_away_store_item_path(take_away_store, item), class: 'btn btn-info' %>
       </div>
     </div>
-    <div class="container mt-3 column">
-      <div class="row">
+    <div class="container mt-3 row">
+      <div class="col-6">
         <% if item.photo.attached? %>
           <%= image_tag item.photo, class: 'fixed-img item-img', alt: 'Card item image' %>
         <% else %>
           <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
         <% end %>
       </div>
-
-      <div class="row">
-        <span><%= item.description %></span>
-      </div>
-      <div class="row">
-        <% if item.calories.present? %>
-          <span><%= item.calories %> Calorias</span>
-        <% end %>
+      <div class="col-6 box-item">
+        <small>Descrição:</small>
+        <div class="row box-item__description overflow-auto">
+          <span class="text-justify"><%= item.description %></span>
+        </div>
+        <div class="row mt-3 text-break">
+          <% if item.calories.present? %>
+            <small><%= item.calories %> Calorias</small>
+          <% end %>
+        </div>
       </div>
     </div>
+
   </div>
 
   <%= render 'tags/new', characteristic: item.characteristics.build, take_away_store: take_away_store, item: item %>
 
   <%= render 'portions/new', portion: portion, take_away_store: take_away_store, item: item  %>
-
-    <div class="mt-4">
-      <% if item.portions.any? { |portion| portion.persisted? } %>
-        <div class="column">
-          <% item.portions.select(&:persisted?).each do |portion| %>
-            <%= link_to portion_path(portion) do %>
-              <span class="row">
-                <%= portion.menu_option_name %>
-              </span>
-            <% end %>
-          <% end %>
-        </div>
-      <% else %>
-        <p>Sem porções registradas</p>
-      <% end %>
-    </div>
   </div>
 </section>
