@@ -24,14 +24,12 @@
 
 <div class="mt-5 col-9 menu-list">
   <div>
-    <% unless @menus.nil? %>
+    <% if @menus&.select(&:persisted?).present? %>
       <% @menus.select(&:persisted?).each do |menu| %>
-        <div class="menu mt-1 p-3 border rounded">
+        <div class="menu mt-1 p-3 border rounded" id=<%=dom_id(menu)%>>
           <div class="menu-header">
-            <h4><%= menu.name %></h4>
-            <hr>
             <%= link_to take_away_store_menu_path(@take_away_store, menu) do %>
-              <h5>Editar Cardápio</h5>
+              <h4><%= menu.name %></h4>
             <% end %>
           </div>
           
@@ -47,6 +45,8 @@
           </div>
         </div>
       <% end %>
+    <% else %>
+      <p>Não existem cardápios cadastrados</p>
     <% end %>
   </div>
 </div>

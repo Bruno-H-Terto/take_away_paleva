@@ -38,7 +38,12 @@
               <%= image_tag item.photo %>
             <% end %>
             <div class="card-body">
-              <h5 class="card-title"><%= item.name %></h5>
+              <h5 class="card-title">
+                <%= item.name %>
+                <% if item.inactive? %>
+                  <strong> - <%= Item.human_attribute_name(item.status) %></strong>
+                <% end %>
+              </h5>
             </div>
             <ul class="list-group list-group-flush">
               <% item.portions.each do |portion| %>
