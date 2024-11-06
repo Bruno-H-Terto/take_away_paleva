@@ -1,0 +1,48 @@
+<section>
+  <%= @menu.name %>
+
+  <div id="items">
+    <%= render 'shared/errors', object: @item_menu %>
+    <div>
+      <h3>Adicione items ao Cardápio</h3>
+    </div>
+    <div class="form-container">
+      <%= form_with model: @menu.item_menus.build, url: take_away_store_menu_item_menus_path(@take_away_store, @menu) do |form| %>
+        <div class="mb-3">
+          <%= form.label :item_id, 'Items' %>
+          <%= form.collection_select :item_id, Item.active, :id, :name, { prompt: 'Selecione um item' }, class: 'form-select' %>
+        </div>
+
+        <div>
+          <%= form.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="menu-details">
+    <div class="row">
+      <% if @menu.items&.any? %>
+        <h5>Items cadastrados</h5>
+        <% @menu.items.each do |item| %>
+          <div class="col-3 card" style="width: 18rem;">
+            <% if item.photo.present? %>
+              <%= image_tag item.photo %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= item.name %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% item.portions.each do |portion| %>
+                <li class="list-group-item"><%= portion.option_name %> | <%= portion.formated_value %></li>
+              <% end %>
+            </ul>
+            <div class="card-body">
+              <%= link_to 'Mais informações', take_away_store_item_path(item.take_away_store, item), class: 'card-link' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>

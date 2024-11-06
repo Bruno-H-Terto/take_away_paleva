@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   has_many :tags, dependent: :destroy
   has_many :characteristics, through: :tags
   has_many :historics, dependent: :destroy
+  has_many :item_menus
+  has_many :menus, through: :item_menus
   has_one_attached :photo, dependent: :destroy
   before_destroy :destroyed_by_association
   before_destroy :destroy_associanctions
@@ -20,7 +22,6 @@ class Item < ApplicationRecord
   private
 
   def destroy_associanctions
-    historics.destroy_all
     portions.destroy_all
   end
 end

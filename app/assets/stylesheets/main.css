@@ -34,6 +34,13 @@ h1, h2, h3, h4, h5, h6 {
   height: 200px;
 }
 
+
+.item-img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
 .img-brand img {
   height: 70px;
 }
@@ -81,6 +88,7 @@ nav {
   max-height: 21rem;
 }
 
+
 .list-portions {
   max-height: 10rem;
   padding: 1rem;
@@ -101,6 +109,11 @@ nav {
 
 .item-card {
   width: 10rem;
+  margin: 5px;
+}
+
+.item-card-list {
+  width: 4rem;
   margin: 5px;
 }
 
@@ -138,4 +151,37 @@ nav {
 .bg-alert {
   background-color: #cf989d;
   color: #64121a;
+}
+
+.navbar-collapse {
+  background-color: #f8f9fa;
+  justify-content: start;
+  align-items: start;
+  align-content: start;
+}
+
+.menu {
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+#items {
+  padding: 1rem;
+}
+
+.form-container {
+  margin-bottom: 1rem;
+}
+
+.menu-body {
+  max-height: 25rem;
+  overflow-y: auto;
+  border-top: 1px solid #c01212;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.menu-list {
+  max-height: 80vh;
+  overflow-y: auto;
 }

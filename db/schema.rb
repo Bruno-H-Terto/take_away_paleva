@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_045300) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_04_233756) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_045300) do
     t.index ["portion_id"], name: "index_historics_on_portion_id"
   end
 
+  create_table "item_menus", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "menu_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_menus_on_item_id"
+    t.index ["menu_id"], name: "index_item_menus_on_menu_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -80,6 +89,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_045300) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.index ["take_away_store_id"], name: "index_items_on_take_away_store_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "take_away_store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_menus_on_name", unique: true
+    t.index ["take_away_store_id"], name: "index_menus_on_take_away_store_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -140,7 +158,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_045300) do
   add_foreign_key "business_hours", "take_away_stores"
   add_foreign_key "historics", "items"
   add_foreign_key "historics", "portions"
+  add_foreign_key "item_menus", "items"
+  add_foreign_key "item_menus", "menus"
   add_foreign_key "items", "take_away_stores"
+  add_foreign_key "menus", "take_away_stores"
   add_foreign_key "portions", "items"
   add_foreign_key "tags", "characteristics"
   add_foreign_key "tags", "items"
