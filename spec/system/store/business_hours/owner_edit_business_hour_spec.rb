@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Proprietário atualiza se horário de funcionamento' do
+describe 'Proprietário atualiza se Meus Horários' do
   context 'a partir da tela de detalhes da loja' do
     it 'com sucesso' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
@@ -104,7 +104,7 @@ describe 'Proprietário atualiza se horário de funcionamento' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Horário de Funcionamento'
+      click_on 'Meus Horários'
       click_on 'Segunda-feira'
       select 'Aberto', from: 'Funcionamento'
       fill_in 'Hora de abertura', with: '12:35'
@@ -135,7 +135,7 @@ describe 'Proprietário atualiza se horário de funcionamento' do
 
       login_as owner, scope: :owner
       visit root_path
-      click_on 'Horário de Funcionamento'
+      click_on 'Meus Horários'
       click_on 'Segunda-feira'
       select 'Aberto', from: 'Funcionamento'
       fill_in 'Hora de abertura', with: ''

@@ -1,5 +1,5 @@
 <h3>Novo Prato</h3>
 
-<%= form_with(model: @dish, url: take_away_store_dishes_path(@take_away_store)) do |form| %>
+<%= form_with(model: @dish, class: 'col-4', url: take_away_store_dishes_path(@take_away_store)) do |form| %>
   <%= render 'form', dish: @dish, take_away_store: @take_away_store, form: form %>
 <% end %>

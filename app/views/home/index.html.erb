@@ -3,10 +3,10 @@
   <h2>Cardápio</h2>
   <%= render 'shared/errors', object: @menu %>
   <section class="col-3">
-  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
+  <button class="area-dropdown btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
     Criar nova Categória
   </button>
-  <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton">
+  <ul class="dropdown-menu p-3 area-dropdown" aria-labelledby="dropdownMenuButton">
     <li>
       <%= form_with model: [@take_away_store, @menu] do |form| %>
         <div class="mb-2">

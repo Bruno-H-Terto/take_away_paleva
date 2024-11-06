@@ -29,6 +29,7 @@ describe 'Proprietário cria menus' do
       store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
           close_time: '17:00')
     end
+    store.items.create!(name: 'Pizza', description: 'Massa italiana com molho a gosto', calories: 70)
 
     login_as owner, scope: :owner
     visit root_path
@@ -143,5 +144,24 @@ describe 'Proprietário cria menus' do
     expect(page).to have_content '1 erro localizado'
     expect(page).to have_content 'Item já está em uso'
     expect(menu.items.count).to eq 1
+  end
+
+  it 'e não localiza items cadastrados' do
+    owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+        email: 'quadribol@email.com', password: 'treina_dev13')
+    store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+        register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+        number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+        email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
+    menu = store.menus.create!(name: 'Fast Food')
+    login_as owner, scope: :owner
+    visit take_away_store_menu_path(store, menu)
+
+    expect(page).to have_content 'Não existem items disponíveis'
+    expect(page).to have_content 'Clique aqui para cadastrar seus produtos'
   end
 end

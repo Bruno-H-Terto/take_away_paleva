@@ -6,7 +6,16 @@ a {
 }
 
 body {
-  font-family: "Poppins", sans-serif;;
+  font-family: "Poppins", sans-serif;
+  color: #343C54;
+}
+
+a {
+  color: #183eb1;
+}
+
+a:hover {
+  color: blue;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -184,4 +193,61 @@ nav {
 .menu-list {
   max-height: 80vh;
   overflow-y: auto;
+}
+
+.form-input-search {
+  display: flex;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.3rem;
+}
+
+.form-text-search {
+  border: none;
+  outline: none;
+  height: 30px;
+}
+
+.search-img {
+  width: 20px;
+}
+
+.dropdown-icon {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-icon a {
+  color: #343C54;
+  margin-left: 0.5rem;
+}
+
+.dropdown-icon:hover {
+  background-color: #f5f1f1;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-img-icon {
+  width: 22px;
+  margin-left: 0.3rem;
+}
+
+.add-link {
+  display: flex;
+  width: 8rem;
+  border-radius: 4px;
+}
+
+.add-link:hover{
+  background-color: #e7dcdc;
+  transition: 0.5s ease-in-out;
+}
+
+.add-link img {
+  width: 25px;
+}
+
+.area-dropdown{
+  width: 13rem;
 }

@@ -23,14 +23,17 @@
                 Acesso rápido
               </button>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store), class: 'dropdown-item' %>
+                <li class="dropdown-icon">
+                  <%= image_tag 'store', class: 'dropdown-img-icon' %>
+                  <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store)%>
                 </li>
-                <li>
-                  <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store), class: 'dropdown-item' %>
+                <li class="dropdown-icon">
+                  <%= image_tag 'item-icon', class: 'dropdown-img-icon' %>
+                  <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store) %>
                 </li>
-                <li>
-                  <%= link_to 'Horário de Funcionamento', take_away_store_business_hours_path(@owner.take_away_store), class: 'dropdown-item' %>
+                <li class="dropdown-icon">
+                  <%= image_tag 'business-hour', class: 'dropdown-img-icon' %>
+                  <%= link_to 'Meus Horários', take_away_store_business_hours_path(@owner.take_away_store) %>
                 </li>
               </ul>
             </div>
@@ -42,9 +45,10 @@
 
         <div class="d-flex align-items-center nav-form">
           <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }, class: 'd-inline-flex align-items-center' do |form| %>
-            <div class="form-group mb-0 me-2">
+            <div class="form-input-search form-group mb-0 me-2">
               <%= form.label :query, t('forms.query'), class: "visually-hidden" %>
-              <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição', class: "form-control" %>
+              <%= image_tag 'search', class: 'search-img' %>
+              <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição', class: "form-text-search" %>
             </div>
 
             <div>

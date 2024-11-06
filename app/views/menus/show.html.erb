@@ -3,21 +3,29 @@
 
   <div id="items">
     <%= render 'shared/errors', object: @item_menu %>
-    <div>
-      <h3>Adicione items ao Cardápio</h3>
-    </div>
-    <div class="form-container">
-      <%= form_with model: @menu.item_menus.build, url: take_away_store_menu_item_menus_path(@take_away_store, @menu) do |form| %>
-        <div class="mb-3">
-          <%= form.label :item_id, 'Items' %>
-          <%= form.collection_select :item_id, Item.active, :id, :name, { prompt: 'Selecione um item' }, class: 'form-select' %>
-        </div>
+    <% if Item.exists? %>
+      <div>
+        <h3>Adicione items ao Cardápio</h3>
+      </div>
+      <div class="form-container">
+        <%= form_with model: @menu.item_menus.build, url: take_away_store_menu_item_menus_path(@take_away_store, @menu) do |form| %>
+          <div class="mb-3">
+            <%= form.label :item_id, 'Items' %>
+            <%= form.collection_select :item_id, Item.active, :id, :name, { prompt: 'Selecione um item' }, class: 'form-select' %>
+          </div>
 
-        <div>
-          <%= form.submit class: 'btn btn-primary' %>
-        </div>
+          <div>
+            <%= form.submit class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h4>Não existem items disponíveis</h4>
+      <%= link_to take_away_store_items_path do %>
+        <small>Clique aqui para cadastrar seus produtos</small>
       <% end %>
-    </div>
+    <% end %>
+
   </div>
 
   <div id="menu-details">

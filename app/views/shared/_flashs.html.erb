@@ -2,15 +2,23 @@
   <% if notice %>
     <div class="bg-notice">
       <%= notice %>
-      <%= image_tag 'close_icon', id: 'close_icon' %>
+      <%= image_tag 'close_icon', class: 'close-icon' %>
     </div>
   <% end %>
 
   <% if alert %>
     <div class="bg-alert">
       <%= alert %>
-      <%= image_tag 'close_icon', id: 'close_icon' %>
+      <%= image_tag 'close_icon', class: 'close-icon' %>
     </div>
   <% end %>
 </div>
 
+<script>
+  document.querySelectorAll('.close-icon').forEach(function(icon) {
+    icon.addEventListener('click', function(event) {
+      var messageContainer = event.target.closest('div');
+      messageContainer.style.display = 'none';
+    });
+  });
+</script>
