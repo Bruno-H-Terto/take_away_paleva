@@ -4,5 +4,13 @@ class Menu < ApplicationRecord
   has_many :items, through: :item_menus
 
   validates :name, presence: true
-  validates :name, uniqueness: { case_sensitive: false }
+  validate :name_must_be_uniq_for_same_store, if: -> {take_away_store.present?}
+
+  private
+
+  def name_must_be_uniq_for_same_store
+    if take_away_store&.menus&.where('lower(name) = ?', name.downcase).where.not(id: id).exists?
+      errors.add(:name, 'já está em uso para esta loja')
+    end
+  end
 end
