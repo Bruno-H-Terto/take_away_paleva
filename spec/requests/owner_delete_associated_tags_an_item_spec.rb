@@ -14,7 +14,7 @@ describe 'Proprietário remove marcadores associados' do
             close_time: '17:00')
       end
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
-      tag = drink.characteristics.create!(quality_name: 'Alcoólico')
+      tag = drink.characteristics.create!(quality_name: 'Alcoólico', take_away_store: store)
 
       delete take_away_store_item_tag_path(store, drink, tag)
 
@@ -34,8 +34,8 @@ describe 'Proprietário remove marcadores associados' do
             close_time: '17:00')
       end
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
-      tag = drink.characteristics.create!(quality_name: 'Alcoólico')
-      drink.characteristics.create!(quality_name: 'Promoção')
+      tag = drink.characteristics.create!(quality_name: 'Alcoólico', take_away_store: store)
+      drink.characteristics.create!(quality_name: 'Promoção', take_away_store: store)
 
       login_as owner, scope: :owner
 
@@ -55,7 +55,7 @@ describe 'Proprietário remove marcadores associados' do
             close_time: '17:00')
       end
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
-      tag = drink.characteristics.create!(quality_name: 'Alcoólico')
+      tag = drink.characteristics.create!(quality_name: 'Alcoólico', take_away_store: store)
       other_owner = Owner.create!(name: 'Jhon', surname: 'Doe', register_number: '307.331.850-02',
           email: 'jhon@email.com', password: 'treina_dev13')
       other_store = other_owner.create_take_away_store!(trade_name: 'Pastelaria Top', corporate_name: 'Pastel LTDA',

@@ -12,10 +12,10 @@ class TagsController < ApplicationController
 
   def create
     if tag_params[:characteristic_id].present?
-      @characteristic = Characteristic.find(tag_params[:characteristic_id])
+      @characteristic = @take_away_store.characteristics.find(tag_params[:characteristic_id])
       @tag = @item.tags.build(characteristic: @characteristic)
     else
-      @characteristic = Characteristic.find_or_create_by(quality_name: tag_params[:quality_name])
+      @characteristic = @take_away_store.characteristics.find_or_create_by(quality_name: tag_params[:quality_name])
       @tag = @item.tags.build(characteristic: @characteristic)
     end
   

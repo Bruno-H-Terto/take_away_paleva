@@ -13,7 +13,7 @@ RSpec.describe Tag, type: :model do
             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
             email: 'potter@email.com')
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
-      characteristic = Characteristic.create!(quality_name: 'Alcoólico')
+      characteristic = Characteristic.create!(quality_name: 'Alcoólico', take_away_store: store)
 
       tag = Tag.new(item: drink, characteristic: characteristic)
 
@@ -29,7 +29,7 @@ RSpec.describe Tag, type: :model do
             email: 'potter@email.com')
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
       other_drink = store.items.create!(name: 'Vinho branco', description: '750ml', calories: 50, type: 'Beverage')
-      characteristic = Characteristic.create!(quality_name: 'Alcoólico')
+      characteristic = store.characteristics.create!(quality_name: 'Alcoólico')
       Tag.create!(item: drink, characteristic: characteristic)
 
       drink_tag = Tag.new(item: drink, characteristic: characteristic)

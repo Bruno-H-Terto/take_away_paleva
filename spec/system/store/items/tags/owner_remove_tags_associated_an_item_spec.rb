@@ -13,8 +13,8 @@ describe 'Proprietário remove marcadores associados a um item' do
           close_time: '17:00')
     end
     item = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 120, type: 'Beverage')
-    first_characteristic = item.characteristics.create!(quality_name: 'Doce')
-    second_characteristic = item.characteristics.create!(quality_name: 'Salgado')
+    first_characteristic = item.characteristics.create!(quality_name: 'Doce', take_away_store: store)
+    second_characteristic = item.characteristics.create!(quality_name: 'Salgado', take_away_store: store)
 
     login_as owner, scope: :owner
     visit root_path

@@ -102,7 +102,7 @@ RSpec.describe Item, type: :model do
             email: 'potter@email.com')
       drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
       drink.portions.create!(option_name: '750ml', value: 8000)
-      characteristic = Characteristic.create!(quality_name: 'Alcoólico')
+      characteristic = store.characteristics.create!(quality_name: 'Alcoólico')
       drink.tags.create!(characteristic: characteristic)
 
       drink.destroy!

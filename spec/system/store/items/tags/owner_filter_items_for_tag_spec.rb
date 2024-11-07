@@ -16,8 +16,8 @@ describe 'Proprietário filtra listagem de items por tag' do
       item_1 = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
       item_2 = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 100, type: 'Dish')
       item_3 = store.items.create!(name: 'Coca-Cola', description: 'Zero açucar', calories: 30, type: 'Beverage')
-      characteristic = Characteristic.create!(quality_name: 'Salgado')
-      other_characteristic = Characteristic.create!(quality_name: 'Gaseificado')
+      characteristic = store.characteristics.create!(quality_name: 'Salgado')
+      other_characteristic = store.characteristics.create!(quality_name: 'Gaseificado')
       item_1.tags.create!(characteristic: characteristic)
       item_2.tags.create!(characteristic: characteristic)
       item_3.tags.create!(characteristic: other_characteristic)
@@ -46,8 +46,8 @@ describe 'Proprietário filtra listagem de items por tag' do
       end
       item_1 = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
       item_2 = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 100, type: 'Dish')
-      characteristic = Characteristic.create!(quality_name: 'Salgado')
-      other_characteristic = Characteristic.create!(quality_name: 'Gaseificado')
+      characteristic = store.characteristics.create!(quality_name: 'Salgado')
+      other_characteristic = store.characteristics.create!(quality_name: 'Gaseificado')
       item_1.tags.create!(characteristic: characteristic)
       item_2.tags.create!(characteristic: characteristic)
 

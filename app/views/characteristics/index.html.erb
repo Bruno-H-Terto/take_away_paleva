@@ -2,11 +2,26 @@
   <div>
     <h3>Gerencie seus marcadores</h3>
   </div>
+  <div>
+    <small>Novo Marcador</small>
+    <%= form_with model: @characteristic do |form| %>
+      <div>
+        <%= form.label :quality_name %>
+        <%= form.text_field :quality_name %>
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
   <% if @characteristics&.any? %>
     <% @characteristics.each do |characteristic| %>
       <div>
         <p><%= characteristic.quality_name %></p>
       </div>
     <% end %>
+  <% else %>
+    <p>Não foram localizados marcadores cadastrados</p>
   <% end %>
 </section>
