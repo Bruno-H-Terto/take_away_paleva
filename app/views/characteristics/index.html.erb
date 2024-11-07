@@ -16,7 +16,7 @@
     <% end %>
   </div>
   <% if @characteristics&.any? %>
-    <% @characteristics.each do |characteristic| %>
+    <% @characteristics.select(&:persisted?).each do |characteristic| %>
       <div>
         <p><%= characteristic.quality_name %></p>
       </div>
