@@ -3,6 +3,7 @@ class TakeAwayStore < ApplicationRecord
   has_many :items, class_name: 'Item'
   has_many :business_hours
   has_many :menus
+  has_many :characteristics, through: :items
   accepts_nested_attributes_for :business_hours
 
   before_validation :generate_code, on: :create

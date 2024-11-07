@@ -1,7 +1,10 @@
-<section>
-  <%= @menu.name %>
+<section class="row">
 
-  <div id="items">
+  <div class="w-100 link-bar">
+    <%= link_to 'Home', root_path %>
+  </div>
+  <div id="items" class="col-4">
+    <%= @menu.name %>
     <%= render 'shared/errors', object: @item_menu %>
     <% if Item.exists? %>
       <div>
@@ -15,7 +18,7 @@
           </div>
 
           <div>
-            <%= form.submit class: 'btn btn-primary' %>
+            <%= form.submit class: 'btn btn-primary d-flex w-100' %>
           </div>
         <% end %>
       </div>
@@ -28,7 +31,7 @@
 
   </div>
 
-  <div id="menu-details">
+  <div id="menu-details" class="col-4">
     <div class="row">
       <% if @menu.items&.any? %>
         <h5>Items cadastrados</h5>

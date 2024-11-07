@@ -213,9 +213,17 @@ nav {
   width: 20px;
 }
 
-.dropdown-icon {
+.search-form{
+  margin-right: auto;
+}
+
+.dropdown-icon, .user-icon {
   display: flex;
   align-items: center;
+}
+
+.user-icon {
+  font-size: 1rem;
 }
 
 .dropdown-icon a {
@@ -228,20 +236,25 @@ nav {
   transition: background-color 0.3s ease;
 }
 
-.dropdown-img-icon {
+.dropdown-img-icon, .user-img-icon {
   width: 22px;
   margin-left: 0.3rem;
 }
 
 .add-link {
   display: flex;
-  width: 8rem;
+  width: 9rem;
+  height: 2.2rem;
+  align-self: center;
+  align-content: center;
+  align-items: center;
   border-radius: 4px;
+  border: 1px solid;
 }
 
 .add-link:hover{
-  background-color: #e7dcdc;
-  transition: 0.5s ease-in-out;
+  background-color: #eaecee;
+  transition: 0.4s ease-in-out;
 }
 
 .add-link img {

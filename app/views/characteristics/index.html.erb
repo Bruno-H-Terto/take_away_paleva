@@ -1,0 +1,12 @@
+<section>
+  <div>
+    <h3>Gerencie seus marcadores</h3>
+  </div>
+  <% if @characteristics&.any? %>
+    <% @characteristics.each do |characteristic| %>
+      <div>
+        <p><%= characteristic.quality_name %></p>
+      </div>
+    <% end %>
+  <% end %>
+</section>

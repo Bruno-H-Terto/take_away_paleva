@@ -2,7 +2,7 @@
 
 <h3>Inclua seu horário de funcionamento</h3>
 
-<%= form_with model: @take_away_store, url: take_away_store_business_hours_path(@take_away_store), method: :post, data: { turbo: false }, class: 'form-container' do |form| %>
+<%= form_with model: @take_away_store, url: take_away_store_business_hours_path(@take_away_store), method: :post, data: { turbo: false }, class: 'col-4 form-container' do |form| %>
   <%= form.fields_for :business_hours do |business_hour_form| %>
 
     <div id="<%= business_hour_form.object.day_of_week %>" class="business-hour-container">
@@ -29,6 +29,6 @@
   <% end %>
   
   <div class="form-group">
-    <%= form.submit t('business_hour.registration'), class: 'btn btn-primary' %>
+    <%= form.submit t('business_hour.registration'), class: 'btn btn-primary d-flex w-100' %>
   </div>
 <% end %>

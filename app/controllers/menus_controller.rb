@@ -3,6 +3,7 @@ class MenusController < ApplicationController
   before_action :set_take_away_store
   
   def create
+    @menus = @take_away_store&.menus
     @menu = @take_away_store.menus.build(menu_params)
 
     if @menu.save
