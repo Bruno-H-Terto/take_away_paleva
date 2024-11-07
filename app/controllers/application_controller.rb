@@ -34,4 +34,8 @@ class ApplicationController < ActionController::Base
   def valid_path?(excluded_paths)
     excluded_paths.include?(request.path)
   end
+
+  def current_store
+    current_owner.take_away_store
+  end
 end

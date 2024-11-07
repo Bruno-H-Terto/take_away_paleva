@@ -15,7 +15,7 @@ class TagsController < ApplicationController
       @characteristic = @take_away_store.characteristics.find(tag_params[:characteristic_id])
       @tag = @item.tags.build(characteristic: @characteristic)
     else
-      @characteristic = @take_away_store.characteristics.find_or_create_by(quality_name: tag_params[:quality_name])
+      @characteristic = @take_away_store.characteristics.create(quality_name: tag_params[:quality_name])
       @tag = @item.tags.build(characteristic: @characteristic)
     end
   
@@ -24,7 +24,7 @@ class TagsController < ApplicationController
     end
 
     flash[:alert] = 'Não foi possível adicionar seu marcador'
-    if tag_params[:characteristic_id].present?
+    if tag_params[:characteristic_id].blank? && params[:commit] == 'Adicionar Tag'
       return redirect_to take_away_store_item_path(@take_away_store, @item)
     end
 

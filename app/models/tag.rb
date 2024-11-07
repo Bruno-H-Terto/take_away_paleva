@@ -4,7 +4,6 @@ class Tag < ApplicationRecord
   accepts_nested_attributes_for :characteristic
   before_validation :tag_must_be_uniq_for_same_item, if: -> {item.present?}
 
-  validate :characteristic_quality_name_present
 
   private
 

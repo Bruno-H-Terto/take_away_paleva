@@ -2,7 +2,7 @@ class Characteristic < ApplicationRecord
   has_many :tags, dependent: :destroy
   has_many :items, through: :tags
   belongs_to :take_away_store
-  validate :quality_name_must_be_uniq_for_same_store
+  validate :quality_name_must_be_uniq_for_same_store, if: -> {quality_name.present?}
   validates :quality_name, presence: true
 
 

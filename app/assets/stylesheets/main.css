@@ -43,17 +43,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 200px;
 }
 
-nav .btn {
-  background-color: #E94B35;
-  border-color: #E94B35;
-  color: #fff;
-}
-
-nav .btn:hover{
-  background-color: #9b3325;
-  border-color: #E94B35;
-  color: #fff;
-}
 
 .item-img {
   object-fit: cover;
