@@ -140,7 +140,7 @@ nav .btn {
 .flashs {
   position: fixed;
   width: 30rem;
-  top: 5rem;
+  top: 3rem;
   left: 10rem;
   height: 4rem;
   z-index: 1000;
@@ -190,7 +190,6 @@ nav .btn {
 
 .menu-body {
   max-height: 25rem;
-  overflow-y: auto;
   border-top: 1px solid #c01212;
   padding: 0.5rem;
   margin-top: 1rem;
@@ -198,7 +197,10 @@ nav .btn {
 
 .menu-list {
   max-height: 80vh;
+  position: fixed;
   overflow-y: auto;
+  right: 0;
+  display: flex;
 }
 
 .form-input-search {
@@ -266,4 +268,28 @@ nav .btn {
 
 .area-dropdown{
   width: 13rem;
+}
+
+.aside {
+  padding-top: 5rem;
+  padding-left: 2rem;
+  position: fixed;
+  height: 100vh;
+  width: 20rem;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.backgroud-aside {
+  z-index: -50;
+}
+
+.aside-dashboard {
+  width: 30rem;
+}
+
+.more-img {
+  display: float;
+  width: 7rem;
 }

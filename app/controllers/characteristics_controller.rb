@@ -1,6 +1,6 @@
 class CharacteristicsController < ApplicationController
   def index
-    @take_away_store = @owner.take_away_store
+    @take_away_store = current_store
     @characteristics = @take_away_store.characteristics.select(&:persisted?)
     @characteristic = @take_away_store.characteristics.build
   end

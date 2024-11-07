@@ -1,35 +1,37 @@
 <section class="row">
   <% if owner_signed_in? && @take_away_store.id.present? %>
-  <h2>Cardápio</h2>
-  <%= render 'shared/errors', object: @menu %>
-  <section class="col-3">
-  <button class="area-dropdown btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
-    Criar nova Categória
-  </button>
-  <ul class="dropdown-menu p-3 area-dropdown" aria-labelledby="dropdownMenuButton">
-    <li>
-      <%= form_with model: [@take_away_store, @menu] do |form| %>
-        <div class="mb-2">
-          <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
-          <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
-        </div>
-        
-        <div>
-          <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
-        </div>
-      <% end %>
-    </li>
-  </ul>
-
-  <div class="mt-3">
-    <div>
-      <h6>Gerenciar pedidos</h6>
-    </div>
-    <ul>
+  <div class="aside">
+    <h2>Cardápio</h2>
+    <%= render 'shared/errors', object: @menu %>
+    <section class="col-3">
+    <button class="area-dropdown btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
+      Criar nova Categória
+    </button>
+    <ul class="dropdown-menu p-3 area-dropdown" aria-labelledby="dropdownMenuButton">
       <li>
-        Novo pedido
+        <%= form_with model: [@take_away_store, @menu] do |form| %>
+          <div class="mb-2">
+            <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
+            <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
+          </div>
+          
+          <div>
+            <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
       </li>
     </ul>
+    
+    <div class="mt-3 aside-dashboard">
+      <div>
+        <h6>Gerenciar pedidos</h6>
+      </div>
+      <ul>
+        <li>
+          Novo pedido
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -51,7 +53,10 @@
               </div>
             <% end %>
             <div class="mt-2 menu-body">
-              <%= render 'items/items', items: menu.items.where(status: 'active') %>
+              <% if menu.items.count > 3 %>
+                <p>Exibindo 3 de <%= menu.items.count %> de itens</p>
+              <% end %>
+              <%= render 'items/items', items: menu.items.where(status: 'active').last(3) %>
             </div>
           </div>
         </div>
