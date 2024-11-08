@@ -8,7 +8,7 @@
 
 <section class="row">
   <h3>Dados da loja</h3>
-  <div class="col-8">
+  <div class="col-6">
     <dl>
       <dt><%= @take_away_store.business_name %></dt>
       <dl>Responsável: <%= @owner.full_name %></dl>
@@ -24,24 +24,29 @@
     </div>
   </div>
 
- 
-  <div id="business-hours" class="col-4">
-    <div>
-      <% if @take_away_store.business_hours.any? %>
-        <p>Horário de funcionamento</p>
+  <div class="col-6 border p-2">
+    <h3>Gerencie seus horários</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center">Dia da semana</th>
+          <th class="text-center">Horário de abertura</th>
+          <th class="text-center">Horário de fechamento</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @take_away_store.business_hours.each do |business_hour| %>
-          <div>
-            <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
-              <p><%= business_hour.display_hours%></p>
-            <% end %>
-          </div>
-          <div>
-            
-          </div>
+          <tr id=<%= business_hour.day_of_week_was%>>
+            <td class="text-start">
+              <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
+                <%= BusinessHour.human_attribute_name business_hour.day_of_week %>
+              <% end %>
+            </td>
+            <td class="text-center"><%= business_hour.display_time(business_hour.open_time) %></td>
+            <td class="text-center"><%= business_hour.display_time(business_hour.close_time) %></td>
+          </tr>
         <% end %>
-      <% else %>
-        <%= link_to 'Adicionar horário de funcionamento', new_take_away_store_business_hour_path(@take_away_store), class: 'text-blue-500 hover:underline' %>
-      <% end %>
-    </div>
+      </tbody>
+    </table>
   </div>
 </section>

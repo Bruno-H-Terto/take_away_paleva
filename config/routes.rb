@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     resources :dishes, only: %i[new create show edit update destroy]
     resources :beverages, only: %i[new create show edit update destroy]
   end
-  resources :characteristics, only: %i[index create]
+  resources :characteristics, only: %i[index create show update]
   resources :portions, only: %i[show update]
 end

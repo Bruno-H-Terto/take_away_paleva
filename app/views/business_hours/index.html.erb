@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <% @take_away_store.business_hours.each do |business_hour| %>
-        <tr>
+        <tr id=<%= business_hour.day_of_week_was%>>
           <td class="text-center">
             <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
               <%= BusinessHour.human_attribute_name business_hour.day_of_week %>

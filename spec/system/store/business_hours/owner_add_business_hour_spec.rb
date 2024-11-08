@@ -78,13 +78,41 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
     click_on 'Registrar horários'
 
     expect(page).to have_content 'Horário registrado com sucesso'
-    expect(page).to have_content 'Segunda-feira de 09:00 às 17:00'
-    expect(page).to have_content 'Terça-feira de 09:00 às 17:00'
-    expect(page).to have_content 'Quarta-feira de 09:00 às 17:00'
-    expect(page).to have_content 'Quinta-feira de 09:00 às 17:00'
-    expect(page).to have_content 'Sexta-feira de 09:00 às 17:00'
-    expect(page).to have_content 'Sábado sem funcionamento'
-    expect(page).to have_content 'Domingo sem funcionamento'
+    within '#monday' do
+      expect(page).to have_content 'Segunda-feira'
+      expect(page).to have_content '09:00'
+      expect(page).to have_content '17:00'
+    end
+    within '#tuesday' do
+      expect(page).to have_content 'Terça-feira'
+      expect(page).to have_content '09:00'
+      expect(page).to have_content '17:00'
+    end
+    within '#wednesday' do
+      expect(page).to have_content 'Quarta-feira'
+      expect(page).to have_content '09:00'
+      expect(page).to have_content '17:00'
+    end
+    within '#thursday' do
+      expect(page).to have_content 'Quinta-feira'
+      expect(page).to have_content '09:00'
+      expect(page).to have_content '17:00'
+    end
+    within '#friday' do
+      expect(page).to have_content 'Sexta-feira'
+      expect(page).to have_content '09:00'
+      expect(page).to have_content '17:00'
+    end
+    within '#saturday' do
+      expect(page).to have_content 'Sábado'
+      expect(page).to have_content '--:--'
+      expect(page).to have_content '--:--'
+    end
+    within '#sunday' do
+      expect(page).to have_content 'Domingo'
+      expect(page).to have_content '--:--'
+      expect(page).to have_content '--:--'
+    end
   end
 
   it 'falha ao selecionar Funcionamento, mas não passa o horário' do

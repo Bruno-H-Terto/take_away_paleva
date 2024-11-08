@@ -97,4 +97,81 @@ describe 'Proprietário acessa listagem de tags registradas' do
     expect(page).to have_content 'Não foi possível criar seu marcador'
     expect(store.characteristics.count).to eq 0
   end
+
+  it 'e edita um marcador cadastrado' do
+    owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+        email: 'quadribol@email.com', password: 'treina_dev13')
+    store = owner.create_take_away_store!(trade_name: 'Pastel Dev', corporate_name: 'Hogwarts LTDA',
+        register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+        number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+        email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
+    store.characteristics.create!(quality_name: 'salgado')
+
+    login_as owner, scope: :owner
+    visit root_path
+    click_on 'Marcadores'
+    click_on 'salgado'
+    fill_in 'Marcador', with: 'Salgado'
+    click_on 'Atualizar Marcador'
+
+    expect(page).to have_content 'Marcador atualizado com sucesso!'
+    expect(page).to have_content 'Sem items associados'
+    expect(page).to have_content 'Salgado'
+    expect(page).not_to have_content 'salgado'
+  end
+
+  it 'e falha ao não incluir informações obrigatórias' do
+    owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+        email: 'quadribol@email.com', password: 'treina_dev13')
+    store = owner.create_take_away_store!(trade_name: 'Pastel Dev', corporate_name: 'Hogwarts LTDA',
+        register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+        number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+        email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
+    store.characteristics.create!(quality_name: 'salgado')
+
+    login_as owner, scope: :owner
+    visit root_path
+    click_on 'Marcadores'
+    click_on 'salgado'
+    fill_in 'Marcador', with: ''
+    click_on 'Atualizar Marcador'
+
+    expect(page).to have_content 'Não foi possível atualizar seu Marcador'
+  end
+
+  it 'e falha ao não incluir informações obrigatórias' do
+    owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+        email: 'quadribol@email.com', password: 'treina_dev13')
+    store = owner.create_take_away_store!(trade_name: 'Pastel Dev', corporate_name: 'Hogwarts LTDA',
+        register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+        number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+        email: 'potter@email.com')
+    BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+          close_time: '17:00')
+    end
+    item_1 = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+    item_2 = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 100, type: 'Dish')
+    characteristic = store.characteristics.create!(quality_name: 'Salgado')
+    item_1.tags.create!(characteristic: characteristic)
+    item_2.tags.create!(characteristic: characteristic)
+
+    login_as owner, scope: :owner
+    visit root_path
+    click_on 'Marcadores'
+    click_on 'Salgado'
+
+    within '#list_associeted_items' do
+      expect(page).to have_content 'Pizza'
+      expect(page).to have_content 'Hamburguer'
+    end
+  end
 end

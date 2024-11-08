@@ -37,7 +37,7 @@ class BusinessHoursController < ApplicationController
 
   def update
     if @business_hour.update(business_hour_params)
-      return redirect_to take_away_store_path(@take_away_store), notice: 'Horário atualizado com sucesso'
+      return redirect_to take_away_store_business_hours_path(@take_away_store), notice: 'Horário atualizado com sucesso'
     end
 
     flash.now[:alert] = 'Não foi possível atualizar seu horário, revise os campos abaixo:'

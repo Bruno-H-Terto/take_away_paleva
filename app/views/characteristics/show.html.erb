@@ -1,0 +1,29 @@
+<section class="row"> 
+  <div class="col-6">
+    <h3>Marcador <%= @characteristic.quality_name_in_database %></h3>
+    <div id="list_associeted_items">
+      <% if @characteristic.items.any? %>
+        <h5>Items associados</h5>
+        <div class="overflow-auto">
+          <%= render 'items/items', items: @characteristic.items %>
+        </div>
+      <% else %>
+        <p>Sem items associados</p>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="col-6">
+    <small>Atualizar <%= @characteristic.quality_name_in_database %></small>
+    <%= form_with model: @characteristic do |form| %>
+      <div>
+        <%= form.label :quality_name %>
+        <%= form.text_field :quality_name %>
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -31,7 +31,7 @@ describe 'Proprietário consulta histórico' do
       click_on 'Histórico'
 
       formated_date_past = I18n.l(7.days.ago, format: "%d/%m/%y")
-      formated_date_present = I18n.l(Date.today, format: "%d/%m/%y")
+      formated_date_present = I18n.l(Date.current, format: "%d/%m/%y")
       expect(page).to have_content "Histórico - Pizza"
       within "#portion_#{portion.id}" do
         expect(page).to have_content "Adicionado: #{formated_date_past} - Porção Média | R$ 50,00"
@@ -93,7 +93,7 @@ describe 'Proprietário consulta histórico' do
       click_on 'Especial - R$ 60,00'
 
       formated_date_past = I18n.l(7.days.ago, format: "%d/%m/%y")
-      formated_date_present = I18n.l(Date.today, format: "%d/%m/%y")
+      formated_date_present = I18n.l(Date.current, format: "%d/%m/%y")
       expect(page).to have_content 'Histórico - Porção Especial'
 
       expect(page).to have_content "Adicionado: #{formated_date_past} - Porção Média | R$ 50,00"
