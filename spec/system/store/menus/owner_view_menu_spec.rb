@@ -21,7 +21,7 @@ describe 'Proprietário consulta seus menus' do
     expect(current_path).to eq new_owner_session_path
   end
 
-  it 'e vê listagem de cardápios e seus itens a partir da página inicial' do
+  it 'e vê listagem de cardápios, e seus itens, a partir da página inicial' do
     owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
         email: 'quadribol@email.com', password: 'treina_dev13')
     store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
@@ -33,6 +33,7 @@ describe 'Proprietário consulta seus menus' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+    dish.portions.create!(option_name: 'Média', value: 7000)
     store.menus.create!(name: 'Café da manhã')
     store.menus.create!(name: 'Açai')
     store.menus.create!(name: 'Comida da Roça')
@@ -104,6 +105,7 @@ describe 'Proprietário consulta seus menus' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+    dish.portions.create!(option_name: 'Pequena', value: 13000)
     dish.inactive!
     menu = store.menus.create!(name: 'Fast Food')
     menu.item_menus.create!(item: dish)
@@ -153,7 +155,9 @@ describe 'Proprietário consulta seus menus' do
           close_time: '17:00')
     end
     dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+    dish.portions.create!(option_name: 'Pequena', value: 13000)
     other_dish = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 80, type: 'Dish')
+    other_dish.portions.create!(option_name: 'Média', value: 10000)
     other_dish.inactive!
     portion = dish.portions.create!(option_name: 'Média', value: '5000')
     menu = store.menus.create!(name: 'Fast Food')

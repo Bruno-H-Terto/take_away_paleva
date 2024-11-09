@@ -17,7 +17,7 @@ class MenusController < ApplicationController
   def show
     @menu = Menu.find(params[:id])
     @menu_items = @menu.item_menus.build
-    @items = @take_away_store.items.select { |item| item.active? }
+    @items = @take_away_store.items.select { |item| item.active? && item.portions.any? }
   end
 
   private

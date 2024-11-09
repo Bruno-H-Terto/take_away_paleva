@@ -209,7 +209,7 @@ nav .btn {
   min-width: 32rem ;
 }
 
-.order-items {
+#order {
   max-height: 70vh;
   position: fixed;
   overflow-y: auto;

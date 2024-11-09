@@ -1,0 +1,54 @@
+<div class="mt-5 col-9 menu-list">
+  <div>
+    <% if menus&.exists?(&:persisted?) %>
+      <% menus.select(&:persisted?).each do |menu| %>
+        <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">
+          <div class="menu-header">
+            <%= link_to take_away_store_menu_path(@take_away_store, menu) do %>
+              <h4><%= menu.name %></h4>
+            <% end %>
+          </div>
+          <div id="items">
+            <% if menu.items.exists?(&:active?) %>
+              <div>
+                <small>Itens inclusos no cardápio</small>
+              </div>
+              <% menu.items.select(&:active?).each do |item| %>
+                <div class="container mt-3 row p-2 menu-list-items">
+                  <small><%= item.name %></small>
+                  <div class="col-6">
+                    <% if item.photo.attached? %>
+                      <%= image_tag item.photo, class: 'fixed-img item-img', alt: 'Card item image' %>
+                    <% else %>
+                      <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
+                    <% end %>
+                  </div>
+                  <div class="col-6 box-item">
+                    <small>Descrição:</small>
+                    <div class="row box-item__description overflow-auto">
+                      <span class="text-justify"><%= item.description %></span>
+                    </div>
+                    <div class="row mt-3 text-break">
+                      <% if item.calories.present? %>
+                        <small><%= item.calories %> Calorias</small>
+                      <% end %>
+                    </div>
+                    <div class="row mt-3 text-break" id=<%= dom_id(menu, item.name) %> >
+                      <small><%= link_to 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
+                      <%= link_to 'Adicionar ao Carrinho', order_items_path(menu, item.id) %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p>Sem itens cadastrados</p>
+            <% end %>
+            <div class="mt-2 menu-body"></div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Não existem cardápios cadastrados</p>
+    <% end %>
+  </div>
+</div>

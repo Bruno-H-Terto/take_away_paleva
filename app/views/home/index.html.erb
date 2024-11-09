@@ -1,101 +1,66 @@
 <section class="row">
   <% if owner_signed_in? && @take_away_store.id.present? %>
-  <div class="aside">
-    <h2>Cardápio</h2>
-    <%= render 'shared/errors', object: @menu %>
-    <section class="col-3">
-    <button class="area-dropdown btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
-      Criar nova Categória
-    </button>
-    <ul class="dropdown-menu p-3 area-dropdown" aria-labelledby="dropdownMenuButton">
-      <li>
-        <%= form_with model: [@take_away_store, @menu] do |form| %>
-          <div class="mb-2">
-            <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
-            <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
-          </div>
-          
-          <div>
-            <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
-          </div>
-        <% end %>
-      </li>
-    </ul>
-    
-    <div class="mt-3 aside-dashboard">
-      <div>
-        <h6>Gerenciar pedidos</h6>
-      </div>
-      <ul>
-        <li>
-          Novo pedido
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="mt-5 col-9 menu-list">
-  <div>
-    <% if @menus&.exists?(&:persisted?) %>
-      <% @menus.select(&:persisted?).each do |menu| %>
-        <div class="menu mt-1 p-3 border rounded" id=<%=dom_id(menu)%>>
-          <div class="menu-header">
-            <%= link_to take_away_store_menu_path(@take_away_store, menu) do %>
-              <h4><%= menu.name %></h4>
-            <% end %>
-          </div>
-          
-          <div id="items">
-            <% if menu.items.exists?(&:active?) %>
-              <div>
-                <small>Itens inclusos no cardápio</small>
+    <div class="aside">
+      <h2>Cardápio</h2>
+      <%= render 'shared/errors', object: @menu %>
+      <section class="col-3">
+          <button class="btn btn-primary area-dropdown" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Criar nova Categória
+          </button>
+        </p>
+        <div class="collapse area-dropdown" id="collapseExample">
+          <div class="card card-body">
+            <%= form_with model: [@take_away_store, @menu] do |form| %>
+              <div class="mb-2">
+                <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
+                <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
               </div>
-              <% menu.items&.select(&:active?)&.each do |item| %>
-                <div class="container mt-3 row p-2 menu-list-items">
-                  <small><%= item.name %></small>
-                  <div class="col-6">
-                    <% if item.photo.attached? %>
-                      <%= image_tag item.photo, class: 'fixed-img item-img', alt: 'Card item image' %>
-                    <% else %>
-                      <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
-                    <% end %>
-                  </div>
-
-                  <div class="col-6 box-item">
-                    <small>Opções:</small>
-                    <div class="row box-item__description overflow-auto">
-                      <% if item.portions.any? %>
-                        <% item.portions.each do |portion| %>
-                          <span class="text-justify"><%= portion.menu_option_name %></span>  
-                        <% end %>
-                      <% end %>
-                    </div>
-                    <div class="row mt-3 text-break">
-                      <small><%= link_to 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-              <p>Sem itens cadastrados</p>
+              <div>
+                <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
+              </div>
             <% end %>
-            <div class="mt-2 menu-body">
-
-            </div>
           </div>
         </div>
+
+        <div class="mt-3 aside-dashboard">
+          <div>
+            <h6>Gerenciar pedidos</h6>
+          </div>
+          <ul>
+            <li>Novo pedido</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <%= render 'home/menu_list', menus: @menus %>
+    
+    <div class="col-3" id="order">
+      <% if @cart_items %>
+      <h2>Carrinho</h2>
+        <%= form_with(scope: :invites, url: root_path) do |form| %>
+          <% @cart_items.each do |item| %>
+            <div id= "order_item_<%= item.id %>">
+              <div class="row">
+                <%= item.name %>
+                <%= form.text_field nil, id: nil, placeholder: "Observação" %> 
+              </div>
+              <div>
+                <%= form.label :portion_id, 'Opções' %>
+                <%= form.collection_select :portion_id, item.portions, :id, :menu_option_name %> 
+              </div>
+              <div>
+                <%= form.label :quantity, 'Quantidade' %>
+                <%= form.number_field :quantity %>
+              </div>
+            </div>
+          <% end %>
+          <%= form.submit 'Confirmar Pedido' %>
+        <% end %>
       <% end %>
-    <% else %>
-      <p>Não existem cardápios cadastrados</p>
-    <% end %>
-  </div>
-</div>
-
-<div class="order-items">
-  <h2>Carrinho</h2>
-</div>
-
+    </div>
+  <% end %>
+</section>
 
 <script>
   document.querySelectorAll('.dropdown-menu').forEach(menu => {
@@ -103,7 +68,5 @@
       event.stopPropagation();
     });
   });
-</script>
 
-  <% end %>
-</section>
+</script>

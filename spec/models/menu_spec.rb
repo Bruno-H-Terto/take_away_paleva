@@ -61,7 +61,7 @@ RSpec.describe Menu, type: :model do
             number: '91', district: 'Centro', city: 'São Paulo', state: 'SP', zip_code: '12000-000', complement: 'Loja 1',
             email: 'pateltop@email.com')
 
-      menu = other_store.menus.build(name: 'Café da manhã')
+      menu = other_store.menus.create(name: 'Café da manhã')
 
       expect(menu).to be_valid
     end
