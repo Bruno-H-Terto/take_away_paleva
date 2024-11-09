@@ -196,10 +196,24 @@ nav .btn {
 }
 
 .menu-list {
-  max-height: 80vh;
+  max-height: 90vh;
   position: fixed;
   overflow-y: auto;
-  right: 0;
+  width: 40rem;
+  top: 2rem;
+  left: 18rem;
+  display: flex;
+}
+
+.menu-list-items {
+  min-width: 32rem ;
+}
+
+.order-items {
+  max-height: 70vh;
+  position: fixed;
+  overflow-y: auto;
+  left: 60rem;
   display: flex;
 }
 

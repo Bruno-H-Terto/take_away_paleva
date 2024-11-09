@@ -1,4 +1,5 @@
 class CharacteristicsController < ApplicationController
+  before_action :authenticate_owner!
   def index
     @take_away_store = current_store
     @characteristics = @take_away_store.characteristics.select(&:persisted?)
@@ -38,5 +39,10 @@ class CharacteristicsController < ApplicationController
 
   def characteristic_params
     params.require(:characteristic).permit(:quality_name)
+  end
+
+  def set_take_away_store
+    @store = current_owner
+    @menus = @take_away_store
   end
 end

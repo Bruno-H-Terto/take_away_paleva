@@ -36,6 +36,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_store
-    current_owner.take_away_store
+    current_owner&.take_away_store
   end
 end

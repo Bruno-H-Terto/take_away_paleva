@@ -70,7 +70,7 @@ describe 'Proprietário consulta seus menus' do
     visit root_path
 
     within "#menu_#{menu.id}" do
-      expect(page).to have_content 'Nenhum item cadastrado'
+      expect(page).to have_content 'Sem itens cadastrados'
     end
   end
 

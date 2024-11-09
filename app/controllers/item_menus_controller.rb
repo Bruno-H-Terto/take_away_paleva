@@ -1,8 +1,8 @@
 class ItemMenusController < ApplicationController
   def create
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
-    @menu = Menu.find(params[:menu_id])
-    @item = Item.find(item_menu_params[:item_id])
+    @menu = @take_away_store.menus.find(params[:menu_id])
+    @item = @take_away_store.items.find(item_menu_params[:item_id])
     @item_menu = @menu.item_menus.build(item: @item)
 
     if @item_menu.save

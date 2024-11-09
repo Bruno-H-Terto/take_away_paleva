@@ -4,6 +4,7 @@ class HomeController < ApplicationController
       @owner = current_owner
       @take_away_store = @owner.take_away_store
       @menus = @owner.menus
+      @items = @take_away_store.items.select { |item| item.active? }
       @menu = @owner.menus.build
     end
   end

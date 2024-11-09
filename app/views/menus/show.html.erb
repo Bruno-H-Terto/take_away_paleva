@@ -6,7 +6,7 @@
   <div id="items" class="col-4">
     <%= @menu.name %>
     <%= render 'shared/errors', object: @item_menu %>
-    <% if Item.exists? %>
+    <% if @items&.any? %>
       <div>
         <h3>Adicione items ao Cardápio</h3>
       </div>
@@ -14,7 +14,7 @@
         <%= form_with model: @menu.item_menus.build, url: take_away_store_menu_item_menus_path(@take_away_store, @menu) do |form| %>
           <div class="mb-3">
             <%= form.label :item_id, 'Items' %>
-            <%= form.collection_select :item_id, Item.active, :id, :name, { prompt: 'Selecione um item' }, class: 'form-select' %>
+            <%= form.collection_select :item_id, @items, :id, :name, { prompt: 'Selecione um item' }, class: 'form-select' %>
           </div>
 
           <div>
