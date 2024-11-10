@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_10_062615) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_10_191527) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -100,6 +100,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_062615) do
     t.index ["take_away_store_id"], name: "index_menus_on_take_away_store_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "menu_id", null: false
+    t.integer "item_id", null: false
+    t.integer "portion_id", null: false
+    t.string "observation"
+    t.integer "quantity"
+    t.integer "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["menu_id"], name: "index_order_items_on_menu_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["portion_id"], name: "index_order_items_on_portion_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -177,6 +192,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_062615) do
   add_foreign_key "item_menus", "menus"
   add_foreign_key "items", "take_away_stores"
   add_foreign_key "menus", "take_away_stores"
+  add_foreign_key "order_items", "items"
+  add_foreign_key "order_items", "menus"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "portions"
   add_foreign_key "orders", "take_away_stores"
   add_foreign_key "portions", "items"
   add_foreign_key "tags", "characteristics"

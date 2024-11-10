@@ -9,6 +9,9 @@ pt-BR:
       tag: 'Tag'
       item_menu: 'Item do Menu'
       menu: 'Cardápio'
+      order:
+        one: 'Pedido'
+        other: 'Pedidos'
     attributes:
       owner:
         register_number: 'CPF'
@@ -58,4 +61,7 @@ pt-BR:
         quality_name: 'Marcador'
       menu:
         name: 'Rótulo'
+      order:
+        name: 'Nome do Cliente'
+        waiting_confirmation: 'Aguardando confirmação da cozinha'
         

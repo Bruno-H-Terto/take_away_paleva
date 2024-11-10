@@ -10,7 +10,7 @@
           <p><strong>Item:</strong> <%= order_item[:item].name %></p>
           <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
           <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
-          <p><strong>Observação:</strong> <%= order_item[:observation] %></p>
+          <p><strong>Observação:</strong> <%= order_item[:observation].presence || 'Nenhuma' %></p>
         </div>
         <div>
           <%= button_to 'Remover', order_item_path(index), method: :delete %>

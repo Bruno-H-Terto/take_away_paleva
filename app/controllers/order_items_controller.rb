@@ -1,5 +1,9 @@
 class OrderItemsController < ApplicationController
   def cart
+    if params[:menu_id].empty? || params[:item_id].empty? || params[:portion_id].empty? || params[:quantity].empty?
+      return redirect_to root_path, alert: 'Não foi possível adicionar seu item ao carrinho'
+    end
+
     @take_away_store = current_store
     session[:cart_items] ||= []
 
@@ -78,6 +82,10 @@ class OrderItemsController < ApplicationController
     menu_id = params[:menu]
     item_id = params[:item]
     portion_id = params[:portion]
+
+    if order_item_params[:quantity].empty? || menu_id.empty? || item_id.empty? || portion_id.empty?
+      return redirect_to order_items_path, alert: 'Não foi possível atualizar seu item'
+    end
     
     session[:cart_items][params[:id].to_i] = {
       menu: menu_id,

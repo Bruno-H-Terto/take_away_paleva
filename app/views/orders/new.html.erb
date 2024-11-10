@@ -1,4 +1,6 @@
   <h2>Finalize seu Pedido</h2>
+  <%= render 'shared/errors', object: @order %>
+  
   <%= form_with model: @order do |form| %>
     <div>
       <%= form.label :name, 'Nome do Cliente' %>

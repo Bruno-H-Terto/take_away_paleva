@@ -1,12 +1,14 @@
 <div>
-  <div>
+  <div id="orders_waiting_confirmation">
     <div>
       <h2>Pedidos aguardando confirmação</h2>
     </div>
     <div>
       <% @orders.each do |order| %>
+        <%= link_to order_path(order) do %>
+          <p>Pedido - <%= order.code %></p>
+        <% end %>
         <p>Cliente: <%= order.name %></p>
-        <p>Pedido - <%= order.code %></p>
         <p>Solicitado em <%= order.created_at_current.strftime("%d/%m/%Y %H:%M") %></p>
       <% end %>
     </div>
