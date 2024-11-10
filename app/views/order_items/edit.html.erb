@@ -1,0 +1,16 @@
+<%= form_with url: order_item_path(@item), method: :patch, scope: :order_item do |form| %>
+  <p><strong>Menu:</strong> <%= @item[:menu].name %></p>
+  <p><strong>Item:</strong> <%= @item[:item].name %></p>
+  <p><strong>Porção:</strong> <%= @item[:portion].menu_option_name %></p>
+  <div>
+    <%= form.label :observation, 'Observação' %>
+    <%= form.text_field :observation %>
+  </div>
+  <div>
+    <%= form.label :quantity, 'Quantidade' %>
+    <%= form.number_field :quantity, min: 1 %>
+  </div>
+  
+  <%= form.submit %>
+<% end %>
+

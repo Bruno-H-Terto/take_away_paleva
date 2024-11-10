@@ -13,8 +13,8 @@
           <p><strong>Observação:</strong> <%= order_item[:observation] %></p>
         </div>
         <div>
-          <p>Editar</p>
           <%= button_to 'Remover', order_item_path(index), method: :delete %>
+          <%= link_to 'Editar', edit_order_item_path(index) %>
         </div>
       </div>
       <% end %>
