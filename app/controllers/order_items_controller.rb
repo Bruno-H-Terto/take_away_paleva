@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
     sum = 0
     @price = 0
 
-    if session[:cart_items]
+    if session[:cart_items].present?
       
       session[:cart_items].each do |order_item|
         menu = @take_away_store.menus.find_by(id: order_item['menu'])
@@ -28,21 +28,27 @@ class OrderItemsController < ApplicationController
         portion = Portion.find_by(id: order_item['portion_id'])
         sum += portion.value*order_item['quantity'].to_i
 
-        if menu && item && portion
-          @order_items << {
-            menu: menu,
-            item: item,
-            portion: portion.menu_option_name,
-            observation: order_item['observation'],
-            quantity: order_item['quantity']
-          }
-        end
+        @order_items << {
+          menu: menu,
+          item: item,
+          portion: portion.menu_option_name,
+          observation: order_item['observation'],
+          quantity: order_item['quantity']
+        }
       end
       @price = "R$ #{sum.to_s.insert(-3, ',')}"
+    else
+      session.delete(:cart_items)
     end
   end
 
-  def create
-    
+  def destroy
+    if session[:cart_items]
+      session[:cart_items].delete_at(params[:id].to_i)
+    end
+
+    session.delete(:cart_items) if session[:cart_items].empty?
+  
+    redirect_to order_items_path, notice: 'Item removido do carrinho'
   end
 end

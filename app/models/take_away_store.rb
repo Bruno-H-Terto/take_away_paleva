@@ -4,6 +4,7 @@ class TakeAwayStore < ApplicationRecord
   has_many :business_hours
   has_many :menus
   has_many :characteristics
+  has_many :orders
   accepts_nested_attributes_for :business_hours
 
   before_validation :generate_code, on: :create
@@ -35,10 +36,7 @@ class TakeAwayStore < ApplicationRecord
   private
 
   def generate_code
-    loop do
-      self.code = SecureRandom.alphanumeric(6).upcase
-      break(TakeAwayStore.none? { |store| store.code == code })
-    end
+    self.code = SecureRandom.alphanumeric(6).upcase
   end
 
   def address_must_be_uniq

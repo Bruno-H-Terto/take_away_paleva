@@ -1,42 +1,31 @@
-<% if @order_items %>
-  <h2>Finalize seu Pedido</h2>
-  <%= form_with url: order_items_path do |form| %>
-    <div>
-      <%= form.label :name, 'Nome do Cliente' %>
-      <%= form.text_field :name %>
-    </div>
-
-    <div>
-      <%= form.label :phone_number, 'Telefone do Cliente' %>
-      <%= form.text_field :phone_number %>
-    </div>
-
-    <div>
-      <%= form.label :email, 'E-mail' %>
-      <%= form.email_field :email %>
-    </div>
-
-    <div>
-      <%= form.label :register_number, 'CPF' %>
-      <%= form.text_field :register_number %>
-    </div>
-
-    <div id="order_items">
-      <h2>Itens do pedido</h2>
-      <div>
-        <% @order_items.each do |order_item| %>
-          <div class="order-item">
-            <p><strong>Menu:</strong> <%= order_item[:menu].name %></p>
-            <p><strong>Item:</strong> <%= order_item[:item].name %></p>
-            <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
-            <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
-            <p><strong>Observação:</strong> <%= order_item[:observation] %></p>
-          </div>
-        <% end %>
+<% if @order_items.present? %>
+  <div id="order_items" class="row">
+    <h2>Itens do pedido</h2>
+    <div class="col">
+      <% @order_items.each_with_index do |order_item, index| %>
+      <div id="order_item_<%= index + 1 %>">
+        <div><%= index + 1 %></div>
+        <div class="order-item p-2">
+          <p><strong>Menu:</strong> <%= order_item[:menu].name %></p>
+          <p><strong>Item:</strong> <%= order_item[:item].name %></p>
+          <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
+          <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
+          <p><strong>Observação:</strong> <%= order_item[:observation] %></p>
+        </div>
+        <div>
+          <p>Editar</p>
+          <%= button_to 'Remover', order_item_path(index), method: :delete %>
+        </div>
       </div>
-      <div><strong>Total do Pedido</strong>: <%= @price %></div>
+      <% end %>
     </div>
-
-    <%= form.submit 'Confirmar Pedido' %>
-  <% end %>
+    <div class="col">
+      <strong>Total do Pedido</strong>: <%= @price %>
+      <div>
+        <%= link_to 'Confirmar Pedido', new_order_path %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <p>Carrinho vázio, volte a página inicial para cadastrar novos itens</p>
 <% end %>

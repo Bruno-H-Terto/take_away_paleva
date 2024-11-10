@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   resources :characteristics, only: %i[index create show update]
   resources :portions, only: %i[show update]
-  resources :order_items, only: %i[index create]
+  resources :order_items, only: %i[index create destroy]
+  resources :orders, only: %i[new create index]
   get 'order_items/:menu_id/item/:item_id', to: 'order_items#cart', as: 'new_item'
 end

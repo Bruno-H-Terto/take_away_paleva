@@ -1,0 +1,23 @@
+  <h2>Finalize seu Pedido</h2>
+  <%= form_with model: @order do |form| %>
+    <div>
+      <%= form.label :name, 'Nome do Cliente' %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div>
+      <%= form.label :phone_number, 'Telefone do Cliente' %>
+      <%= form.text_field :phone_number %>
+    </div>
+
+    <div>
+      <%= form.label :email, 'E-mail' %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div>
+      <%= form.label :register_number, 'CPF' %>
+      <%= form.text_field :register_number %>
+    </div>
+        <%= form.submit 'Salvar e continuar' %>
+  <% end %>
