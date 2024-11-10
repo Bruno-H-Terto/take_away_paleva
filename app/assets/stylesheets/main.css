@@ -209,14 +209,6 @@ nav .btn {
   min-width: 32rem ;
 }
 
-#order {
-  max-height: 70vh;
-  position: fixed;
-  overflow-y: auto;
-  left: 60rem;
-  display: flex;
-}
-
 .form-input-search {
   display: flex;
   width: 100%;
@@ -306,4 +298,16 @@ nav .btn {
 .more-img {
   display: float;
   width: 7rem;
+}
+
+.cart-form {
+  max-height: 90vh;
+  position: fixed;
+  overflow-y: auto;
+  width: 40rem;
+  top: 8rem;
+  left: 18rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }

@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       @items = @take_away_store.items.select { |item| item.active? }
       @menu = @owner.menus.build
       if session[:cart_items]
-        @cart_items = Item.where(id: session[:cart_items])
+        @cart_items = session[:cart_items]
       end
     end
   end

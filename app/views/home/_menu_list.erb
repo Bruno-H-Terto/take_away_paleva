@@ -35,7 +35,23 @@
                     </div>
                     <div class="row mt-3 text-break" id=<%= dom_id(menu, item.name) %> >
                       <small><%= link_to 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
-                      <%= link_to 'Adicionar ao Carrinho', order_items_path(menu, item.id) %>
+                      <%= form_with url: new_item_path(menu, item), method: :get do |form| %>
+                        <div>
+                          <%= form.label :portion_id, 'Porção' %>
+                          <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }), prompt: "Selecione uma opção" %>
+                        </div>
+                        <div>
+                          <%= form.label :observation, 'Observação' %>
+                          <%= form.text_field :observation %>
+                        </div>
+                        <div>
+                          <%= form.label :quantity, 'Quantidade' %>
+                          <%= form.number_field :quantity, min: 1 %>
+                        </div>
+                        
+                        <%= form.submit 'Adicionar ao Carrinho' %>
+                      <% end %>
+
                     </div>
                   </div>
                 </div>

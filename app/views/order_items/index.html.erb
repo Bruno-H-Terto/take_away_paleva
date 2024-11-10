@@ -1,0 +1,42 @@
+<% if @order_items %>
+  <h2>Finalize seu Pedido</h2>
+  <%= form_with url: order_items_path do |form| %>
+    <div>
+      <%= form.label :name, 'Nome do Cliente' %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div>
+      <%= form.label :phone_number, 'Telefone do Cliente' %>
+      <%= form.text_field :phone_number %>
+    </div>
+
+    <div>
+      <%= form.label :email, 'E-mail' %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div>
+      <%= form.label :register_number, 'CPF' %>
+      <%= form.text_field :register_number %>
+    </div>
+
+    <div id="order_items">
+      <h2>Itens do pedido</h2>
+      <div>
+        <% @order_items.each do |order_item| %>
+          <div class="order-item">
+            <p><strong>Menu:</strong> <%= order_item[:menu].name %></p>
+            <p><strong>Item:</strong> <%= order_item[:item].name %></p>
+            <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
+            <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
+            <p><strong>Observação:</strong> <%= order_item[:observation] %></p>
+          </div>
+        <% end %>
+      </div>
+      <div><strong>Total do Pedido</strong>: <%= @price %></div>
+    </div>
+
+    <%= form.submit 'Confirmar Pedido' %>
+  <% end %>
+<% end %>
