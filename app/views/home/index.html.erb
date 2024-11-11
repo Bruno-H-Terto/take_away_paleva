@@ -1,55 +1,19 @@
 <section class="row">
   <% if owner_signed_in? && @take_away_store.id.present? %>
-    <div class="aside">
-      <h2>Cardápio</h2>
-      <%= render 'shared/errors', object: @menu %>
-      <section class="col-3">
-          <button class="btn btn-primary area-dropdown" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Criar nova Categória
-          </button>
-        </p>
-        <div class="collapse area-dropdown" id="collapseExample">
-          <div class="card card-body">
-            <%= form_with model: [@take_away_store, @menu] do |form| %>
-              <div class="mb-2">
-                <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
-                <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
-              </div>
-              <div>
-                <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+    <%= render 'home/dashboard' %>
 
-        <div class="mt-3 aside-dashboard" id="order">
-          <div>
-            <%= link_to orders_path do %>
-              <h6>Meus pedidos</h6>
-            <% end %>
-          </div>
-          <ul class="w-100">
-            <% if @cart_items %>
-              <li>Você possui itens aguardando confirmação</li>
-              <%= link_to 'Ir para o Carrinho', order_items_path %>
-            <% end %>
-          </ul>
-        </div>
-      </section>
+  <% else %>
+    <div>
+      <h1>Palevá</h1>
+      <h2>Take Away Store</h2>
     </div>
 
-    <%= render 'home/menu_list', menus: @menus %>
-    
-
-     <% end %>
+    <div>
+      <%= link_to new_owner_registration_path do %>
+        <h6>Seja um Estabelecimento parceiro</h6>
+      <% end %>
     </div>
+  <% end %>
 </section>
 
-<script>
-  document.querySelectorAll('.dropdown-menu').forEach(menu => {
-    menu.addEventListener('click', event => {
-      event.stopPropagation();
-    });
-  });
 
-</script>

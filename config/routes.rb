@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "home#index"
   get "owner", to: "home#owner", as: 'owner'
   resources :take_away_stores, only: %i[new create show edit update] do
+    resources :employees, only: %i[index new create]
     resources :menus, only: %i[create show] do
       resources :item_menus, only: %i[create destroy]
     end

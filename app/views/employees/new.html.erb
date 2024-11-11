@@ -1,0 +1,24 @@
+<section>
+  <div>
+    <h2>Novo Funcionário</h2>
+  </div>
+
+  <%= render 'shared/errors', object: @profile %>
+  <div>
+    <%= form_with model: @profile, url: take_away_store_employees_path(@take_away_store) do |form| %>
+      <div>
+        <%= form.label :register_number %>
+        <%= form.text_field :register_number %>
+      </div>
+
+      <div>
+        <%= form.label :email %>
+        <%= form.email_field :email %>
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</section>

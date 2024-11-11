@@ -1,0 +1,13 @@
+<section>
+  <div>
+    <%= link_to 'Novo acesso', new_take_away_store_employee_path(@take_away_store) %>
+  </div>
+
+  <div>
+    <% if @profiles.present? %>
+      <% @profiles.each do |profile| %>
+        <p><strong><%= profile.email %></strong> - <%= Profile.human_attribute_name(profile.status) %></p>
+      <% end %>
+    <% end %>
+  </div>
+</section>

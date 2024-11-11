@@ -5,6 +5,7 @@ class TakeAwayStore < ApplicationRecord
   has_many :menus
   has_many :characteristics
   has_many :orders
+  has_many :profiles
   accepts_nested_attributes_for :business_hours
 
   before_validation :generate_code, on: :create
