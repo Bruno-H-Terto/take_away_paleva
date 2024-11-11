@@ -8,11 +8,10 @@ class Owner < ApplicationRecord
   validates_with RegisterValidator, field: :register_number, length: 11, if: -> { register_number.present? }
 
   has_one :take_away_store
-  has_one :unique_field, as: :registrable
   has_many :items, through: :take_away_store
   has_many :menus, through: :take_away_store
 
-  after_create :ensure_unique_field
+  before_save :ensure_unique_field
 
   def full_name
     "#{name} #{surname}"
@@ -24,15 +23,18 @@ class Owner < ApplicationRecord
 
   private
 
+  
   def ensure_unique_field
+    formatted_register_number = register_number.gsub(/\D/, '') if register_number.present?
+  
     if UniqueField.exists?(email: email)
       errors.add(:email, 'já está em uso')
       raise ActiveRecord::Rollback
-    elsif UniqueField.exists?(register_number: register_number)
+    elsif UniqueField.exists?(register_number: formatted_register_number)
       errors.add(:register_number, 'já está em uso')
       raise ActiveRecord::Rollback
     else
-      self.unique_field = UniqueField.create(email: email, register_number: register_number, registrable: self)
+      UniqueField.create!(email: email, register_number: register_number)
     end
   end
 end

@@ -23,6 +23,24 @@ RSpec.describe Order, type: :model do
       expect(order).to be_valid
     end
 
+    it 'data é gerada automaticamente com o pedido' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+            email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+            register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+            number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
+            email: 'potter@email.com')
+      drink = store.items.create!(name: 'Vinho tinto', description: '750ml', calories: 50, type: 'Beverage')
+      portion = drink.portions.create!(option_name: 'Pequena', value: 13000)
+      menu = store.menus.create!(name: 'Café da manhã')
+      item_menu = ItemMenu.create!(item: drink, menu: menu)
+
+      order = store.orders.create!(name: 'Jhon', phone_number: '(11) 999887744', email: 'jhon@email.com', register_number: '362.164.860-71')
+      order_items = order.order_items.create!(menu: menu, item: drink, portion: portion, quantity: 1, observation: 'Ok')
+      
+      expect(I18n.l(order.created_at_current, format: "%d/%m/%y - %H:%M")).to eq I18n.l(Time.current, format: "%d/%m/%y - %H:%M")
+    end
+
     it 'status para novos pedidos deve ser aguardando confirmação' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')

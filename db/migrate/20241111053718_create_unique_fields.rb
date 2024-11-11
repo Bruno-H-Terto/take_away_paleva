@@ -3,7 +3,6 @@ class CreateUniqueFields < ActiveRecord::Migration[7.2]
     create_table :unique_fields do |t|
       t.string :email
       t.string :register_number
-      t.references :registrable, polymorphic: true, null: false
 
       t.timestamps
     end

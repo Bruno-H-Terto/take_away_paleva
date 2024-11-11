@@ -12,6 +12,8 @@ class Employee < ApplicationRecord
 
   validates :name, :surname, :register_number, presence: true
   validates :register_number, uniqueness: true
+
+
   private
 
   def employee_associated
@@ -24,4 +26,5 @@ class Employee < ApplicationRecord
       errors.add(:profile, 'não associado a um Estabelecimento ativo')
     end
   end
+  
 end

@@ -5,6 +5,10 @@ RSpec.describe TakeAwayStore, type: :model do
     it { should belong_to(:owner) }
     it { should have_many(:items) }
     it { should have_many(:orders) }
+    it { should have_many(:business_hours) }
+    it { should have_many(:menus) }
+    it { should have_many(:characteristics) }
+    it { should have_many(:profiles) }
 
     it 'todos os campos válidos' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
@@ -229,6 +233,30 @@ RSpec.describe TakeAwayStore, type: :model do
 
       expect(store).to be_valid
       expect(other_store).not_to be_valid
+    end
+
+    it 'email deve ser único entre Estabelecimentos e Perfis' do
+      first_owner = Owner.create!(name: 'Finn', surname: 'Jake', register_number: '402.793.150-58',
+             email: 'adventure@time.com', password: 'treina_dev13')
+      store = first_owner.create_take_away_store!(trade_name: 'Pizza Dev', corporate_name: 'Hogwarts LTDA',
+             register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+             number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+             email: 'potter@email.com')
+      BusinessHour.day_of_weeks.each do |key, _|
+      store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+             close_time: '17:00')
+      end
+      store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
+
+      second_owner = Owner.create!(name: 'Jhon', surname: 'Doe', register_number: '750.209.140-88',
+             email: 'jhon@email.com', password: 'treina_dev13')
+      second_store = second_owner.build_take_away_store(trade_name: 'Pastelaria', corporate_name: 'China LTDA',
+              register_number: '82.165.933/0001-01', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+              number: '91', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: 'Loja 1',
+              email: 'bob@email.com')
+   
+      expect(second_store.save).to be_falsey
+      expect(TakeAwayStore.count).to eq 1
     end
 
     it 'email deve ser único entre Estabelecimentos e Funcionários' do

@@ -1,6 +1,5 @@
 class TakeAwayStore < ApplicationRecord
   belongs_to :owner
-  has_one :unique_field, as: :registrable
   has_many :items, class_name: 'Item'
   has_many :business_hours
   has_many :menus
@@ -49,11 +48,16 @@ class TakeAwayStore < ApplicationRecord
   end  
 
   def ensure_unique_field
+    formatted_register_number = register_number.gsub(/\D/, '') if register_number.present?
+  
     if UniqueField.exists?(email: email)
       errors.add(:email, 'já está em uso')
       raise ActiveRecord::Rollback
+    elsif UniqueField.exists?(register_number: formatted_register_number)
+      errors.add(:register_number, 'já está em uso')
+      raise ActiveRecord::Rollback
     else
-      self.unique_field = UniqueField.create(email: email, register_number: register_number, registrable: self)
+      UniqueField.create!(email: email, register_number: register_number)
     end
   end
 end
