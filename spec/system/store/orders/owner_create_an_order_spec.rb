@@ -20,7 +20,7 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
@@ -52,7 +52,7 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         click_on 'Adicionar ao Carrinho'
       end
 
@@ -82,13 +82,13 @@ describe 'Proprietário registra um pedido' do
   
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
         click_on 'Adicionar ao Carrinho'
       end
-      within "##{other_dish.name}_menu_#{other_menu.id}" do
+      within "#menu_#{other_menu.id}" do
         select 'Pequena - R$ 50,00', from: 'portion_id'
         fill_in 'Quantidade', with: '1'
         fill_in 'Observação', with: 'Cobertura de chocolate'
@@ -135,7 +135,7 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
@@ -174,7 +174,7 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
@@ -209,7 +209,7 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "#menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
@@ -243,7 +243,7 @@ describe 'Proprietário registra um pedido' do
 
     login_as owner, scope: :owner
     visit root_path
-    within "##{dish.name}_menu_#{menu.id}" do
+    within "#menu_#{menu.id}" do
       select 'Média - R$ 70,00', from: 'portion_id'
       fill_in 'Quantidade', with: '2'
       fill_in 'Observação', with: 'Sem azeitonas'
@@ -277,7 +277,7 @@ describe 'Proprietário registra um pedido' do
 
     login_as owner, scope: :owner
     visit root_path
-    within "##{dish.name}_menu_#{menu.id}" do
+    within "#menu_#{menu.id}" do
       select 'Média - R$ 70,00', from: 'portion_id'
       fill_in 'Quantidade', with: '2'
       fill_in 'Observação', with: 'Sem azeitonas'
@@ -318,7 +318,7 @@ describe 'Proprietário registra um pedido' do
 
     login_as owner, scope: :owner
     visit root_path
-    within "##{dish.name}_menu_#{menu.id}" do
+    within "#menu_#{menu.id}" do
       select 'Média - R$ 70,00', from: 'portion_id'
       fill_in 'Quantidade', with: '2'
       fill_in 'Observação', with: 'Sem azeitonas'
@@ -357,7 +357,7 @@ describe 'Proprietário registra um pedido' do
 
     login_as owner, scope: :owner
     visit root_path
-    within "##{dish.name}_menu_#{menu.id}" do
+    within "#menu_#{menu.id}" do
       select 'Média - R$ 70,00', from: 'portion_id'
       fill_in 'Quantidade', with: '2'
       fill_in 'Observação', with: 'Sem azeitonas'
