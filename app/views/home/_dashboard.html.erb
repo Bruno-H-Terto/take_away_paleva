@@ -2,23 +2,26 @@
   <h2>Cardápio</h2>
   <%= render 'shared/errors', object: @menu %>
   <section class="col-3">
+    <% if owner_signed_in? %>
       <button class="btn btn-primary area-dropdown" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Criar nova Categória
       </button>
-    </p>
-    <div class="collapse area-dropdown" id="collapseExample">
-      <div class="card card-body">
-        <%= form_with model: [@take_away_store, @menu] do |form| %>
-          <div class="mb-2">
-            <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
-            <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
-          </div>
-          <div>
-            <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
-          </div>
-        <% end %>
+
+      <div class="collapse area-dropdown" id="collapseExample">
+        <div class="card card-body">
+          <%= form_with model: [@take_away_store, @menu] do |form| %>
+            <div class="mb-2">
+              <%= form.label :name, 'Rótulo', class: 'visually-hidden' %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
+            </div>
+            <div>
+              <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+
 
     <div class="mt-3 aside-dashboard" id="order">
       <div>

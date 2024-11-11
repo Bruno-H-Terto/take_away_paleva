@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_10_235612) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_11_015809) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_235612) do
     t.datetime "updated_at", null: false
     t.integer "take_away_store_id", null: false
     t.index ["take_away_store_id"], name: "index_characteristics_on_take_away_store_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "register_number", null: false
+    t.string "name"
+    t.string "surname"
+    t.integer "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["profile_id"], name: "index_employees_on_profile_id"
+    t.index ["register_number"], name: "index_employees_on_register_number", unique: true
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
   create_table "historics", force: :cascade do |t|

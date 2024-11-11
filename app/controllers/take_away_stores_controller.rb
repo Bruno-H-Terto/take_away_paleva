@@ -1,6 +1,7 @@
 class TakeAwayStoresController < ApplicationController
-  before_action :authenticate_owner!
-  before_action :take_away_store_register, except: %i[create]
+  before_action :authenticate_associated!, only: %i[show]
+  before_action :authenticate_owner!, except: %i[show]
+  before_action :take_away_store_register, except: %i[create], if: -> {owner_signed_in?}
   before_action :set_take_away_store, only: %i[show edit update]
 
   def search
@@ -49,8 +50,8 @@ class TakeAwayStoresController < ApplicationController
   end
 
   def set_take_away_store
-    @take_away_store = TakeAwayStore.find(params[:id])
-    if @take_away_store.owner != current_owner
+    @take_away_store = current_store
+    if current_store != TakeAwayStore.find(params[:id])
       return redirect_to TakeAwayStore.find_by(owner: @owner), alert: 'Acesso negado - Não é permito visualizar dados de outro Estabelecimento'
     end
   end

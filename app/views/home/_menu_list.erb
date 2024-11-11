@@ -4,7 +4,7 @@
       <% menus.select(&:persisted?).each do |menu| %>
         <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">
           <div class="menu-header">
-            <%= link_to take_away_store_menu_path(@take_away_store, menu) do %>
+            <%= link_to_if owner_signed_in?, menu.name, take_away_store_menu_path(@take_away_store, menu) do %>
               <h4><%= menu.name %></h4>
             <% end %>
           </div>
@@ -34,7 +34,9 @@
                       <% end %>
                     </div>
                     <div class="row mt-3 text-break" id=<%= dom_id(menu, item.name) %> >
-                      <small><%= link_to 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
+                      <small><%= link_to_if owner_signed_in?, 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
+                    </div> 
+                    <div>
                       <%= form_with url: new_item_path(menu, item), method: :get do |form| %>
                         <div>
                           <%= form.label :portion_id, 'Porção' %>

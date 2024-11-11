@@ -4,6 +4,7 @@ describe 'Proprietário realiza seu cadastro' do
   it 'com sucesso' do
     visit root_path
     click_on 'Seja um parceiro'
+    click_on 'Sou Proprietário'
     fill_in 'CPF', with: '759.942.990-57'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'
@@ -18,6 +19,7 @@ describe 'Proprietário realiza seu cadastro' do
   it 'realiza logout após registro' do
     visit root_path
     click_on 'Seja um parceiro'
+    click_on 'Sou Proprietário'
     fill_in 'CPF', with: '759.942.990-57'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'
@@ -33,6 +35,7 @@ describe 'Proprietário realiza seu cadastro' do
   it 'e falha ao não preencher informações obrigatórias' do
     visit root_path
     click_on 'Seja um parceiro'
+    click_on 'Sou Proprietário'
     fill_in 'CPF', with: ''
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
@@ -50,6 +53,7 @@ describe 'Proprietário realiza seu cadastro' do
   it 'CPF inválido' do
     visit root_path
     click_on 'Seja um parceiro'
+    click_on 'Sou Proprietário'
     fill_in 'CPF', with: '111.111.111-11'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'

@@ -5,6 +5,7 @@ describe 'Proprietário registra seu estabelecimento' do
     it 'e é direcionado após seu cadastro' do
       visit root_path
       click_on 'Seja um parceiro'
+      click_on 'Sou Proprietário'
       fill_in 'CPF', with: '759.942.990-57'
       fill_in 'Nome', with: 'Dom'
       fill_in 'Sobrenome', with: 'Corleone'
@@ -24,6 +25,7 @@ describe 'Proprietário registra seu estabelecimento' do
 
       visit root_path
       click_on 'Faça seu login'
+      click_on 'Sou Proprietário'
       fill_in 'E-mail', with: 'vito@email.com'
       fill_in 'Senha', with: 'treina_dev13'
       click_on 'Log in'

@@ -36,6 +36,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_store
-    current_owner&.take_away_store
+    if owner_signed_in?
+      current_owner&.take_away_store
+    elsif employee_signed_in?
+      current_employee&.take_away_store
+    end
+  end
+
+  def authenticate_associated!
+    return root_path unless owner_signed_in? || employee_signed_in?
   end
 end

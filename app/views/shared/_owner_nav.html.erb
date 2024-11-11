@@ -1,0 +1,55 @@
+<div class="d-flex align-items-center nav-form search-form">
+  <%= form_with url: search_take_away_stores_path, method: :get, data: { turbo: false }, class: 'd-inline-flex align-items-center' do |form| %>
+    <div class="form-input-search form-group mb-0 me-2">
+      <%= form.label :query, t('forms.query'), class: "visually-hidden" %>
+      <%= image_tag 'search', class: 'search-img' %>
+      <%= form.text_field :query, placeholder: 'Buscar por Nome/Descrição', class: "form-text-search" %>
+    </div>
+
+    <div>
+      <%= form.submit 'Enviar', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  <li>
+    <%= link_to owner_path, class: 'user-icon' do %>
+      <%= image_tag 'user', class: 'user-img-icon' %>
+      <div class="nav-link active"><%= current_owner.card_name %> | <%= current_owner.email %></div>
+    <% end %>
+  </li>
+  <% if current_owner.take_away_store.id.present? %>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Acesso rápido
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-icon">
+          <%= image_tag 'store', class: 'dropdown-img-icon' %>
+          <%= link_to 'Minha Loja', take_away_store_path(current_owner.take_away_store)%>
+        </li>
+        <li class="dropdown-icon">
+          <%= image_tag 'item-icon', class: 'dropdown-img-icon' %>
+          <%= link_to 'Meus produtos', take_away_store_items_path(current_owner.take_away_store) %>
+        </li>
+        <li class="dropdown-icon">
+          <%= image_tag 'business-hour', class: 'dropdown-img-icon' %>
+          <%= link_to 'Meus Horários', take_away_store_business_hours_path(@owner.take_away_store) %>
+        </li>
+
+        <li class="dropdown-icon">
+          <%= image_tag 'tag-icon', class: 'dropdown-img-icon' %>
+          <%= link_to 'Marcadores', characteristics_path %>
+        </li>
+
+        <li class="dropdown-icon">
+          <%= image_tag 'tag-icon', class: 'dropdown-img-icon' %>
+          <%= link_to 'Meus funcionários', take_away_store_employees_path(current_owner.take_away_store) %>
+        </li>
+    </div>
+  <% end %>
+      </ul>
+    <div>
+      <%= button_to 'Sair', destroy_owner_session_path, method: :delete, class: 'btn btn-default' %>
+    </div>

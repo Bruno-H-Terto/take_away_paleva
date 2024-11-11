@@ -1,5 +1,5 @@
 <section class="row">
-  <% if owner_signed_in? && @take_away_store.id.present? %>
+  <% if (owner_signed_in? || employee_signed_in?) && @take_away_store.id.present? %>
     <%= render 'home/dashboard' %>
 
   <% else %>

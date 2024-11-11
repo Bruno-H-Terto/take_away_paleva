@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
   belongs_to :take_away_store
+  has_many :employees
 
   enum :status, {
     waiting_confirmation: 0,

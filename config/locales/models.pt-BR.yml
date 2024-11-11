@@ -15,6 +15,9 @@ pt-BR:
       profile:
         one: 'Funcionário'
         other: 'Funcionários'
+      employee:
+        one: 'Funcionário'
+        other: 'Funcionários'
     attributes:
       owner:
         register_number: 'CPF'
@@ -71,4 +74,6 @@ pt-BR:
         register_number: 'CPF'
         email: 'E-mail'
         waiting_confirmation: 'Aguardando confirmação'
-        
+      employee:
+        register_number: 'CPF'
+        name: 'Nome'

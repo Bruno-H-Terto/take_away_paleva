@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  before_action :set_take_away_store
   def index
     @orders = current_store.orders
   end
@@ -53,5 +53,9 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:name, :register_number, :phone_number, :email)
+  end
+
+  def set_take_away_store
+    @take_away_store = current_store
   end
 end

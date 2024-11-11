@@ -3,8 +3,17 @@ Rails.application.routes.draw do
     sessions: 'owners/sessions',
     registrations: 'owners/registrations'
   }
+
+  devise_for :employees, controllers: {
+    sessions: 'employees/sessions',
+    registrations: 'employees/registrations'
+  }
+
+
   root "home#index"
   get "owner", to: "home#owner", as: 'owner'
+  get 'create_account', to: 'home#create_account', as: 'new_registration'
+  get 'sign_in_account', to: 'home#sign_in_account', as: 'new_session'
   resources :take_away_stores, only: %i[new create show edit update] do
     resources :employees, only: %i[index new create]
     resources :menus, only: %i[create show] do

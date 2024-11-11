@@ -11,10 +11,11 @@
   <div class="col-6">
     <dl>
       <dt><%= @take_away_store.business_name %></dt>
-      <dl>Responsável: <%= @owner.full_name %></dl>
+      <dl>Responsável: <%= @take_away_store.owner.full_name %></dl>
     </dl>
     <span>Contato: <%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
-    <%= link_to 'Editar dados', edit_take_away_store_path(@take_away_store) %>
+    <%= link_to_if owner_signed_in?, 'Editar dados', edit_take_away_store_path(@take_away_store) do %>
+    <% end %>
     <div class="container border mt-3">
       <address><%= @take_away_store.street_number %></address>
       <address><%= @take_away_store.city %>, <%= @take_away_store.state %></address>
@@ -38,8 +39,8 @@
         <% @take_away_store.business_hours.each do |business_hour| %>
           <tr id=<%= business_hour.day_of_week_was%>>
             <td class="text-start">
-              <%= link_to edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
-                <%= BusinessHour.human_attribute_name business_hour.day_of_week %>
+              <%= link_to_if owner_signed_in?, BusinessHour.human_attribute_name(business_hour.day_of_week), edit_take_away_store_business_hour_path(@take_away_store, business_hour) do %>
+                <%= BusinessHour.human_attribute_name(business_hour.day_of_week) %>
               <% end %>
             </td>
             <td class="text-center"><%= business_hour.display_time(business_hour.open_time) %></td>
