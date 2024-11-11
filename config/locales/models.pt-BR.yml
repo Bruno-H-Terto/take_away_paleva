@@ -77,3 +77,5 @@ pt-BR:
       employee:
         register_number: 'CPF'
         name: 'Nome'
+        surname: 'Sobrenome'
+        profile: 'Perfil'

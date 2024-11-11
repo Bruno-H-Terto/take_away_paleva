@@ -1,5 +1,6 @@
 class TakeAwayStore < ApplicationRecord
   belongs_to :owner
+  has_one :unique_field, as: :registrable
   has_many :items, class_name: 'Item'
   has_many :business_hours
   has_many :menus
@@ -9,6 +10,7 @@ class TakeAwayStore < ApplicationRecord
   accepts_nested_attributes_for :business_hours
 
   before_validation :generate_code, on: :create
+  after_create :ensure_unique_field
   validates :trade_name, :corporate_name, :register_number, :phone_number, :email,
             :street, :number, :state, :district, :city, :zip_code, presence: true
   validates :register_number, uniqueness: true 
@@ -45,4 +47,13 @@ class TakeAwayStore < ApplicationRecord
       errors.add(:base, 'Endereço já está em uso')
     end
   end  
+
+  def ensure_unique_field
+    if UniqueField.exists?(email: email)
+      errors.add(:email, 'já está em uso')
+      raise ActiveRecord::Rollback
+    else
+      self.unique_field = UniqueField.create(email: email, register_number: register_number, registrable: self)
+    end
+  end
 end

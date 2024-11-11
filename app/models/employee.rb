@@ -1,15 +1,17 @@
 class Employee < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  include Devise::Models::Authenticatable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   belongs_to :profile
   has_one :take_away_store, through: :profile
 
-  before_validation :employee_associated, on: :create
+  before_validation :employee_associated, on: :create, if: -> {register_number.present? && email.present?}
 
+  validates :name, :surname, :register_number, presence: true
+  validates :register_number, uniqueness: true
   private
 
   def employee_associated

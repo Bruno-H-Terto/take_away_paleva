@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_015809) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_11_053718) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -210,6 +210,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_015809) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_take_away_stores_on_owner_id"
+  end
+
+  create_table "unique_fields", force: :cascade do |t|
+    t.string "email"
+    t.string "register_number"
+    t.string "registrable_type", null: false
+    t.integer "registrable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_unique_fields_on_email", unique: true
+    t.index ["register_number"], name: "index_unique_fields_on_register_number", unique: true
+    t.index ["registrable_type", "registrable_id"], name: "index_unique_fields_on_registrable"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
