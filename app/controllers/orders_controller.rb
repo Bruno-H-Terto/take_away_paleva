@@ -45,8 +45,8 @@ class OrdersController < ApplicationController
       return redirect_to orders_path, notice: 'Pedido registrado com sucesso!'
     end
 
-    flash[:alert] = 'Não foi possível concluir seu pedido'
-    render :new
+    flash.now[:alert] = 'Não foi possível concluir seu pedido'
+    render :new, status: :unprocessable_entity
   end
 
   private

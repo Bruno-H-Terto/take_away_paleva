@@ -101,9 +101,8 @@ describe 'Proprietário adiciona novos itens ao menu' do
       visit take_away_store_dish_path(store, owner)
       
       expect(page).to have_content 'Acesso não autorizado'
-      expect(page).to have_content 'Pastelaria Top'
       expect(page).not_to have_content 'Grifinória'
-      expect(current_path).to eq take_away_store_path(other_store)
+      expect(current_path).to eq root_path
     end
   end
 
@@ -208,9 +207,8 @@ describe 'Proprietário adiciona novos itens ao menu' do
       visit take_away_store_dish_path(store, owner)
       
       expect(page).to have_content 'Acesso não autorizado'
-      expect(page).to have_content 'Pastelaria Top'
       expect(page).not_to have_content 'Grifinória'
-      expect(current_path).to eq take_away_store_path(other_store)
+      expect(current_path).to eq root_path
     end
   end
 end

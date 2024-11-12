@@ -1,4 +1,7 @@
 class EmployeesController < ApplicationController
+  before_action :employee_unauthorized!
+  before_action :authenticate_owner!
+  
   def index
     @take_away_store = current_store
     @profiles = @take_away_store.profiles

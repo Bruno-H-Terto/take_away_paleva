@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :take_away_store_register, if: -> { owner_signed_in? }
   before_action :business_hours_register, if: -> { owner_signed_in? }
   before_action :owner_active, if: -> { owner_signed_in? }
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
-
   def employee_unauthorized!
     return redirect_to root_path, alert: 'Acesso não autorizado' if employee_signed_in?
   end
@@ -48,5 +48,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate_associated!
     return root_path unless owner_signed_in? || employee_signed_in?
+  end
+
+  def record_not_found
+    redirect_to root_path, notice: 'Requisição inválida'
   end
 end

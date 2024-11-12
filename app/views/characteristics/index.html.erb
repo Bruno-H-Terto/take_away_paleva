@@ -4,6 +4,7 @@
   </div>
   <div class="col-6">
     <small>Novo Marcador</small>
+    <%= render 'shared/errors', object: @characteristic %>
     <%= form_with model: @characteristic do |form| %>
       <div>
         <%= form.label :quality_name %>

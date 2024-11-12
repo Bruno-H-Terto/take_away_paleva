@@ -1,4 +1,7 @@
 class ItemMenusController < ApplicationController
+  before_action :employee_unauthorized!
+  before_action :authenticate_owner!
+  
   def create
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
     @menu = @take_away_store.menus.find(params[:menu_id])

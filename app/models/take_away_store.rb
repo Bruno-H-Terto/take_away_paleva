@@ -19,7 +19,7 @@ class TakeAwayStore < ApplicationRecord
     message: 'deve ser em um formato válido'
   }
   validates :email, uniqueness: true
-  validates :zip_code, format: { with: /\A(\d){5}[-](\d){3}\z/, message: 'deve ser em um formato válido' }
+  validates :zip_code, format: { with: /\A(\d){5}[-]?(\d){3}\z/, message: 'deve ser em um formato válido' }
   validates_with RegisterValidator, field: :register_number, length: 14, if: -> { register_number.present? }
   validates_with PhoneValidator, field: :phone_number, if: -> { phone_number.present? }
 

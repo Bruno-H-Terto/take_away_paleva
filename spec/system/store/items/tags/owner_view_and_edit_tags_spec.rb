@@ -160,6 +160,7 @@ describe 'Proprietário acessa listagem de tags registradas' do
     end
     item_1 = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
     item_2 = store.items.create!(name: 'Hamburguer', description: 'Artesanal', calories: 100, type: 'Dish')
+    item_3 = store.items.create!(name: 'Sorvete', description: 'Chocolate', calories: 100, type: 'Dish')
     characteristic = store.characteristics.create!(quality_name: 'Salgado')
     item_1.tags.create!(characteristic: characteristic)
     item_2.tags.create!(characteristic: characteristic)
@@ -172,6 +173,7 @@ describe 'Proprietário acessa listagem de tags registradas' do
     within '#list_associeted_items' do
       expect(page).to have_content 'Pizza'
       expect(page).to have_content 'Hamburguer'
+      expect(page).not_to have_content 'Sorvete'
     end
   end
 end

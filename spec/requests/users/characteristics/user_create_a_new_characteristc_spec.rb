@@ -49,7 +49,7 @@ describe 'Usuário cria uma nova Característica' do
     end
   end
 
-  context 'EMployee POST /characteristics' do
+  context 'Employee POST /characteristics' do
     it 'não autorizado' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')

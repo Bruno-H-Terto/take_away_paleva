@@ -25,22 +25,25 @@ class OrderItemsController < ApplicationController
     @price = 0
 
     if session[:cart_items].present?
-      
-      session[:cart_items].each do |order_item|
-        menu = @take_away_store.menus.find_by(id: order_item['menu'])
-        item = @take_away_store.items.find_by(id: order_item['item'])
-        portion = Portion.find_by(id: order_item['portion_id'])
-        sum += portion.value*order_item['quantity'].to_i
+      begin
+        session[:cart_items].each do |order_item|
+          menu = @take_away_store.menus.find_by(id: order_item['menu'])
+          item = @take_away_store.items.find_by(id: order_item['item'])
+          portion = Portion.find_by(id: order_item['portion_id'])
+          sum += portion.value*order_item['quantity'].to_i
 
-        @order_items << {
-          menu: menu,
-          item: item,
-          portion: portion.menu_option_name,
-          observation: order_item['observation'],
-          quantity: order_item['quantity']
-        }
+          @order_items << {
+            menu: menu,
+            item: item,
+            portion: portion.menu_option_name,
+            observation: order_item['observation'],
+            quantity: order_item['quantity']
+          }
+        end
+        @price = "R$ #{sum.to_s.insert(-3, ',')}"
+      rescue
+        session.delete(:cart_items)
       end
-      @price = "R$ #{sum.to_s.insert(-3, ',')}"
     else
       session.delete(:cart_items)
     end

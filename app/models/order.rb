@@ -31,7 +31,6 @@ class Order < ApplicationRecord
   end
 
   def created_time_current
-    Time.zone = 'Brasilia'
     self.created_at_current = Time.zone.now
   end
 
