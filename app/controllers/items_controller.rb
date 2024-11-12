@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
 
     if @take_away_store.owner != current_owner
-      return redirect_to take_away_store_path(current_owner.take_away_store), alert: 'Acesso não autorizado'
+      return redirect_to root_path, alert: 'Acesso não autorizado'
     end
   end
 

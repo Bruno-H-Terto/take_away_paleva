@@ -48,7 +48,7 @@ describe 'Usuário edita um item' do
       login_as other_owner, scope: :owner
       patch take_away_store_dish_path(store, dish), params: { dish: { name: 'Hamburguer'} }
 
-      expect(response).to redirect_to(take_away_store_path(other_store))
+      expect(response).to redirect_to root_path
       expect(dish.name).not_to eq 'Hamburguer'
       expect(dish.name).to eq 'Pizza'
     end
@@ -125,7 +125,7 @@ describe 'Usuário edita um item' do
       login_as other_owner, scope: :owner
       patch take_away_store_beverage_path(store, drink), params: { beverage: { name: 'Vinho'} }
 
-      expect(response).to redirect_to(take_away_store_path(other_store))
+      expect(response).to redirect_to root_path
       expect(drink.name).not_to eq 'Vinho'
       expect(drink.name).to eq 'Coca-Cola'
     end
@@ -206,7 +206,7 @@ describe 'Usuário edita um item' do
       patch change_status_take_away_store_item_path(store, dish)
       patch change_status_take_away_store_item_path(store, drink)
 
-      expect(response).to redirect_to(take_away_store_path(other_store))
+      expect(response).to redirect_to root_path
       expect(dish.active?).to eq true
       expect(drink.active?).to eq true
     end
