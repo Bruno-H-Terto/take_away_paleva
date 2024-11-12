@@ -43,11 +43,13 @@ class ApplicationController < ActionController::Base
       current_owner&.take_away_store
     elsif employee_signed_in?
       current_employee&.take_away_store
+    else
+      return redirect_to root_path, notice: 'Para prosseguir, faça login'
     end
   end
 
   def authenticate_associated!
-    return root_path unless owner_signed_in? || employee_signed_in?
+    return root_path, notice: 'Para prosseguir, faça login' unless owner_signed_in? || employee_signed_in?
   end
 
   def record_not_found
