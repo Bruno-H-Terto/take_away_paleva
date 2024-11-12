@@ -22,22 +22,24 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = current_store&.orders.build(order_params)
+    @order = current_store.orders.build(order_params)
     @order_items = []
 
     if session[:cart_items]
       session[:cart_items].each do |order_item|
-        menu = current_store.menus.find_by(id: order_item['menu'])
-        item = current_store.items.find_by(id: order_item['item'])
-        portion = Portion.find_by(id: order_item['portion_id'])
+        order_item = order_item.transform_keys(&:to_sym)
+
+        menu = current_store.menus.find_by(id: order_item[:menu])
+        item = current_store.items.find_by(id: order_item[:item])
+        portion = Portion.find_by(id: order_item[:portion_id])
 
         if menu.present? && item.present? && portion.present?
           @order_items << @order.order_items.build(
             menu: menu,
             item: item,
             portion: portion,
-            quantity: order_item['quantity'],
-            observation: order_item['observation']
+            quantity: order_item[:quantity],
+            observation: order_item[:observation]
           )
         end
       end
@@ -45,7 +47,7 @@ class OrdersController < ApplicationController
       return redirect_to root_path, alert: 'Adicione itens ao carrinho para confirmar um pedido!'
     end
 
-    if @order.valid? && @order_item.present? && @order_items.all? { |item| item.valid? }
+    if @order.valid? && @order_items.present? && @order_items.all?(&:valid?)
       @order.save
       @order_items.each { |item| item.save }
       session.delete(:cart_items)

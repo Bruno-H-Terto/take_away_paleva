@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
     if owner_signed_in?
       current_owner&.take_away_store
     elsif employee_signed_in?
-      current_employee&.take_away_store
+      current_employee.take_away_store
     else
       return redirect_to root_path, notice: 'Para prosseguir, faça login'
     end

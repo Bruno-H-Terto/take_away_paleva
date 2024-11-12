@@ -12,6 +12,11 @@ describe 'Usuário confirma um pedido' do
       dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
       portion = dish.portions.create!(option_name: 'Média', value: '5000')
       menu = store.menus.create!(name: 'Fast Food')
+      allow_any_instance_of(OrdersController).to receive(:session).and_return({
+        cart_items: [
+          { menu: menu.id, item: dish.id, portion_id: portion.id, observation: 'Completo', quantity: '1' }
+        ]
+      })
 
       post orders_path, params: { order: { name: 'Jhon', phone_number: '', email: 'jhon@email.com', register_number: ''} }
 
@@ -50,6 +55,57 @@ describe 'Usuário confirma um pedido' do
 
       expect(Order.count).to eq 0
       expect(OrderItem.count).to eq 0
+    end
+  end
+
+  context 'Employee POST /orders' do
+    it 'deve estar autenticado' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+      portion = dish.portions.create!(option_name: 'Média', value: '5000')
+      menu = store.menus.create!(name: 'Fast Food')
+      profile = store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
+      employee = Employee.create!(name: 'Bob', surname: 'Construtor', register_number: '362.164.860-71',
+            email: 'bob@email.com', password: 'treina_dev13')
+      allow_any_instance_of(OrdersController).to receive(:session).and_return({
+        cart_items: [
+          { menu: menu.id, item: dish.id, portion_id: portion.id, observation: 'Completo', quantity: '1' }
+        ]
+      })
+
+      post orders_path, params: { order: { name: 'Jhon', phone_number: '', email: 'jhon@email.com', register_number: ''} }
+
+      expect(response).to redirect_to root_path
+    end
+
+    it 'com sucesso' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      dish = store.items.create!(name: 'Pizza', description: 'Quatro queijos', calories: 120, type: 'Dish')
+      portion = dish.portions.create!(option_name: 'Média', value: '5000')
+      menu = store.menus.create!(name: 'Fast Food')
+      profile = store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
+      employee = Employee.create!(name: 'Bob', surname: 'Construtor', register_number: '362.164.860-71',
+            email: 'bob@email.com', password: 'treina_dev13')
+      allow_any_instance_of(OrdersController).to receive(:session).and_return({
+        cart_items: [
+          { menu: menu.id, item: dish.id, portion_id: portion.id, observation: 'Completo', quantity: '1' }
+        ]
+      })
+
+      login_as employee, scope: :employee
+      post orders_path, params: { order: { name: 'Jhon', phone_number: '', email: 'jhon@email.com', register_number: ''} }
+
+      expect(Order.count).to eq 1
     end
   end
 end

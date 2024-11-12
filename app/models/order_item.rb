@@ -11,7 +11,9 @@ class OrderItem < ApplicationRecord
   private
 
   def order_specifications_must_be_same_store
-    if menu.take_away_store != item.take_away_store || item != portion.item
+    specifications = [menu, item, portion]
+    if specifications.all?(&:present?) &&
+       (menu.take_away_store != item.take_away_store || item != portion.item)
       errors.add(:base, 'Especificações do pedido devem ser do mesmo Estabelecimento')
     end
   end
