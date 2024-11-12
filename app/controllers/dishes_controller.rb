@@ -1,4 +1,5 @@
 class DishesController < ApplicationController
+  before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store_dish
   before_action :set_dish, only: %i[show edit update destroy]

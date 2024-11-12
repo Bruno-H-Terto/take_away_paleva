@@ -23,7 +23,7 @@
                       <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
                     <% end %>
                   </div>
-                  <div class="col-6 box-item">
+                  <div class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
                     <small>Descrição:</small>
                     <div class="row box-item__description overflow-auto">
                       <span class="text-justify"><%= item.description %></span>
@@ -33,7 +33,7 @@
                         <small><%= item.calories %> Calorias</small>
                       <% end %>
                     </div>
-                    <div class="row mt-3 text-break" id=<%= dom_id(menu, item.name) %> >
+                    <div class="row mt-3 text-break" >
                       <small><%= link_to_if owner_signed_in?, 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
                     </div> 
                     <div>

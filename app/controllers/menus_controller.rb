@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store
   

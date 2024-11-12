@@ -1,5 +1,6 @@
 class TakeAwayStoresController < ApplicationController
   before_action :authenticate_associated!, only: %i[show]
+  before_action :employee_unauthorized!, except: %i[show]
   before_action :authenticate_owner!, except: %i[show]
   before_action :take_away_store_register, except: %i[create], if: -> {owner_signed_in?}
   before_action :set_take_away_store, only: %i[show edit update]

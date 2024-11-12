@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   include ApplicationHelper
+  before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store_item, only: %i[change_status historical]
   before_action :set_take_away_store

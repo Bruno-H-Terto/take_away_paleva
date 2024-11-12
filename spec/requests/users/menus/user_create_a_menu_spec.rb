@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Proprietário visualiza dados do cardápio' do
-  context 'GET /take_away_stores/:take_away_store_id/menus/:id' do
+describe 'Usuário cria um cardápio' do
+  context 'Owner POST /take_away_stores/:take_away_store_id/menus' do
     it 'e deve estar autenticado' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
@@ -13,21 +13,19 @@ describe 'Proprietário visualiza dados do cardápio' do
         store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
             close_time: '17:00')
       end
-      menu = store.menus.create!(name: 'Jantar')
 
-      get take_away_store_menu_path(store, menu)
+      post take_away_store_menus_path(store), params: { menu: {name: 'Executivo'} }
 
       expect(response).to redirect_to new_owner_session_path
     end
 
-    it 'só está autorizado a ver dados do próprio estabelecimento' do
+    it 'só pode criar menus do próprio estabelecimento' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
       store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
           register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
           number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
           email: 'potter@email.com')
-      menu = store.menus.create!(name: 'Jantar')
       other_owner = Owner.create!(name: 'Jhon', surname: 'Doe', register_number: '307.331.850-02',
           email: 'jhon@email.com', password: 'treina_dev13')
       other_store = other_owner.create_take_away_store!(trade_name: 'Pastelaria Top', corporate_name: 'Pastel LTDA',
@@ -40,7 +38,31 @@ describe 'Proprietário visualiza dados do cardápio' do
       end
 
       login_as other_owner, scope: :owner
-      get take_away_store_menu_path(store, menu)
+      post take_away_store_menus_path(store), params: { menu: {name: 'Executivo'} }
+
+      expect(response).to redirect_to root_path
+      expect(store.menus.count).to eq 0
+    end
+  end
+
+  context 'Employee POST /take_away_stores/:take_away_store_id/menus' do
+    it 'não autorizado' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      BusinessHour.day_of_weeks.each do |key, _|
+        store.business_hours.create!(day_of_week: key, status: :open, open_time: '09:00',
+            close_time: '17:00')
+      end
+      profile = store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
+      employee = Employee.new(name: 'Bob', surname: 'Construtor', register_number: '362.164.860-71',
+            email: 'bob@email.com', password: 'treina_dev13')
+
+      login_as employee, scope: :employee
+      post take_away_store_menus_path(store), params: { menu: {name: 'Executivo'} }
 
       expect(response).to redirect_to root_path
     end

@@ -1,4 +1,5 @@
 class BusinessHoursController < ApplicationController
+  before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store
   before_action :set_business_hour, only: %i[edit update]

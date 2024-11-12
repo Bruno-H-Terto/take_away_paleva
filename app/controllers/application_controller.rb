@@ -1,13 +1,16 @@
 class ApplicationController < ActionController::Base
   # Permitir apenas navegadores modernos com suporte a webp, web push, badges, import maps, CSS nesting e CSS :has.
   allow_browser versions: :modern
-
   before_action :set_owner, if: -> { owner_signed_in? }
   before_action :take_away_store_register, if: -> { owner_signed_in? }
   before_action :business_hours_register, if: -> { owner_signed_in? }
   before_action :owner_active, if: -> { owner_signed_in? }
 
   private
+
+  def employee_unauthorized!
+    return redirect_to root_path, alert: 'Acesso não autorizado' if employee_signed_in?
+  end
 
   def set_owner
     @owner = current_owner

@@ -1,5 +1,6 @@
 class PortionsController < ApplicationController
   include ApplicationHelper
+  before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store, only: %i[create]
   before_action :set_item, only: %i[create]
