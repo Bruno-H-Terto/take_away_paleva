@@ -15,7 +15,6 @@
 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
   <li>
     <%= link_to owner_path, class: 'user-icon' do %>
-      <%= image_tag 'user', class: 'user-img-icon' %>
       <div class="nav-link active"><%= current_owner.card_name %> | <%= current_owner.email %></div>
     <% end %>
   </li>

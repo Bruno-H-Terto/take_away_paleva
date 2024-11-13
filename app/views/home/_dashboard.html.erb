@@ -29,10 +29,27 @@
           <h6>Meus pedidos</h6>
         <% end %>
       </div>
-      <ul class="w-100">
-        <% if @cart_items %>
-          <li>Você possui itens aguardando confirmação</li>
+
+      <ul class="cart">
+        <% if @order_items.present? %>
+          <p>Você possui itens aguardando confirmação</p>
+          <p>Total do pedido: <%= @price %></p>
           <%= link_to 'Ir para o Carrinho', order_items_path %>
+
+          <div class="cart-list border p-2">
+            <dl>
+              <% @order_items.group_by { |order_item| order_item[:menu] }.each do |menu, items| %>
+                <dt>Menu: <%= menu.name %></dt>
+                <div class="cart-item">
+                  <% items.each do |order_item| %>
+                    <dd><%= order_item[:quantity] %>x <%= order_item[:item].name %></dd>
+                    <dd><%= order_item[:portion] %></dd>
+                    <hr>
+                  <% end %>
+                </div>
+              <% end %>
+            </dl>
+          </div>
         <% end %>
       </ul>
     </div>

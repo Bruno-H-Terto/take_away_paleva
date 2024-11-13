@@ -15,46 +15,51 @@
               </div>
               <% menu.items.select(&:active?).each do |item| %>
                 <div class="container mt-3 row p-2 menu-list-items">
-                  <small><%= item.name %></small>
-                  <div class="col-6">
-                    <% if item.photo.attached? %>
-                      <%= image_tag item.photo, class: 'fixed-img item-img', alt: 'Card item image' %>
+                  <div class="col-6 text-center">
+                    <% if owner_signed_in? %>
+                      <%= link_to take_away_store_item_path(menu.take_away_store, item) do %>
+                        <h5><%= item.name %></h5>
+                        <% if item.photo.attached? %>
+                          <%= image_tag item.photo, class: 'fixed-img item-radius-img', alt: 'Card item image' %>
+                        <% else %>
+                          <%= image_tag 'default-item-img', class: 'fixed-img item-img', alt: 'No image item' %>
+                        <% end %>
+                      <% end %>
                     <% else %>
-                      <%= image_tag 'default-item-img',  class: 'fixed-img item-img', alt: 'No image item' %>
+                      <h5><%= item.name %></h5>
+                      <% if item.photo.attached? %>
+                        <%= image_tag item.photo, class: 'fixed-img item-radius-img', alt: 'Card item image' %>
+                      <% else %>
+                        <%= image_tag 'default-item-img', class: 'fixed-img item-img', alt: 'No image item' %>
+                      <% end %>
                     <% end %>
                   </div>
                   <div class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
-                    <small>Descrição:</small>
-                    <div class="row box-item__description overflow-auto">
-                      <span class="text-justify"><%= item.description %></span>
-                    </div>
-                    <div class="row mt-3 text-break">
-                      <% if item.calories.present? %>
-                        <small><%= item.calories %> Calorias</small>
-                      <% end %>
-                    </div>
+                    <%= form_with url: new_item_path(menu, item), method: :get, class: 'form-menu-item' do |form| %>
+                      <strong>Monte seu pedido</strong>
+                      <div class="mb-1">
+                        <%= form.label :portion_id, 'Porção', class: "visually-hidden" %>
+                        <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }),
+                                        prompt: "Selecione uma opção", class: 'form-select' %>
+                      </div>
+
+                      <div class="mb-1">
+                        <%= form.label :observation, 'Observação', class: "visually-hidden" %>
+                        <%= form.text_field :observation, class: 'form-control', placeholder: 'Observação' %>
+                      </div>
+
+                      <div>
+                        <%= form.label :quantity, 'Quantidade' %>
+                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: 'Quantidade' %>
+                      </div>
+
+                      <div class="mt-3">
+                        <%= form.submit 'Adicionar ao Carrinho', class: 'btn btn-primary d-flex w-100' %>
+                      </div>
+                    <% end %>
                     <div class="row mt-3 text-break" >
                       <small><%= link_to_if owner_signed_in?, 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
                     </div> 
-                    <div>
-                      <%= form_with url: new_item_path(menu, item), method: :get do |form| %>
-                        <div>
-                          <%= form.label :portion_id, 'Porção' %>
-                          <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }), prompt: "Selecione uma opção" %>
-                        </div>
-                        <div>
-                          <%= form.label :observation, 'Observação' %>
-                          <%= form.text_field :observation %>
-                        </div>
-                        <div>
-                          <%= form.label :quantity, 'Quantidade' %>
-                          <%= form.number_field :quantity, min: 1 %>
-                        </div>
-                        
-                        <%= form.submit 'Adicionar ao Carrinho' %>
-                      <% end %>
-
-                    </div>
                   </div>
                 </div>
               <% end %>
@@ -70,3 +75,6 @@
     <% end %>
   </div>
 </div>
+
+
+

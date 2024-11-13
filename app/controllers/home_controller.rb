@@ -7,17 +7,31 @@ class HomeController < ApplicationController
       @menus = @owner.menus
       @items = @take_away_store.items.select { |item| item.active? }
       @menu = @owner.menus.build
-      if session[:cart_items]
-        @cart_items = session[:cart_items]
-        @cart_items.each do |order_item|
-          menu = current_store.menus.exists?(id: order_item['menu'])
-          item = current_store.items.find_by(id: order_item['item'])
-          portion = Portion.find_by(id: order_item['portion_id'])
-
-          unless menu.present? && item.present? && portion.present?
-            session.delete(:cart_items)
+      @order_items = []
+      sum = 0
+      @price = 0
+      if session[:cart_items].present?
+        begin
+          session[:cart_items].group_by do |order_item|
+            menu = @take_away_store.menus.find_by(id: order_item['menu'])
+            item = @take_away_store.items.find_by(id: order_item['item'])
+            portion = Portion.find_by(id: order_item['portion_id'])
+            sum += portion.value*order_item['quantity'].to_i
+  
+            @order_items << {
+              menu: menu,
+              item: item,
+              portion: portion.menu_option_name,
+              observation: order_item['observation'],
+              quantity: order_item['quantity']
+            }
           end
+          @price = "R$ #{sum.to_s.insert(-3, ',')}"
+        rescue
+          session.delete(:cart_items)
         end
+      else
+        session.delete(:cart_items)
       end
     end
   end
