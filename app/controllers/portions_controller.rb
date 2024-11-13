@@ -13,6 +13,8 @@ class PortionsController < ApplicationController
       return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Porção adicionada com sucesso!'
     end
 
+    @tag = @item.tags.build
+    @characteristic = @tag.build_characteristic
     controller_name = @item.class.name.underscore.pluralize
     flash.now[:alert] = 'Não foi possível adicionar sua porção'
     render "#{controller_name}/show", status: :unprocessable_entity

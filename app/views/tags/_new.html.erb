@@ -4,7 +4,7 @@
     <p>Selecionar marcador existente</p>
     <div class="column">
       <% if Characteristic.any? %>
-        <%= render 'shared/errors', object: @characteristic %>
+        <%= render 'shared/errors', object: @tag %>
         <div class="row mb-3">
           <%= form_with model: @characteristic, url: take_away_store_item_tags_path(take_away_store, item) do |form| %>
             <div>

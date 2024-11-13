@@ -24,9 +24,11 @@ class TagsController < ApplicationController
       return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Marcador adicionado com sucesso!'
     end
 
-    flash[:alert] = 'Não foi possível adicionar seu marcador'
-    if tag_params[:characteristic_id].blank? && params[:commit] == 'Adicionar Tag'
-      return redirect_to take_away_store_item_path(@take_away_store, @item)
+    flash.now[:alert] = 'Não foi possível adicionar seu marcador'
+    if params[:commit] == 'Adicionar Tag'
+      @portion = @item.portions.build
+      controller_name = @item.class.name.underscore.pluralize
+      return render "#{controller_name}/show", status: :unprocessable_entity
     end
 
     render :new, status: :unprocessable_entity

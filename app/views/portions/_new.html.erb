@@ -4,7 +4,7 @@
       <h4 class="text-center">Adicionar porção</h4>
       <div>
         <%= render 'shared/errors', object: portion %>
-        <%= form_with model: portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
+        <%= form_with model: @portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
           <div class="mb-3">
             <%= form.label :option_name %>
             <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...', class: 'form-control w-100' %>
