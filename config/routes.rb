@@ -26,8 +26,8 @@ Rails.application.routes.draw do
       resources :portions, only: %i[create]
       resources :tags, only: %i[new create destroy]
     end
-    resources :dishes, only: %i[new create show edit update destroy]
-    resources :beverages, only: %i[new create show edit update destroy]
+    resources :dishes, only: %i[new create show edit update]
+    resources :beverages, only: %i[new create show edit update]
   end
   resources :characteristics, only: %i[index create show update]
   resources :portions, only: %i[show update]

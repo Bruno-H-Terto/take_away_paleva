@@ -21,7 +21,7 @@ RSpec.describe ItemMenu, type: :model do
       expect(item_menu).to be_valid
     end
 
-    it 'item deve ter ao menos uma porão cadastrada' do
+    it 'item deve ter ao menos uma porção cadastrada' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
       store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',

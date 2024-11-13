@@ -6,7 +6,7 @@ class Portion < ApplicationRecord
   validates :value, numericality: {only_integer: true}
   validates :value, numericality: {greater_than_or_equal_to: 100, message: 'Preço mínimo de R$ 1,00'}
   before_validation :option_name_must_be_uniq_for_same_item, if: -> {item.present?}
-  before_destroy :prevent_destroy, unless: :destroyed_by_association
+  before_destroy :prevent_destroy
   after_create :register_changes_in_historic_create
   after_update :register_changes_in_historic_upload
 

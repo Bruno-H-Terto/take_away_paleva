@@ -9,7 +9,7 @@
             <% end %>
           </div>
           <div id="items">
-            <% if menu.items.exists?(&:active?) %>
+            <% if menu.items.select(&:active?).present? %>
               <div>
                 <small>Itens inclusos no cardápio</small>
               </div>

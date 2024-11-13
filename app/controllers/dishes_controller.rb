@@ -2,7 +2,7 @@ class DishesController < ApplicationController
   before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store_dish
-  before_action :set_dish, only: %i[show edit update destroy]
+  before_action :set_dish, only: %i[show edit update]
 
   def show
     @item = @dish
@@ -37,9 +37,9 @@ class DishesController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
-  def destroy
-    if @dish.destroy
-      return redirect_to take_away_store_path(@take_away_store), notice: 'Prato excluído com sucesso!'
+  def change_visibility
+    if @dish.erased!
+      return redirect_to take_away_store_dish_path(@take_away_store, @dish), notice: 'Prato excluído com sucesso!'
     end
 
     flash.now[:alert] = 'Não foi possível excluir o prato selecionado'

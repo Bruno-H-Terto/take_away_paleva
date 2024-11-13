@@ -106,6 +106,7 @@ describe 'Usuário confirma um pedido' do
       post orders_path, params: { order: { name: 'Jhon', phone_number: '', email: 'jhon@email.com', register_number: ''} }
 
       expect(Order.count).to eq 1
+      expect(Order.last.status).to eq 'waiting_confirmation'
     end
   end
 end

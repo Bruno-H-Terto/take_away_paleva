@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="d-inline-flex p-2 group-tags overflow-scroll">
-              <% if item.characteristics.any? { |tag| tag.persisted? } %>
+              <% if item.active? && item.characteristics.any? { |tag| tag.persisted? } %>
                   <% item.characteristics.select(&:persisted?).each do |tag| %>
                     <div class="tag">
                       <%= tag.quality_name %>
@@ -28,9 +28,8 @@
       </div>
 
       <div class="btn-group mt-3 gap-2">
-        <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
         <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
-        <%= button_to 'Excluir', take_away_store_item_path(take_away_store, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza que deseja excluir este item?' } %>
+        <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
         <%= link_to 'Histórico', historical_take_away_store_item_path(take_away_store, item), class: 'btn btn-info' %>
       </div>
     </div>
@@ -57,8 +56,9 @@
 
   </div>
 
-  <%= render 'tags/new', characteristic: item.characteristics.build, take_away_store: take_away_store, item: item %>
+    <%= render 'tags/new', characteristic: item.characteristics.build, take_away_store: take_away_store, item: item %>
 
-  <%= render 'portions/new', portion: portion, take_away_store: take_away_store, item: item  %>
+    <%= render 'portions/new', portion: portion, take_away_store: take_away_store, item: item  %>
+
   </div>
 </section>

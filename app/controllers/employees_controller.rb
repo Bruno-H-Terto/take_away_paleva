@@ -1,19 +1,17 @@
 class EmployeesController < ApplicationController
   before_action :employee_unauthorized!
   before_action :authenticate_owner!
+  before_action :set_take_away_store
   
   def index
-    @take_away_store = current_store
     @profiles = @take_away_store.profiles
   end
 
   def new
-    @take_away_store = current_store
     @profile = @take_away_store.profiles.build
   end
 
   def create
-    @take_away_store = current_store
     @profile = @take_away_store.profiles.build(employee_profile_params)
 
     if @profile.save
@@ -28,5 +26,13 @@ class EmployeesController < ApplicationController
 
   def employee_profile_params
     params.require(:profile).permit(:register_number, :email)
+  end
+
+  def set_take_away_store
+    @take_away_store = current_store
+    
+    if @take_away_store.id != params[:take_away_store_id].to_i
+      return redirect_to root_path, alert: 'Acesso não autorizado'
+    end
   end
 end

@@ -42,7 +42,7 @@ RSpec.describe Characteristic, type: :model do
       expect(characteristic).not_to be_valid
     end
 
-    it 'poder ter mesmo nome para diferentes Estabelecimentos' do
+    it 'marcador pode ter mesmo nome para diferentes Estabelecimentos' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
       store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',

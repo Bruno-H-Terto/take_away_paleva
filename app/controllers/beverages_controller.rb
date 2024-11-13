@@ -2,7 +2,7 @@ class BeveragesController < ApplicationController
   before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store_beverage
-  before_action :set_beverage, only: %i[show edit update destroy]
+  before_action :set_beverage, only: %i[show edit update]
 
   def show
     @item = @beverage
@@ -35,15 +35,6 @@ class BeveragesController < ApplicationController
 
     flash.now[:alert] = 'Não foi possível atualizar sua bebida'
     render :edit, status: :unprocessable_entity
-  end
-
-  def destroy
-    if @beverage.destroy
-      return redirect_to take_away_store_path(@take_away_store), notice: 'Bebida excluída com sucesso!'
-    end
-
-    flash.now[:alert] = 'Não foi possível excluir a bebida selecionada'
-    render :show, status: :unprocessable_entity
   end
 
   private
