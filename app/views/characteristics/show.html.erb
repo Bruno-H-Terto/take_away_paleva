@@ -14,6 +14,7 @@
   </div>
   
   <div class="col-6">
+    <%= render 'shared/errors', object: @characteristic %>
     <small>Atualizar <%= @characteristic.quality_name_in_database %></small>
     <%= form_with model: @characteristic do |form| %>
       <div>

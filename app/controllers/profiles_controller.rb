@@ -1,4 +1,4 @@
-class EmployeesController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :employee_unauthorized!
   before_action :authenticate_owner!
   before_action :set_take_away_store
@@ -18,8 +18,8 @@ class EmployeesController < ApplicationController
       return redirect_to take_away_store_employees_path(@take_away_store), notice: 'Novo Funcionário registrado com sucesso!'
     end
 
-    flash[:alert] = 'Não foi possível registrar seu Funcionário'
-    render :new
+    flash.now[:alert] = 'Não foi possível registrar seu Funcionário'
+    render :new, status: :unprocessable_entity
   end
 
   private

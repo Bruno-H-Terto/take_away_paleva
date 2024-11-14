@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'sign_in_account', to: 'home#sign_in_account', as: 'new_session'
   
   resources :take_away_stores, only: %i[new create show edit update] do
-    resources :employees, only: %i[index new create]
+    resources :profiles, only: %i[index new create]
     resources :menus, only: %i[create show] do
       resources :item_menus, only: %i[create destroy]
     end
@@ -38,8 +38,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :orders, only: %i[index] do
-        get 'status', on: :collection
+      resources :stores, only: %i[show] do
+        resources :orders, only: %i[index] do
+          get 'status', on: :collection
+        end
       end
     end
   end

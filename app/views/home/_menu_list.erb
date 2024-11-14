@@ -37,6 +37,7 @@
                   <div class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
                     <%= form_with url: new_item_path(menu, item), method: :get, class: 'form-menu-item' do |form| %>
                       <strong>Monte seu pedido</strong>
+                      <%= render 'shared/errors', object: @order %>
                       <div class="mb-1">
                         <%= form.label :portion_id, 'Porção', class: "visually-hidden" %>
                         <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }),
@@ -50,7 +51,7 @@
 
                       <div>
                         <%= form.label :quantity, 'Quantidade' %>
-                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: 'Quantidade' %>
+                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: 'Quantidade', require: true %>
                       </div>
 
                       <div class="mt-3">

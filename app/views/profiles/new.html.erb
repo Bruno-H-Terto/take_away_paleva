@@ -5,7 +5,7 @@
 
   <%= render 'shared/errors', object: @profile %>
   <div>
-    <%= form_with model: @profile, url: take_away_store_employees_path(@take_away_store) do |form| %>
+    <%= form_with model: @profile, url: take_away_store_profiles_path(@take_away_store) do |form| %>
       <div>
         <%= form.label :register_number %>
         <%= form.text_field :register_number %>

@@ -1,45 +1,39 @@
 <div id="item_portions" class="col-3 border m-1 p-2">
-  <% if item.active? %>
-    <div class="item-portions__form">
-      <h4 class="text-center">Adicionar porção</h4>
-      <div>
-        <%= render 'shared/errors', object: portion %>
-        <%= form_with model: @portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
-          <div class="mb-3">
-            <%= form.label :option_name %>
-            <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...', class: 'form-control w-100' %>
-          </div>
-
-          <div class="mb-3">
-            <%= form.label :value %>
-            <%= form.text_field :value, class: 'form-control w-100' %>
-          </div>
-
-          <div class="mt-3">
-            <%= form.submit class: 'btn btn-success w-100' %>
-          </div>
-        <% end %>
-      </div>
-      <div class="mt-4">
-        <% if item.portions.any? { |portion| portion.persisted? } %>
-          <h5>Lista de porções cadastradas</h5>
-          <div class="column overflow-auto list-portions">
-            <% item.portions.select(&:persisted?).each do |portion| %>
-              <%= link_to portion_path(portion), class: 'd-block text-decoration-none' do %>
-                <span class="row border-bottom py-2">
-                  <%= portion.menu_option_name %>
-                </span>
-              <% end %>
-            <% end %>
-          </div>
-        <% else %>
-          <p>Sem porções registradas</p>
-        <% end %>
-      </div>
-    </div>
-  <% else %>
+  <div class="item-portions__form">
+    <h4 class="text-center">Adicionar porção</h4>
     <div>
-      <p><strong>Nota: </strong>Opção indisponível</p>
+      <%= render 'shared/errors', object: portion %>
+      <%= form_with model: @portion, url: take_away_store_item_portions_path(take_away_store, item), method: :post do |form| %>
+        <div class="mb-3">
+          <%= form.label :option_name %>
+          <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...', class: 'form-control w-100' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :value %>
+          <%= form.text_field :value, class: 'form-control w-100' %>
+        </div>
+
+        <div class="mt-3">
+          <%= form.submit class: 'btn btn-success w-100' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <div class="mt-4">
+      <% if item.portions.any? { |portion| portion.persisted? } %>
+        <h5>Lista de porções cadastradas</h5>
+        <div class="column overflow-auto list-portions">
+          <% item.portions.select(&:persisted?).each do |portion| %>
+            <%= link_to portion_path(portion), class: 'd-block text-decoration-none' do %>
+              <span class="row border-bottom py-2">
+                <%= portion.menu_option_name %>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Sem porções registradas</p>
+      <% end %>
+    </div>
+  </div>
 </div>
