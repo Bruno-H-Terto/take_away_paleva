@@ -170,5 +170,58 @@ describe 'Usuário vê listagem de pedidos de um Estabelecimento a partir de seu
       expect(json_response.inspect).to include 'Ana'
       expect(json_response.inspect).to include order_4.code
     end
+
+    it 'informa status vazio' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+      order_3.preparing!
+      order_4 = store.orders.create!(name: 'Ana', phone_number: '', email: 'ana@email.com', register_number: '')
+      order_4.canceled!
+
+      get status_api_v1_store_orders_path(store.code), params: { status: '' }
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 4
+      expect(json_response.inspect).to include 'Jhon'
+      expect(json_response.inspect).to include order_1.code
+      expect(json_response.inspect).to include 'José'
+      expect(json_response.inspect).to include order_2.code
+      expect(json_response.inspect).to include 'Maria'
+      expect(json_response.inspect).to include order_3.code
+      expect(json_response.inspect).to include 'Ana'
+      expect(json_response.inspect).to include order_4.code
+    end
+
+    it 'sofre erro interno' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+      order_3.preparing!
+      order_4 = store.orders.create!(name: 'Ana', phone_number: '', email: 'ana@email.com', register_number: '')
+      order_4.canceled!
+      allow_any_instance_of(TakeAwayStore).to receive(:orders).and_raise(ActiveRecord::ActiveRecordError)
+
+      get status_api_v1_store_orders_path(store.code), params: { status: 'kamehameha' }
+
+      expect(response.status).to eq 500
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response['error_message']).to eq 'Ocorreu um erro interno'
+    end
   end
 end
