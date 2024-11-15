@@ -13,7 +13,7 @@ describe 'Proprietário cadastra um perfil afiliado' do
           close_time: '17:00')
     end
 
-    post take_away_store_employees_path(store), params: { 
+    post take_away_store_profiles_path(store), params: { 
       profile: { register_number: '701.128.250-52', email: 'bob@email.com' } 
     }
 
@@ -33,7 +33,7 @@ describe 'Proprietário cadastra um perfil afiliado' do
     end
 
     login_as owner, scope: :owner
-    post take_away_store_employees_path(store), params: { 
+    post take_away_store_profiles_path(store), params: { 
       profile: { register_number: '701.128.250-52', email: 'bob@email.com' } 
     }
 
@@ -60,7 +60,7 @@ describe 'Proprietário cadastra um perfil afiliado' do
     end
 
     login_as other_owner, scope: :owner
-    post take_away_store_employees_path(store), params: { 
+    post take_away_store_profiles_path(store), params: { 
       profile: { register_number: '701.128.250-52', email: 'bob@email.com' } 
     }
 
@@ -80,7 +80,7 @@ describe 'Proprietário cadastra um perfil afiliado' do
     end
 
     login_as owner, scope: :owner
-    post take_away_store_employees_path(9999999), params: { 
+    post take_away_store_profiles_path(9999999), params: { 
       profile: { register_number: '701.128.250-52', email: 'bob@email.com' } 
     }
 
@@ -104,7 +104,7 @@ describe 'Proprietário cadastra um perfil afiliado' do
             email: 'bob@email.com', password: 'treina_dev13')
   
       login_as employee, scope: :employee
-      post take_away_store_employees_path(store), params: { 
+      post take_away_store_profiles_path(store), params: { 
         profile: { register_number: '701.128.250-52', email: 'bob@email.com' } 
       }
 

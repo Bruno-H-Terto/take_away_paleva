@@ -36,7 +36,7 @@ describe 'Proprietário cria pré-cadastro de funcionários' do
     end
           
     login_as owner, scope: :owner
-    visit new_take_away_store_employee_path(store)
+    visit new_take_away_store_profile_path(store)
     fill_in 'CPF', with: '362.164.860-71'
     fill_in 'E-mail', with: 'bob@email.com'
     click_on 'Criar Funcionário'
@@ -58,7 +58,7 @@ describe 'Proprietário cria pré-cadastro de funcionários' do
     end
           
     login_as owner, scope: :owner
-    visit new_take_away_store_employee_path(store)
+    visit new_take_away_store_profile_path(store)
     fill_in 'CPF', with: ''
     fill_in 'E-mail', with: ''
     click_on 'Criar Funcionário'
@@ -83,7 +83,7 @@ describe 'Proprietário cria pré-cadastro de funcionários' do
     store.profiles.create(register_number: '362.164.860-71', email: 'bob@email.com')
           
     login_as owner, scope: :owner
-    visit new_take_away_store_employee_path(store)
+    visit new_take_away_store_profile_path(store)
     fill_in 'CPF', with: '362.164.860-71'
     fill_in 'E-mail', with: 'bob@email.com'
     click_on 'Criar Funcionário'
@@ -107,7 +107,7 @@ describe 'Proprietário cria pré-cadastro de funcionários' do
     end
           
     login_as owner, scope: :owner
-    visit new_take_away_store_employee_path(store)
+    visit new_take_away_store_profile_path(store)
     fill_in 'CPF', with: '362.164.860-'
     fill_in 'E-mail', with: 'bob@email'
     click_on 'Criar Funcionário'

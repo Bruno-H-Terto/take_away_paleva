@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     @profile = @take_away_store.profiles.build(employee_profile_params)
 
     if @profile.save
-      return redirect_to take_away_store_employees_path(@take_away_store), notice: 'Novo Funcionário registrado com sucesso!'
+      return redirect_to take_away_store_profiles_path(@take_away_store), notice: 'Novo Funcionário registrado com sucesso!'
     end
 
     flash.now[:alert] = 'Não foi possível registrar seu Funcionário'
