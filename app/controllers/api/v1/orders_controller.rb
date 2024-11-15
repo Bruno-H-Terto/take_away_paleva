@@ -18,16 +18,19 @@ class Api::V1::OrdersController < Api::V1::ApplicationController
 
   def show
     order = @store.orders.find_by!(code: params[:code])
-    response_order_items = order.order_items.map do |order_item|
-      {
-        menu: order_item.menu.name,
-        item: order_item.item.name,
-        portion: order_item.portion.menu_option_name,
-        observation: order_item.observation.presence || 'Nenhuma',
-        quantity: order_item.quantity
-      }
+    if order.order_items.empty?
+      response_order_items = { message: 'Sem itens registrados' }
+    else
+      response_order_items = order.order_items.map do |order_item|
+        {
+          menu: order_item.menu.name,
+          item: order_item.item.name,
+          portion: order_item.portion.menu_option_name,
+          observation: order_item.observation.presence || 'Nenhuma',
+          quantity: order_item.quantity
+        }
+      end
     end
-  
     order_json = default_sanitizer_response(order)
     order_json['created_at_current'] = I18n.l(order.created_at_current, format: "%d/%m/%y - %H:%M")
   
@@ -39,8 +42,7 @@ class Api::V1::OrdersController < Api::V1::ApplicationController
   private
 
   def set_take_away_store
-    @store = TakeAwayStore.find_by(code: params[:store_code])
-    raise ActiveRecord::RecordNotFound if @store.nil?
+    @store = TakeAwayStore.find_by!(code: params[:store_code])
   end
 
   def sanitizer_response(object)
