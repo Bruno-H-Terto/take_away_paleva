@@ -31,7 +31,7 @@ class Order < ApplicationRecord
   end
 
   def created_time_current
-    self.created_at_current = Time.zone.now
+    self.created_at_current = created_at
   end
 
   def phone_or_email_must_be_present

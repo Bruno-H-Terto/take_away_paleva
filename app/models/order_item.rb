@@ -14,7 +14,7 @@ class OrderItem < ApplicationRecord
     specifications = [menu, item, portion]
     if specifications.all?(&:present?) &&
        (menu.take_away_store != item.take_away_store || item != portion.item)
-      errors.add(:base, 'Especificações do pedido devem ser do mesmo Estabelecimento')
+      errors.add(:base, 'Especificações do pedido devem ser do mesmo Estabelecimento e Produto')
     end
   end
 end

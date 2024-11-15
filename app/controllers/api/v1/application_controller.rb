@@ -11,4 +11,10 @@ class Api::V1::ApplicationController < ActionController::API
   def return_404
     render status: 404, json: { error_message: 'Recurso não localizado' }
   end
+
+  def default_sanitizer_response(object)
+    object.as_json(
+      except: [:created_at, :updated_at]
+      )
+  end
 end
