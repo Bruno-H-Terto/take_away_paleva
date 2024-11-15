@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resources :stores, only: %i[show], param: :code do
         resources :orders, only: %i[index show], param: :code do
           get 'status', on: :collection
+          patch 'confirmed', on: :member
         end
       end
     end

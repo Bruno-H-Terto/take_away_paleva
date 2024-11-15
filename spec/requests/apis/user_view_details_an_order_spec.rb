@@ -24,9 +24,9 @@ describe 'Usuário visualiza detalhes de um pedido' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
-      fomated_date = I18n.l(order.created_at_current, format: "%d/%m/%y - %H:%M")
+      formated_date = I18n.l(order.created_at_current, format: "%d/%m/%y - %H:%M")
       expect(json_response['order']['name']).to eq 'Jhon'
-      expect(json_response['order']['created_at_current']).to eq fomated_date
+      expect(json_response['order']['created_at_current']).to eq formated_date
       expect(json_response['order']['status']).to eq 'waiting_confirmation'
       expect(json_response['order']['phone_number']).to eq '(11) 999998888'
       expect(json_response['order']['email']).to eq 'jhon@email.com'
