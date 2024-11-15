@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário vê listagem de pedidos de um Estabelecimento a partir de seu código' do
+describe 'Listagem de pedidos do mais antigo ao mais recente de um Estabelecimento a partir de seu código' do
   context 'GET /api/v1/stores/:store_code/orders' do
     it 'com sucesso' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',

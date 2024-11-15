@@ -1,13 +1,13 @@
-class Api::V1::OrdersController < Api::V1::ApplicationController
+class Api::V1::OrdersController < Api::V1::ApiController
   before_action :set_take_away_store
   def index
-    orders = sanitizer_response(@store.orders)
+    orders = sanitizer_response(@store.orders.order(created_at_current: :asc))
 
     render status: 200, json: orders
   end
 
   def status
-    orders = sanitizer_response(@store.orders.where(status: params[:status]))
+    orders = sanitizer_response(@store.orders.where(status: params[:status]).order(created_at_current: :asc))
 
     if orders.empty?
       orders = sanitizer_response(@store.orders)
