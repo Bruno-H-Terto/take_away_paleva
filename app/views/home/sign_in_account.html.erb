@@ -1,8 +1,11 @@
-<section>
-  <div>
-    <%= link_to 'Sou Proprietário', new_owner_session_path %>
-  </div>
-  <div>
-    <%= link_to 'Sou Funcionário', new_employee_session_path %>
-  </div>
-</section>
+<%= turbo_frame_tag 'login' do %>
+  <section class="row">
+    <div class="col">
+      <%= link_to 'Sou Proprietário', new_owner_session_path, class: 'btn btn-primary' %>
+    </div>
+    <div class="col">
+      <%= link_to 'Sou Funcionário', new_employee_session_path, class: 'btn btn-primary' %>
+    </div>
+  </section>
+<% end %>
+

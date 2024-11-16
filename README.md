@@ -1,24 +1,21 @@
-# README
+# Take Away Palevá
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Está é uma aplicação para gerenciamento de Estabelecimentos do segmento Take Away, modelo oferecido no qual o consumidor opta por retirar seu pedido diretamente no estabelecimento. Este trabalho foi desenvolvido através do TreinaDev13 ministrado por Campus Code.
 
 Things you may want to cover:
 
-* Ruby version
+## Dependências
+* ruby-3.2.1v
 
-* System dependencies
+* Rails 7.2.1.2v
 
-* Configuration
+## Aplicação
 
-* Database creation
+É disponibilizado o acesso de dois tipos de usuários: Proprietários, adminitradores do negócio, com alto grau de personalização; e Funcionários, usuários associados a um Estabelecimento com baixo grau de autorização.
 
-* Database initialization
+### Proprietários
 
-* How to run the test suite
+Está seção é destinada a destacar funcionalidades previstas para usuários com acesso Proprietário.
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Página Inicial
 
-* Deployment instructions
-
-* ...

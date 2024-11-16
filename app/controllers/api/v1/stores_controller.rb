@@ -1,7 +1,7 @@
 class Api::V1::StoresController < Api::V1::ApiController
   def show
     store = TakeAwayStore.find_by!(code: params[:code])
-    store_response = store.as_json(except: [:created_at, :updated_at])
+    store_response = default_sanitizer_response(store)
 
     render status: 200, json: { store: store_response }
   end
