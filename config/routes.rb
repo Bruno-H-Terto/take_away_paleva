@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :stores, only: %i[show], param: :code do
+      resources :stores, only: %i[index show], param: :code do
         resources :orders, only: %i[index show], param: :code do
           get 'status', on: :collection
           patch 'confirmed', on: :member
