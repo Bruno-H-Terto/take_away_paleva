@@ -29,6 +29,11 @@ describe 'Usuário vê detalhes do Estabelecimento' do
       expect(json_response['stores'].inspect).not_to include 'state'
       expect(json_response['stores'].inspect).not_to include 'zip_code'
       expect(json_response['stores'].inspect).not_to include 'complement'
+      expect(json_response['stores'].inspect).not_to include 'street'
+      expect(json_response['stores'].inspect).not_to include 'number'
+      expect(json_response['stores'].inspect).not_to include 'phone_number'
+      expect(json_response['stores'].inspect).not_to include 'owner_id'
+      expect(json_response['stores'].inspect).not_to include 'id'
       expect(json_response['stores'].first['trade_name']).to eq 'Grifinória'
       expect(json_response['stores'].first['corporate_name']).to eq 'Hogwarts LTDA'
       expect(json_response['stores'].first['code']).to eq store.code

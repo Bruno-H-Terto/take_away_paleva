@@ -55,4 +55,5 @@ class ApplicationController < ActionController::Base
   def record_not_found
     redirect_to root_path, notice: 'Requisição inválida'
   end
+
 end
