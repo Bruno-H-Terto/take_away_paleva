@@ -41,6 +41,22 @@ describe 'Listagem de pedidos do mais antigo ao mais recente de um Estabelecimen
       expect(json_response[3]['code']).to eq order_4.code
     end
 
+    it 'e não possui pedidos registrados' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+
+      get api_v1_store_orders_path(store.code)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response['message']).to eq 'Sem pedidos registrados'
+    end
+
     it 'só tem acesso a listagem do Estabelecimento procurado' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
@@ -111,7 +127,7 @@ describe 'Listagem de pedidos do mais antigo ao mais recente de um Estabelecimen
   end
 
   context 'GET /api/v1/stores/:store_code/orders/status' do
-    it 'com sucesso' do
+    it 'busca por pedidos aguardando confirmação' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')
       store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
@@ -139,6 +155,115 @@ describe 'Listagem de pedidos do mais antigo ao mais recente de um Estabelecimen
       expect(json_response.inspect).not_to include order_3.code
       expect(json_response.inspect).not_to include 'Ana'
       expect(json_response.inspect).not_to include order_4.code
+    end
+
+    it 'busca por pedidos confirmados' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+      order_3.preparing!
+      order_4 = store.orders.create!(name: 'Ana', phone_number: '', email: 'ana@email.com', register_number: '')
+      order_4.canceled!
+
+      get status_api_v1_store_orders_path(store.code), params: { status: 'preparing' }
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 1
+      expect(json_response.inspect).to include 'Maria'
+      expect(json_response.inspect).to include order_3.code
+      expect(json_response.inspect).not_to include 'Jhon'
+      expect(json_response.inspect).not_to include order_1.code
+      expect(json_response.inspect).not_to include 'José'
+      expect(json_response.inspect).not_to include order_2.code
+      expect(json_response.inspect).not_to include 'Ana'
+      expect(json_response.inspect).not_to include order_4.code
+    end
+
+    it 'busca por pedidos cancelados' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+      order_3.preparing!
+      order_4 = store.orders.create!(name: 'Ana', phone_number: '', email: 'ana@email.com', register_number: '')
+      order_4.canceled!
+
+      get status_api_v1_store_orders_path(store.code), params: { status: 'canceled' }
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 1
+      expect(json_response.inspect).to include 'Ana'
+      expect(json_response.inspect).to include order_4.code
+      expect(json_response.inspect).not_to include 'Jhon'
+      expect(json_response.inspect).not_to include order_1.code
+      expect(json_response.inspect).not_to include 'José'
+      expect(json_response.inspect).not_to include order_2.code
+      expect(json_response.inspect).not_to include 'Maria'
+      expect(json_response.inspect).not_to include order_3.code
+    end
+
+    it 'busca por pedidos finalizados' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+      order_3.preparing!
+      order_4 = store.orders.create!(name: 'Ana', phone_number: '', email: 'ana@email.com', register_number: '')
+      order_4.finished!
+
+      get status_api_v1_store_orders_path(store.code), params: { status: 'finished' }
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 1
+      expect(json_response.inspect).to include 'Ana'
+      expect(json_response.inspect).to include order_4.code
+      expect(json_response.inspect).not_to include 'Jhon'
+      expect(json_response.inspect).not_to include order_1.code
+      expect(json_response.inspect).not_to include 'José'
+      expect(json_response.inspect).not_to include order_2.code
+      expect(json_response.inspect).not_to include 'Maria'
+      expect(json_response.inspect).not_to include order_3.code
+    end
+
+    it 'não possui pedidos com o status procurado' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+          email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.create_take_away_store!(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+          register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+          number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'SP', zip_code: '11000-000', complement: '',
+          email: 'potter@email.com')
+      order_1 = store.orders.create!(name: 'Jhon', phone_number: '(11) 999998888', email: 'jhon@email.com', register_number: '701.128.250-52')
+      order_2 = store.orders.create!(name: 'José', phone_number: '(21) 988887777', email: '', register_number: '')
+      order_3 = store.orders.create!(name: 'Maria', phone_number: '', email: 'maria@email.com', register_number: '690.814.440-26')
+
+      get status_api_v1_store_orders_path(store.code), params: { status: 'done' }
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response['message']).to eq 'Não foram localizados pedidos com este status'
     end
 
     it 'informa status inexistente' do
