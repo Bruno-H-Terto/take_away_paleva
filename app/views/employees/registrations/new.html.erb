@@ -5,24 +5,24 @@
 
   <div class="field">
     <%= f.label :register_number %><br />
-    <%= f.text_field :register_number, autofocus: true %>
+    <%= f.text_field :register_number, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
 
   <div class="field">
     <%= f.label :surname %><br />
-    <%= f.text_field :surname %>
+    <%= f.text_field :surname, class: 'form-control' %>
   </div>
 
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
   </div>
 
   <div class="field">
@@ -30,16 +30,16 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit 'Criar Conta' %>
+    <%= f.submit 'Criar Conta', class: 'btn btn-primary d-flex w-100' %>
   </div>
 <% end %>
 

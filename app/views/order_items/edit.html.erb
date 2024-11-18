@@ -4,13 +4,13 @@
   <p><strong>Porção:</strong> <%= @item[:portion].menu_option_name %></p>
   <div>
     <%= form.label :observation, 'Observação' %>
-    <%= form.text_field :observation %>
+    <%= form.text_field :observation, class:'form-control' %>
   </div>
   <div>
     <%= form.label :quantity, 'Quantidade' %>
-    <%= form.number_field :quantity, min: 1 %>
+    <%= form.number_field :quantity, min: 1, class:'form-control' %>
   </div>
   
-  <%= form.submit %>
+  <%= form.submit class: 'btn btn-primary d-flex w-100' %>
 <% end %>
 

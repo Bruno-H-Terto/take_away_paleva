@@ -13,7 +13,7 @@
           <p><strong>Observação:</strong> <%= order_item[:observation].presence || 'Nenhuma' %></p>
         </div>
         <div>
-          <%= button_to 'Remover', order_item_path(index), method: :delete %>
+          <%= button_to 'Remover', order_item_path(index), method: :delete, class:'btn btn-primary d-flex w-100' %>
           <%= link_to 'Editar', edit_order_item_path(index) %>
         </div>
       </div>

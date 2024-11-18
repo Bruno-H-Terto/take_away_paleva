@@ -4,23 +4,23 @@
 
 <div>
   <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, class: 'form-control' %>
 </div>
 
 <div>
   <%= form.label :photo %>
-  <%= form.file_field :photo %>
+  <%= form.file_field :photo, class: 'form-control' %>
 </div>
 
 
 <div>
   <%= form.label :description %>
-  <%= form.text_area :description %>
+  <%= form.text_area :description, class: 'form-control' %>
 </div>
 
 <div>
   <%= form.label :calories %>
-  <%= form.text_field :calories %>
+  <%= form.text_field :calories, class: 'form-control' %>
 </div>
 
-<%= form.submit t('forms.items.action') %>
+<%= form.submit t('forms.items.action'), class: 'btn btn-primary d-flex w-100' %>
