@@ -1,6 +1,7 @@
 class CharacteristicsController < ApplicationController
   before_action :employee_unauthorized!
   before_action :authenticate_owner!
+  
   def index
     @take_away_store = current_store
     @characteristics = @take_away_store.characteristics.select(&:persisted?)

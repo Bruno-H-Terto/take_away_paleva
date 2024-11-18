@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_associated!
   before_action :set_take_away_store
+  
   def index
     @orders = current_store.orders
   end

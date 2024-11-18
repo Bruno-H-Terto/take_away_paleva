@@ -1,4 +1,6 @@
 class OrderItemsController < ApplicationController
+  before_action :authenticate_associated!
+   
   def cart
     if params[:menu_id].empty? || params[:item_id].empty? || params[:portion_id].empty? || params[:quantity].empty?
       return redirect_to root_path, alert: 'Não foi possível adicionar seu item ao carrinho'
