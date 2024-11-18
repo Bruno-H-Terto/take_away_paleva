@@ -29,7 +29,9 @@
           <h6><%= t('order.my') %></h6>
         <% end %>
       </div>
+    </div>
 
+    <div class="aside-cart">
       <ul class="cart">
         <% if @order_items.present? %>
           <p><%= t('order.cart.notification') %></p>

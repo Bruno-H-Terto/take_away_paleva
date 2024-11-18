@@ -335,6 +335,17 @@ nav .btn {
   z-index: -1;
 }
 
+.aside-cart{
+  padding-top: 5rem;
+  padding-left: 2rem;
+  position: fixed;
+  height: 100vh;
+  width: 20rem;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
 .backgroud-aside {
   z-index: -50;
 }

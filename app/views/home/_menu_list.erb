@@ -34,8 +34,18 @@
                       <% end %>
                     <% end %>
                   </div>
-
-                  <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary">+</button>
+                  <div class="col-6 box-item">
+                    <small>Descrição:</small>
+                    <div class="row box-item__description overflow-auto">
+                      <span class="text-justify"><%= item.description %></span>
+                    </div>
+                    <div class="row mt-3 text-break">
+                      <% if item.calories.present? %>
+                        <small><%= item.calories %> Calorias</small>
+                      <% end %>
+                    </div>
+                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary">+ Carrinho</button>
+                  </div>
                   <dialog class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
                     <div>
                       <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
