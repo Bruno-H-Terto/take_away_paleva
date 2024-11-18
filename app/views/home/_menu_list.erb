@@ -11,7 +11,7 @@
           <div id="items">
             <% if menu.items.select(&:active?).present? %>
               <div>
-                <small>Itens inclusos no cardápio</small>
+                <small><%= t('menu.itens') %></small>
               </div>
               <% menu.items.select(&:active?).each do |item| %>
                 <div class="container mt-3 row p-2 menu-list-items">
@@ -34,48 +34,65 @@
                       <% end %>
                     <% end %>
                   </div>
-                  <div class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
+
+                  <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary">+</button>
+                  <dialog class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
+                    <div>
+                      <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
+                    </div>
                     <%= form_with url: new_item_path(menu, item), method: :get, class: 'form-menu-item' do |form| %>
-                      <strong>Monte seu pedido</strong>
+                      <strong><%= t('order.make')%></strong>
                       <%= render 'shared/errors', object: @order %>
                       <div class="mb-1">
-                        <%= form.label :portion_id, 'Porção', class: "visually-hidden" %>
+                        <%= form.label :portion_id, Portion.model_name.human, class: "visually-hidden" %>
                         <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }),
-                                        prompt: "Selecione uma opção", class: 'form-select' %>
+                                        prompt: t('forms.select'), class: 'form-select' %>
                       </div>
 
                       <div class="mb-1">
-                        <%= form.label :observation, 'Observação', class: "visually-hidden" %>
-                        <%= form.text_field :observation, class: 'form-control', placeholder: 'Observação' %>
+                        <%= form.label :observation, t('order.cart.observation'), class: "visually-hidden" %>
+                        <%= form.text_field :observation, class: 'form-control', placeholder: t('order.cart.observation') %>
                       </div>
 
                       <div>
-                        <%= form.label :quantity, 'Quantidade' %>
-                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: 'Quantidade', require: true %>
+                        <%= form.label :quantity, t('order.cart.quantity') %>
+                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: t('order.cart.quantity'), require: true %>
                       </div>
 
                       <div class="mt-3">
-                        <%= form.submit 'Adicionar ao Carrinho', class: 'btn btn-primary d-flex w-100' %>
+                        <%= form.submit t('order.cart.new'), class: 'btn btn-primary d-flex w-100' %>
                       </div>
                     <% end %>
                     <div class="row mt-3 text-break" >
-                      <small><%= link_to_if owner_signed_in?, 'Mais Detalhes', take_away_store_item_path(menu.take_away_store, item) %></small>
+                      <small><%= link_to_if owner_signed_in?, t('menu.more_details'), take_away_store_item_path(menu.take_away_store, item) %></small>
                     </div> 
-                  </div>
+                  </dialog>
                 </div>
               <% end %>
             <% else %>
-              <p>Sem itens cadastrados</p>
+              <p><%= t('menu.no_item_content') %></p>
             <% end %>
             <div class="mt-2 menu-body"></div>
           </div>
         </div>
       <% end %>
     <% else %>
-      <p>Não existem cardápios cadastrados</p>
+      <p><%= t('menu.no_content') %></p>
     <% end %>
   </div>
 </div>
 
+<script>
+  function showModal(dialog){
+    const id = dialog.id
+    const modal = document.querySelector(`#${id}`);
+    modal.showModal();
+  }
 
+  function closeModal(dialog){
+    const id = dialog.id
+    const modal = document.querySelector(`#${id}`);
+    modal.close();
+  }
+</script>
 

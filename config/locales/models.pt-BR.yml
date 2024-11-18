@@ -70,6 +70,10 @@ pt-BR:
       order:
         name: 'Nome do Cliente'
         waiting_confirmation: 'Aguardando confirmação da cozinha'
+        done: 'Pronto'
+        preparing: 'Em preparação'
+        canceled: 'Cancelado'
+        finished: 'Entregue'
       profile:
         register_number: 'CPF'
         email: 'E-mail'

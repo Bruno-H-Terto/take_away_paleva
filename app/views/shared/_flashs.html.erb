@@ -1,18 +1,21 @@
-<div class="flashs container">
-  <% if notice %>
+
+<% if notice %>
+  <div class="flashs container">
     <div class="bg-notice">
       <%= notice %>
       <%= image_tag 'close_icon', class: 'close-icon' %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-  <% if alert %>
+<% if alert %>
+  <div class="flashs container">
     <div class="bg-alert">
       <%= alert %>
       <%= image_tag 'close_icon', class: 'close-icon' %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <script>
   document.querySelectorAll('.close-icon').forEach(function(icon) {

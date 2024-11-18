@@ -1,10 +1,10 @@
 <div class="aside">
-  <h2>Cardápio</h2>
+  <h2><%= Menu.model_name.human %></h2>
   <%= render 'shared/errors', object: @menu %>
   <section class="col-3">
     <% if owner_signed_in? %>
       <button class="btn btn-primary area-dropdown" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Criar nova Categória
+        <%= t('menu.new') %>
       </button>
 
       <div class="collapse area-dropdown" id="collapseExample">
@@ -15,7 +15,7 @@
               <%= form.text_field :name, class: "form-control", placeholder: "Nome do Rótulo" %>
             </div>
             <div>
-              <%= form.submit 'Salvar e continuar', class: 'btn btn-primary' %>
+              <%= form.submit t('forms.items.action'), class: 'btn btn-primary' %>
             </div>
           <% end %>
         </div>
@@ -26,15 +26,15 @@
     <div class="mt-3 aside-dashboard" id="order">
       <div>
         <%= link_to orders_path do %>
-          <h6>Meus pedidos</h6>
+          <h6><%= t('order.my') %></h6>
         <% end %>
       </div>
 
       <ul class="cart">
         <% if @order_items.present? %>
-          <p>Você possui itens aguardando confirmação</p>
-          <p>Total do pedido: <%= @price %></p>
-          <%= link_to 'Ir para o Carrinho', order_items_path %>
+          <p><%= t('order.cart.notification') %></p>
+          <p><%= t('order.final_price') %>: <%= @price %></p>
+          <%= link_to t('order.cart.goto'), order_items_path %>
 
           <div class="cart-list border p-2">
             <dl>

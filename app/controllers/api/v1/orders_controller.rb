@@ -14,7 +14,6 @@ class Api::V1::OrdersController < Api::V1::ApiController
 
   def status
     if Order.statuses.keys.include?(params[:status])
-      puts params
       orders = sanitizer_response(@store.orders.where(status: params[:status]).order(created_at_current: :asc))
       if orders.empty?
         orders = {message: 'Não foram localizados pedidos com este status'}

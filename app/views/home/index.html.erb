@@ -1,17 +1,21 @@
-<section class="row">
+<section class="row logo">
   <% if (owner_signed_in? || employee_signed_in?) && @take_away_store.id.present? %>
     <%= render 'home/dashboard' %>
 
   <% else %>
-    <div>
-      <h1>Palevá</h1>
-      <h2>Take Away Store</h2>
+    <div class="col">
+      <h2>Palevá</h2>
+      <h3>Take Away Store</h3>
+
+      <div>
+        <h4>Monte seu cardápio</h4>
+        <%= image_tag 'example', class: 'example' %>
+      </div>
+
     </div>
 
-    <div>
-      <%= link_to new_owner_registration_path do %>
-        <h6>Seja um Estabelecimento parceiro</h6>
-      <% end %>
+    <div class="col">
+      <%= image_tag 'capi.png', class: 'logo_img' %>
     </div>
   <% end %>
 </section>

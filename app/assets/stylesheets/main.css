@@ -379,3 +379,19 @@ nav .btn {
   margin-top: 0.5rem;
   line-height: 1rem;
 }
+
+.logo_img {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+  justify-content: center;
+  width: 30rem;
+}
+
+.example {
+  margin-top: 5rem;
+  width: 30rem;
+  transform-origin: top left;
+  transform: rotate(-10deg);
+}

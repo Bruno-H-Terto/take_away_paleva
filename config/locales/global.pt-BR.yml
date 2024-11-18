@@ -37,9 +37,27 @@ pt-BR:
   business_hour:
     registration: 'Registrar horários'
   forms:
+    select: 'Selecione uma opção'
     query: 'Buscar'
     items:
       action: 'Salvar e continuar'
   query:
     not_found: "Sem resultados para a busca: %{query}"
+  menu: 
+    new: 'Criar nova Categória'
+    itens: 'Itens inclusos no cardápio'
+    more_details: 'Mais detalhes'
+    no_item_content: 'Sem itens cadastrados'
+    no_content: 'Não existem cardápios cadastrados'
+  order:
+    my: 'Meus pedidos'
+    make: 'Monte seu pedido'
+    final_price: 'Total do pedido'
+    cart:
+      notification: 'Você possui itens aguardando confirmação'
+      goto: 'Ir para o Carrinho'
+      observation: 'Observação'
+      quantity: 'Quantidade'
+      new: 'Adicionar ao Carrinho'
+
   
