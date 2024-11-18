@@ -150,7 +150,7 @@ describe 'Funcionário registrado navega pela aplicação' do
       end
 
       expect(page).to have_content 'Item adicionado ao carrinho'
-      within '#order' do
+      within '#cart' do
         expect(page).to have_content 'Você possui itens aguardando confirmação'
         expect(page).to have_content 'Ir para o Carrinho'
       end

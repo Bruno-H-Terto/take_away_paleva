@@ -34,9 +34,9 @@
                       <% end %>
                     <% end %>
                   </div>
-                  <div class="col-6 box-item">
+                  <div class="col-6">
                     <small>Descrição:</small>
-                    <div class="row box-item__description overflow-auto">
+                    <div class="row box-item__description overflow-auto border">
                       <span class="text-justify"><%= item.description %></span>
                     </div>
                     <div class="row mt-3 text-break">
@@ -44,38 +44,41 @@
                         <small><%= item.calories %> Calorias</small>
                       <% end %>
                     </div>
-                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary">+ Carrinho</button>
+                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary d-flex justify-content-center w-100">+ Carrinho</button>
                   </div>
-                  <dialog class="col-6 box-item" id="<%= dom_id(menu, item.name) %>">
-                    <div>
-                      <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
-                    </div>
-                    <%= form_with url: new_item_path(menu, item), method: :get, class: 'form-menu-item' do |form| %>
-                      <strong><%= t('order.make')%></strong>
-                      <%= render 'shared/errors', object: @order %>
-                      <div class="mb-1">
-                        <%= form.label :portion_id, Portion.model_name.human, class: "visually-hidden" %>
-                        <%= form.select :portion_id, options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }),
-                                        prompt: t('forms.select'), class: 'form-select' %>
-                      </div>
-
-                      <div class="mb-1">
-                        <%= form.label :observation, t('order.cart.observation'), class: "visually-hidden" %>
-                        <%= form.text_field :observation, class: 'form-control', placeholder: t('order.cart.observation') %>
-                      </div>
-
+                  <dialog class="col-3" id="<%= dom_id(menu, item.name) %>">
+                    <div class="w-100">
                       <div>
-                        <%= form.label :quantity, t('order.cart.quantity') %>
-                        <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: t('order.cart.quantity'), require: true %>
+                        <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
                       </div>
+                      <%= form_with url: new_item_path(menu, item), method: :get, class: 'row justify-content-center' do |form| %>
+                        <strong><%= t('order.make')%></strong>
+                        <%= render 'shared/errors', object: @order %>
+                        <div class="mb-3">
+                          <label for="portion_id" class="form-label"><%= Portion.model_name.human %></label>
+                          <select id="portion_id" name="portion_id" class="form-select">
+                            <%= options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }, selected: nil) %>
+                          </select>
+                        </div>
 
-                      <div class="mt-3">
-                        <%= form.submit t('order.cart.new'), class: 'btn btn-primary d-flex w-100' %>
+                        <div class="mb-1">
+                          <%= form.label :observation, t('order.cart.observation'), class: "visually-hidden" %>
+                          <%= form.text_field :observation, class: 'form-control', placeholder: t('order.cart.observation') %>
+                        </div>
+
+                        <div>
+                          <%= form.label :quantity, t('order.cart.quantity') %>
+                          <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: t('order.cart.quantity'), require: true %>
+                        </div>
+
+                        <div class="mt-3">
+                          <%= form.submit t('order.cart.new'), class: 'btn btn-primary d-flex w-100' %>
+                        </div>
+                      <% end %>
+                      <div class="row mt-3 text-break" >
+                        <small><%= link_to_if owner_signed_in?, t('menu.more_details'), take_away_store_item_path(menu.take_away_store, item) %></small>
                       </div>
-                    <% end %>
-                    <div class="row mt-3 text-break" >
-                      <small><%= link_to_if owner_signed_in?, t('menu.more_details'), take_away_store_item_path(menu.take_away_store, item) %></small>
-                    </div> 
+                    </div>
                   </dialog>
                 </div>
               <% end %>
