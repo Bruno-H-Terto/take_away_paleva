@@ -70,12 +70,12 @@
       <button onclick="closeModal(modal_signup)">&times;</button>
     </div>
     <%= turbo_frame_tag 'signup' do %>
-      <section>
-        <div>
-          <%= link_to 'Sou Proprietário', new_owner_registration_path %>
+      <section class="row">
+        <div class="col">
+          <%= link_to 'Sou Proprietário', new_owner_registration_path, class: 'btn btn-primary' %>
         </div>
-        <div>
-          <%= link_to 'Sou Funcionário', new_employee_registration_path %>
+        <div class="col">
+          <%= link_to 'Sou Funcionário', new_employee_registration_path, class: 'btn btn-primary' %>
         </div>
       </section>
     <% end %>

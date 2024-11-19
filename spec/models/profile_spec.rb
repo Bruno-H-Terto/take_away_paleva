@@ -17,6 +17,7 @@ RSpec.describe Profile, type: :model do
 
       expect(profile).to be_valid
       expect(profile.save).to eq true
+      expect(profile.status).to eq 'waiting_confirmation'
     end
 
     it 'email deve ser único entre Perfis' do

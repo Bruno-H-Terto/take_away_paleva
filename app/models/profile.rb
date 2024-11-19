@@ -14,13 +14,13 @@ class Profile < ApplicationRecord
   }, if: -> {email.present?}
   validates_with RegisterValidator, field: :register_number, length: 11, if: -> { register_number.present? }
 
-  before_save :ensure_unique_field
+  before_create :ensure_unique_field
 
   private
 
   def ensure_unique_field
     formatted_register_number = register_number.gsub(/\D/, '') if register_number.present?
-  
+
     if UniqueField.exists?(email: email)
       errors.add(:email, 'já está em uso')
       raise ActiveRecord::Rollback

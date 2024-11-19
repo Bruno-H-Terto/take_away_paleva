@@ -1,7 +1,7 @@
 <turbo-frame id="signup">
   <h2>Crie sua conta</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, data: {turbo: false}, url: registration_path(resource_name)) do |f| %>
     <%= render "employees/shared/error_messages", resource: resource %>
 
     <div class="field">
@@ -39,7 +39,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
     </div>
 
-    <div class="actions">
+    <div class="actions mt-3">
       <%= f.submit 'Criar Conta', class: 'btn btn-primary d-flex w-100' %>
     </div>
   <% end %>

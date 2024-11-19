@@ -20,11 +20,10 @@ class Employee < ApplicationRecord
     profile = Profile.find_by(email: email, register_number: register_number)
 
     if profile.present?
+      profile.active!
       self.profile = profile
-      self.profile.active!
     else
       errors.add(:profile, 'não associado a um Estabelecimento ativo')
     end
   end
-  
 end
