@@ -3,3 +3,11 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "popper"
 import "bootstrap"
+import "./controllers/main"
+
+import { ola } from "./controllers/main";
+window.ola = ola;
+import { showModal } from "./controllers/main";
+window.showModal = showModal;
+import { closeModal } from "./controllers/main";
+window.closeModal = closeModal;

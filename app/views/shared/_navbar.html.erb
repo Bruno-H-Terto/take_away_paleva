@@ -38,10 +38,46 @@
           </div>
         <% else %>
           <div>
-            <%= link_to t('owner.become_a_partner'), new_registration_path, class: "btn btn-primary mr-2" %>
-            <%= link_to t('owner.sign_in'), new_session_path, class: "btn btn-primary mr-2" %>
+            <button onclick="showModal(modal_login)" class= "btn btn-primary mr-2"><%=t('owner.sign_in')%></button> 
+            <button onclick="showModal(modal_signup)" class= "btn btn-primary mr-2"><%=t('owner.become_a_partner')%></button> 
           </div>
         <% end %>
     </div>
   </div>
 </nav>
+
+<dialog class="col-4" id="modal_login">
+  <div class="w-100">
+    <div>
+      <button onclick="closeModal(modal_login)">&times;</button>
+    </div>
+    <%= turbo_frame_tag 'login' do %>
+      <section class="row">
+        <div class="col">
+          <%= link_to 'Sou Proprietário', new_owner_session_path, class: 'btn btn-primary' %>
+        </div>
+        <div class="col">
+          <%= link_to 'Sou Funcionário', new_employee_session_path, class: 'btn btn-primary' %>
+        </div>
+      </section>
+    <% end %>
+  <div>
+</dialog>
+
+<dialog class="col-4" id="modal_signup">
+  <div class="w-100">
+    <div>
+      <button onclick="closeModal(modal_signup)">&times;</button>
+    </div>
+    <%= turbo_frame_tag 'signup' do %>
+      <section>
+        <div>
+          <%= link_to 'Sou Proprietário', new_owner_registration_path %>
+        </div>
+        <div>
+          <%= link_to 'Sou Funcionário', new_employee_registration_path %>
+        </div>
+      </section>
+    <% end %>
+  <div>
+</dialog>

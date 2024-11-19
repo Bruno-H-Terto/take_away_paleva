@@ -4,8 +4,9 @@ describe 'Proprietário registra seu estabelecimento' do
   context 'autenticado' do
     it 'e é direcionado após seu cadastro' do
       visit root_path
-      click_on 'Seja um parceiro'
-      click_on 'Sou Proprietário'
+      within '#signup' do
+        click_on 'Sou Proprietário'
+      end
       fill_in 'CPF', with: '759.942.990-57'
       fill_in 'Nome', with: 'Dom'
       fill_in 'Sobrenome', with: 'Corleone'
@@ -24,8 +25,9 @@ describe 'Proprietário registra seu estabelecimento' do
               email: 'vito@email.com', password: 'treina_dev13')
 
       visit root_path
-      click_on 'Faça seu login'
-      click_on 'Sou Proprietário'
+      within '#login' do
+        click_on 'Sou Proprietário'
+      end
       fill_in 'E-mail', with: 'vito@email.com'
       fill_in 'Senha', with: 'treina_dev13'
       click_on 'Log in'

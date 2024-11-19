@@ -3,8 +3,9 @@ require 'rails_helper'
 describe 'Proprietário realiza seu cadastro' do
   it 'com sucesso' do
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Proprietário'
+    within '#signup' do
+      click_on 'Sou Proprietário'
+    end
     fill_in 'CPF', with: '759.942.990-57'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'
@@ -12,14 +13,14 @@ describe 'Proprietário realiza seu cadastro' do
     fill_in 'Senha', with: 'treina_dev13'
     fill_in 'Confirme sua senha', with: 'treina_dev13'
     click_on 'Criar conta'
-
     expect(page).to have_css 'nav', text: 'DC | bigboss@email.com'
   end
 
   it 'realiza logout após registro' do
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Proprietário'
+    within '#signup' do
+      click_on 'Sou Proprietário'
+    end
     fill_in 'CPF', with: '759.942.990-57'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'
@@ -34,8 +35,9 @@ describe 'Proprietário realiza seu cadastro' do
 
   it 'e falha ao não preencher informações obrigatórias' do
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Proprietário'
+    within '#signup' do
+      click_on 'Sou Proprietário'
+    end
     fill_in 'CPF', with: ''
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
@@ -52,8 +54,9 @@ describe 'Proprietário realiza seu cadastro' do
 
   it 'CPF inválido' do
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Proprietário'
+    within '#signup' do
+      click_on 'Sou Proprietário'
+    end
     fill_in 'CPF', with: '111.111.111-11'
     fill_in 'Nome', with: 'Dom'
     fill_in 'Sobrenome', with: 'Corleone'

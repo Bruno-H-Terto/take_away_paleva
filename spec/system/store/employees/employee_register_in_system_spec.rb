@@ -15,8 +15,9 @@ describe 'Funcionário se registra' do
     store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
 
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Funcionário'
+    within '#signup' do
+      click_on 'Sou Funcionário'
+    end
 
     expect(page).to have_content 'Crie sua conta'
     expect(page).to have_field 'CPF'
@@ -41,8 +42,9 @@ describe 'Funcionário se registra' do
     store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
 
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Funcionário'
+    within '#signup' do
+      click_on 'Sou Funcionário'
+    end
     fill_in 'CPF', with: '362.164.860-71'
     fill_in 'E-mail', with: 'bob@email.com'
     fill_in 'Nome', with: 'Bob'
@@ -69,8 +71,9 @@ describe 'Funcionário se registra' do
     store.profiles.create!(register_number: '362.164.860-71', email: 'bob@email.com')
 
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Funcionário'
+    within '#signup' do
+      click_on 'Sou Funcionário'
+    end
     fill_in 'CPF', with: ''
     fill_in 'E-mail', with: 'bob@email.com'
     fill_in 'Nome', with: ''
@@ -97,8 +100,9 @@ describe 'Funcionário se registra' do
     end
 
     visit root_path
-    click_on 'Seja um parceiro'
-    click_on 'Sou Funcionário'
+    within '#signup' do
+      click_on 'Sou Funcionário'
+    end
     fill_in 'CPF', with: '362.164.860-71'
     fill_in 'E-mail', with: 'bob@email.com'
     fill_in 'Nome', with: 'Bob'

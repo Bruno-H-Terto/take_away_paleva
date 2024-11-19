@@ -1,44 +1,46 @@
-<h2><%= t('owner.become_a_partner') %></h2>
+<turbo-frame id="signup">
+  <h2><%= t('owner.become_a_partner') %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "owners/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "owners/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :register_number %><br />
-    <%= f.text_field :register_number, autofocus: true %>
-  </div>
+    <div class="field">
+      <%= f.label :register_number %><br />
+      <%= f.text_field :register_number, autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname %>
-  </div>
+    <div class="field">
+      <%= f.label :surname %><br />
+      <%= f.text_field :surname %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> <%= t('owner.characters_minimum')%>)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> <%= t('owner.characters_minimum')%>)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions mt-3">
-    <%= f.submit t('owner.create'), class: 'btn btn-primary btn-lg btn-block' %>
-  </div>
-<% end %>
+    <div class="actions mt-3">
+      <%= f.submit t('owner.create'), class: 'btn btn-primary btn-lg btn-block' %>
+    </div>
+  <% end %>
 
-<%= render "owners/shared/links" %>
+</turbo-frame>
+  <%= render "owners/shared/links" %>
