@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  before_action :prevent_double_access!, only: [:create_account, :sign_in_account]
+  before_action :employee_unauthorized!, only: %i[owner]
+
   def index
     if (owner_signed_in? || employee_signed_in?) && current_store.id.present?
       @employee = current_employee if employee_signed_in?
@@ -37,6 +40,8 @@ class HomeController < ApplicationController
   end
 
   def create_account; end
+
+  def sign_in_account; end
 
   def owner
     @owner = current_owner

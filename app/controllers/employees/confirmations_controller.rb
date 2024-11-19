@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Employees::ConfirmationsController < Devise::ConfirmationsController
+  before_action :prevent_double_access!
   # GET /resource/confirmation/new
   # def new
   #   super

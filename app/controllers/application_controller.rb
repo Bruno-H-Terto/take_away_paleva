@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
+  def prevent_double_access!
+    active_user = owner_signed_in? || employee_signed_in?
+    if active_user
+      redirect_to root_path, alert: 'Login já realizado'
+    end
+  end
+
   def employee_unauthorized!
     return redirect_to root_path, alert: 'Acesso não autorizado' if employee_signed_in?
   end

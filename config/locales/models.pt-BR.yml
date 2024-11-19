@@ -78,6 +78,7 @@ pt-BR:
         register_number: 'CPF'
         email: 'E-mail'
         waiting_confirmation: 'Aguardando confirmação'
+        active: 'Confirmado'
       employee:
         register_number: 'CPF'
         name: 'Nome'

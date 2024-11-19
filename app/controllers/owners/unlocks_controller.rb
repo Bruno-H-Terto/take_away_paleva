@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Owners::UnlocksController < Devise::UnlocksController
+  before_action :prevent_double_access!
   # GET /resource/unlock/new
   # def new
   #   super

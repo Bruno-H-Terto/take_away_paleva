@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Employees::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  before_action :prevent_double_access!
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 

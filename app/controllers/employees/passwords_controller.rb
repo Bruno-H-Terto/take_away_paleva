@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Employees::PasswordsController < Devise::PasswordsController
+  before_action :prevent_double_access!
   # GET /resource/password/new
   # def new
   #   super

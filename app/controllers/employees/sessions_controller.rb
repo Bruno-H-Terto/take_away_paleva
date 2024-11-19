@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Employees::SessionsController < Devise::SessionsController
+  before_action :prevent_double_access!, if: ->{owner_signed_in?}
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
