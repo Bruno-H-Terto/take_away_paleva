@@ -2,17 +2,21 @@
   <%= link_to 'Home', root_path %>
 </div>
 
-<h2>Nova Tag</h2>
 
-<%= render 'shared/errors', object: @tag %>
+<div class="row">
+  <div class="col-6">
+    <%= render 'shared/errors', object: @tag %>
 
-<%= form_with model: @characteristic, url: take_away_store_item_tags_path(@take_away_store, @item), data: { turbo: false }, method: :post do |form| %>
-  <div>
-    <%= form.label :quality_name %>
-    <%= form.text_field :quality_name, class: 'form-control' %>
+    <h2>Nova Tag</h2>
+    <%= form_with model: @characteristic, url: take_away_store_item_tags_path(@take_away_store, @item), data: { turbo: false }, method: :post do |form| %>
+      <div>
+        <%= form.label :quality_name %>
+        <%= form.text_field :quality_name, class: 'form-control' %>
+      </div>
+
+      <div class="mt-3">
+        <%= form.submit class: 'btn btn-primary d-flex w-100'  %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.submit class: 'btn btn-primary d-flex w-100'  %>
-  </div>
-<% end %>
+</div>

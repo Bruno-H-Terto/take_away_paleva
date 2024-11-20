@@ -1,5 +1,6 @@
 <div class="mt-5 col-9 menu-list">
   <div>
+    <h6><strong>Nota:</strong> só serão exibidos itens ativos</h6>
     <% if menus&.exists?(&:persisted?) %>
       <% menus.select(&:persisted?).each do |menu| %>
         <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">
@@ -84,6 +85,7 @@
               <% end %>
             <% else %>
               <p><%= t('menu.no_item_content') %></p>
+              <%= link_to_if owner_signed_in?, 'Adicione novos itens', take_away_store_menu_path(@take_away_store, menu) %>
             <% end %>
             <div class="mt-2 menu-body"></div>
           </div>

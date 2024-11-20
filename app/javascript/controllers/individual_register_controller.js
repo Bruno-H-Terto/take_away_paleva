@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { individual_register_number_mask } from "./individual_id";
 
 // Connects to data-controller="individual-register"
 export default class extends Controller {

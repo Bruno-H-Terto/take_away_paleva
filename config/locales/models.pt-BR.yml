@@ -18,6 +18,7 @@ pt-BR:
       employee:
         one: 'Funcionário'
         other: 'Funcionários'
+      order_item: 'Item do pedido'
     attributes:
       owner:
         register_number: 'CPF'

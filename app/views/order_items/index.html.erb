@@ -1,22 +1,25 @@
 <% if @order_items.present? %>
   <div id="order_items" class="row">
     <h2>Itens do pedido</h2>
-    <div class="col">
+    <div class="col-4 list-order-items">
       <% @order_items.each_with_index do |order_item, index| %>
-      <div id="order_item_<%= index + 1 %>">
-        <div><%= index + 1 %></div>
-        <div class="order-item p-2">
-          <p><strong>Menu:</strong> <%= order_item[:menu].name %></p>
-          <p><strong>Item:</strong> <%= order_item[:item].name %></p>
-          <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
-          <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
-          <p><strong>Observação:</strong> <%= order_item[:observation].presence || 'Nenhuma' %></p>
+        <div class="mb-3 overflow-auto" id="order_item_<%= index + 1 %>">
+          <div class="d-flex">
+            <h6 class="p-2"><%= index + 1 %></h6>
+            <div class="order-item p-2">
+              <p><strong>Menu:</strong> <%= order_item[:menu].name %></p>
+              <p><strong>Item:</strong> <%= order_item[:item].name %></p>
+              <p><strong>Porção:</strong> <%= order_item[:portion] %></p>
+              <p><strong>Quantidade:</strong> <%= order_item[:quantity] %></p>
+              <p><strong>Observação:</strong> <%= order_item[:observation].presence || 'Nenhuma' %></p>
+            </div>
+          </div>
+          <div class="btn-group mt-3 gap-2">
+            <%= button_to 'Remover', order_item_path(index), method: :delete, class:'btn btn-primary' %>
+            <%= link_to 'Editar', edit_order_item_path(index), class: 'btn btn-primary' %>
+          </div>
         </div>
-        <div>
-          <%= button_to 'Remover', order_item_path(index), method: :delete, class:'btn btn-primary d-flex w-100' %>
-          <%= link_to 'Editar', edit_order_item_path(index) %>
-        </div>
-      </div>
+        <hr>
       <% end %>
     </div>
     <div class="col">

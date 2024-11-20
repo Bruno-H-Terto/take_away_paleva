@@ -4,9 +4,10 @@
       <div class="w-100">
         <div>
           <h3><%= item.name %></h3>
-          <small>
-            <%= Item.human_attribute_name(item.status) %> 
-          </small>
+          <p>Status: <strong><%= Item.human_attribute_name(item.status) %></strong></p>
+          <% if item.portions.none? %>
+            <p><strong>Nota:</strong> Cadastre uma porção para incluir seu item a um menu</p>
+          <% end %>
         </div>
 
         <div class="row">
@@ -21,7 +22,7 @@
                     </div>
                   <% end %>
               <% else %>
-                <p>Sem marcadores</p>
+                <p>Sem marcadores ativos</p>
               <% end %>
             </div>
         </div>

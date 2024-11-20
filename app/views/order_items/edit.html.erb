@@ -1,16 +1,22 @@
-<%= form_with url: order_item_path(@item), method: :patch, scope: :order_item do |form| %>
-  <p><strong>Menu:</strong> <%= @item[:menu].name %></p>
-  <p><strong>Item:</strong> <%= @item[:item].name %></p>
-  <p><strong>Porção:</strong> <%= @item[:portion].menu_option_name %></p>
-  <div>
-    <%= form.label :observation, 'Observação' %>
-    <%= form.text_field :observation, class:'form-control' %>
-  </div>
-  <div>
-    <%= form.label :quantity, 'Quantidade' %>
-    <%= form.number_field :quantity, min: 1, class:'form-control' %>
-  </div>
-  
-  <%= form.submit class: 'btn btn-primary d-flex w-100' %>
-<% end %>
+<div class="row">
+  <div class="col-6">
+    <h3>Editar Item</h3>
+    <p><strong>Menu:</strong> <%= @item[:menu].name %></p>
+    <p><strong>Item:</strong> <%= @item[:item].name %></p>
+    <p><strong>Porção:</strong> <%= @item[:portion].menu_option_name %></p>
+    <%= form_with url: order_item_path(@item), method: :patch, scope: :order_item do |form| %>
+      <div class="form-fields">
+        <%= form.label :observation, 'Observação' %>
+        <%= form.text_field :observation, class:'form-control' %>
+      </div>
+      <div class="form-fields">
+        <%= form.label :quantity, 'Quantidade' %>
+        <%= form.number_field :quantity, min: 1, class:'form-control' %>
+      </div>
 
+      <div class="form-action mt-3">
+        <%= form.submit t('forms.items.action'), class: 'btn btn-primary d-flex w-100' %>
+      </div>
+    <% end %>
+  </div>
+</div>
