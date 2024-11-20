@@ -8,6 +8,7 @@ class PortionsController < ApplicationController
 
   def create
     @portion = @item.portions.build(portion_params)
+    @portion.value = portion_params[:value].gsub(/\D/, '')
 
     if @portion.save
       return redirect_to take_away_store_item_path(@take_away_store, @item), notice: 'Porção adicionada com sucesso!'

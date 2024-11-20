@@ -9,9 +9,9 @@
           <%= form.text_field :option_name, placeholder: 'Ex.: Pequena, Média...', class: 'form-control w-100' %>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" data-controller="money">
           <%= form.label :value %>
-          <%= form.text_field :value, class: 'form-control w-100' %>
+          <%= form.text_field :value, class: 'form-control w-100 money', placeholder: '99,99' %>
         </div>
 
         <div class="mt-3">
