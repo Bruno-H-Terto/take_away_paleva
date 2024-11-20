@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   before_action :owner_active, if: -> { owner_signed_in? }
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  def money_value(money)
+    money = money.to_s.insert(-3, ',')
+    money = money.reverse.gsub(/(\d{3})(?=\d)/, '\\1.').reverse
+    "R$ #{money}"
+  end
+
   private
   def prevent_double_access!
     active_user = owner_signed_in? || employee_signed_in?

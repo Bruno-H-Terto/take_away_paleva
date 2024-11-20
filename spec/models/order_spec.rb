@@ -17,10 +17,11 @@ RSpec.describe Order, type: :model do
       menu = store.menus.create!(name: 'Café da manhã')
       item_menu = ItemMenu.create!(item: drink, menu: menu)
 
-      order = store.orders.build(name: 'Jhon', phone_number: '(11) 999887744', email: 'jhon@email.com', register_number: '362.164.860-71')
-      order_items = order.order_items.build(menu: menu, item: drink, portion: portion, quantity: 1, observation: 'Ok')
+      order = store.orders.create!(name: 'Jhon', phone_number: '(11) 999887744', email: 'jhon@email.com', register_number: '362.164.860-71')
+      order_items = order.order_items.create!(menu: menu, item: drink, portion: portion, quantity: 2, observation: 'Ok')
       
       expect(order).to be_valid
+      expect(order.total).to eq 26000
     end
 
     it 'data é gerada automaticamente com o pedido' do

@@ -16,13 +16,9 @@ class Portion < ApplicationRecord
   end
 
   def formated_value
-    money = self.value.to_s
-    money = money.insert(-3, ',')
-    money = money.reverse.gsub(/(\d{3})(?=\d)/, '\\1.').reverse
-  
-    "R$ #{money}"
+    money = attribute_in_database(:value).to_s
+    money_value(money)
   end
-  
 
   def item_name
     persisted_name = attribute_in_database(:option_name)

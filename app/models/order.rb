@@ -24,6 +24,10 @@ class Order < ApplicationRecord
     "#{phone_number.presence || 'Sem telefone'} - #{email.presence || 'Sem e-mail' }"
   end
 
+  def formated_value
+    money_value(self.total)
+  end
+
   private
 
   def generate_code

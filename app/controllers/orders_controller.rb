@@ -8,14 +8,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_store&.orders.find(params[:id])
-    sum = 0
-    @price = 0
 
-    @order.order_items.each do |item|
-      sum += item.portion.value * item.quantity.to_i
-    end
-    
-    @price = "R$ #{sum.to_s.insert(-3, ',')}"
+    @price = money_value(@order.total)
   end
 
   def new

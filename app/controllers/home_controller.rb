@@ -29,7 +29,7 @@ class HomeController < ApplicationController
               quantity: order_item['quantity']
             }
           end
-          @price = "R$ #{sum.to_s.insert(-3, ',')}"
+          @price = money_value(sum)
         rescue
           session.delete(:cart_items)
         end
