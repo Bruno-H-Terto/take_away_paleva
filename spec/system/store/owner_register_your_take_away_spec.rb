@@ -45,7 +45,7 @@ describe 'Proprietário registra seu estabelecimento' do
       visit root_path
       fill_in 'Nome Fantasia', with: 'Big Boss Store'
       fill_in 'Razão Social', with: 'Corleone LTDA'
-      fill_in 'CNPJ', with: '43.087.854/0001-60'
+      fill_in 'CNPJ', with: '43087854000160'
       fill_in 'Logradouro', with: 'Brooklyn Beach'
       fill_in 'Complemento', with: 'Loja 1'
       fill_in 'Número', with: '42'

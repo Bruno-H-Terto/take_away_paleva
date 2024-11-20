@@ -6,18 +6,18 @@
   <%= render 'shared/errors', object: @profile %>
   <div>
     <%= form_with model: @profile, url: take_away_store_profiles_path(@take_away_store) do |form| %>
-      <div>
+      <div class="field" data-controller="individual-register">
         <%= form.label :register_number %>
-        <%= form.text_field :register_number %>
+        <%= form.text_field :register_number, class: 'individual_register_number form-control', maxlength: 14 %>
       </div>
 
-      <div>
+      <div class="field">
         <%= form.label :email %>
-        <%= form.email_field :email %>
+        <%= form.email_field :email, class: 'form-control' %>
       </div>
 
-      <div>
-        <%= form.submit %>
+      <div class="action">
+        <%= form.submit class: 'btn btn-primary d-flex w-100' %>
       </div>
     <% end %>
   </div>

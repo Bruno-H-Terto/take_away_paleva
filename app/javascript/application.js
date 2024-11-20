@@ -14,3 +14,6 @@ window.closeModal = closeModal;
 
 import { company_mask } from "./controllers/company_registration_number";
 window.company_mask = company_mask;
+
+import { individual_register_number_mask } from "./controllers/individual_id";
+window.individual_register_number_mask = individual_register_number_mask;

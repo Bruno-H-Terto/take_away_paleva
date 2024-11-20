@@ -9,9 +9,11 @@ export function company_mask(register_number) {
   return register_number;
 }
 
-const register_numberInput = document.getElementById('register_number');
+const register_numberInput = document.querySelector('.company_register_number');
 
-register_numberInput.addEventListener('input', function(event) {
-  let valorregister_number = event.target.value;
-  event.target.value = company_mask(valorregister_number);
-});
+if (register_numberInput) {
+  register_numberInput.addEventListener('input', function(event) {
+    let register_number = event.target.value;
+    event.target.value = company_mask(register_number);
+  });
+}
