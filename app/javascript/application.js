@@ -11,3 +11,6 @@ import { showModal } from "./controllers/main";
 window.showModal = showModal;
 import { closeModal } from "./controllers/main";
 window.closeModal = closeModal;
+
+import { company_mask } from "./controllers/company_registration_number";
+window.company_mask = company_mask;
