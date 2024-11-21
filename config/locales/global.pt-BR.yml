@@ -56,7 +56,7 @@ pt-BR:
     cart:
       notification: 'Você possui itens aguardando confirmação'
       goto: 'Ir para o Carrinho'
-      observation: 'Observação'
+      observation: 'Observação (max.: 30 caracteres)'
       quantity: 'Quantidade'
       new: 'Adicionar ao Carrinho'
 

@@ -434,10 +434,12 @@ describe 'Funcionário registrado navega pela aplicação' do
 
       formated_time = Time.now.strftime("%d/%m/%Y %H:%M")
       expect(page).to have_content 'Pedido registrado com sucesso!'
-      expect(page).to have_content 'Pedidos aguardando confirmação'
-      expect(page).to have_content 'Cliente: Jhon'
-      expect(page).to have_content 'Pedido - ABCD1234'
-      expect(page).to have_content "Solicitado em #{formated_time}"
+      within '#orders_waiting_confirmation' do
+        expect(page).to have_content 'Aguardando confirmação da cozinha'
+        expect(page).to have_content 'Cliente: Jhon'
+        expect(page).to have_content 'Pedido - ABCD1234'
+        expect(page).to have_content "Solicitado em #{formated_time}"
+      end
     end
 
     it 'e falha ao não inserir campos obrigatórios' do

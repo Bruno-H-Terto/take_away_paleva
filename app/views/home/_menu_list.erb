@@ -6,7 +6,7 @@
         <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">
           <div class="menu-header">
             <%= link_to_if owner_signed_in?, menu.name, take_away_store_menu_path(@take_away_store, menu) do %>
-              <h4><%= menu.name %></h4>
+              <h3><%= menu.name %></h3>
             <% end %>
           </div>
           <div id="items">
@@ -45,7 +45,7 @@
                         <small><%= item.calories %> Calorias</small>
                       <% end %>
                     </div>
-                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary d-flex justify-content-center w-100">+ Carrinho</button>
+                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary d-flex justify-content-center w-100 mt-3">+ Carrinho</button>
                   </div>
                   <dialog class="col-3" id="<%= dom_id(menu, item.name) %>">
                     <div class="w-100">
@@ -53,22 +53,23 @@
                         <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
                       </div>
                       <%= form_with url: new_item_path(menu, item), method: :get, class: 'row justify-content-center' do |form| %>
-                        <strong><%= t('order.make')%></strong>
+                        <strong class="mb-3"><%= t('order.make')%></strong>
                         <%= render 'shared/errors', object: @order %>
                         <div class="mb-3">
-                          <label for="portion_id" class="form-label"><%= Portion.model_name.human %></label>
+                          <label for="portion_id" class="form-label visually-hidden"><%= Portion.model_name.human %></label>
                           <select id="portion_id" name="portion_id" class="form-select">
+                            <option disabled="true" value="" selected="selected">Selecione alguma porção</option>
                             <%= options_for_select(item.portions.map { |portion| [portion.menu_option_name, portion.id] }, selected: nil) %>
                           </select>
                         </div>
 
-                        <div class="mb-1">
+                        <div class="mb-3">
                           <%= form.label :observation, t('order.cart.observation'), class: "visually-hidden" %>
-                          <%= form.text_field :observation, class: 'form-control', placeholder: t('order.cart.observation') %>
+                          <%= form.text_field :observation, class: 'form-control', placeholder: t('order.cart.observation'), maxlength: 30 %>
                         </div>
 
                         <div>
-                          <%= form.label :quantity, t('order.cart.quantity') %>
+                          <%= form.label :quantity, t('order.cart.quantity'), class: "visually-hidden" %>
                           <%= form.number_field :quantity, min: 1, class: 'form-control', placeholder: t('order.cart.quantity'), require: true %>
                         </div>
 

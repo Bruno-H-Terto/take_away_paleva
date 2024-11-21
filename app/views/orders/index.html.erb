@@ -1,16 +1,47 @@
-<div>
-  <div id="orders_waiting_confirmation">
-    <div>
-      <h2>Pedidos aguardando confirmação</h2>
+<div class="row">
+  <h2>Pedidos</h2>
+  <div id="orders_waiting_confirmation" class="col p-2 m-2 orders">
+    <div class="order-header">
+      <h6><%= Order.human_attribute_name(:waiting_confirmation) %></h6>
     </div>
+    <div class="order-body">
+      <%= render 'orders/orders', orders: @orders.select(&:waiting_confirmation?) %>
+    </div>
+  </div>
+
+  <div id="orders_confirmed" class="col p-2 m-2 orders">
+    <div class="order-header">
+      <h6><%= Order.human_attribute_name(:preparing) %></h6>
+    </div>
+    <div class="order-body">
+      <%= render 'orders/orders', orders: @orders.select(&:preparing?) %>
+    </div>
+  </div>
+
+  <div id="orders_done" class="col p-2 m-2 orders">
+    <div class="order-header">
+      <h6><%= Order.human_attribute_name(:done) %></h6>
+    </div>
+    <div class="order-body">
+      <%= render 'orders/orders', orders: @orders.select(&:done?) %>
+    </div>
+  </div>
+
+  <div id="orders_canceled" class="col p-2 m-2 orders">
+    <div class="order-header">
+      <h6><%= Order.human_attribute_name(:canceled) %></h6>
+    </div>
+    <div class="order-body">
+      <%= render 'orders/orders', orders: @orders.select(&:canceled?) %>
+    </div>
+  </div>
+
+  <div id="orders_finished" class="col p-2 m-2 orders">
+    <div class="order-header">
+      <h6><%= Order.human_attribute_name(:finished) %></h6>
+    </div class="order-body">
     <div>
-      <% @orders.each do |order| %>
-        <%= link_to order_path(order) do %>
-          <p>Pedido - <%= order.code %></p>
-        <% end %>
-        <p>Cliente: <%= order.name %></p>
-        <p>Solicitado em <%= order.created_at_current.strftime("%d/%m/%Y %H:%M") %></p>
-      <% end %>
+      <%= render 'orders/orders', orders: @orders.select(&:finished?) %>
     </div>
   </div>
 </div>

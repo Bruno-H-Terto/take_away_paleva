@@ -1,0 +1,13 @@
+<% if orders.any? %>
+  <% orders.each do |order| %>
+    <hr>
+    <%= link_to order_path(order) do %>
+      <p>Pedido - <%= order.code %></p>
+    <% end %>
+    <p>Cliente: <%= order.name %></p>
+    <p>Solicitado em <%= order.created_at_current.strftime("%d/%m/%Y %H:%M") %></p>
+    <hr>
+  <% end %>
+<% else %>
+  <small>Sem pedidos registrados</small>
+<% end %>

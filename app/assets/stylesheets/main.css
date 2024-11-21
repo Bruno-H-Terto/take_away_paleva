@@ -445,3 +445,22 @@ dialog button:hover {
   overflow-y: auto;
   height: 80vh;
 }
+
+.order-header{
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 700 !important;
+  padding: 2rem;
+  height: 10rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-bottom: #000 2px solid;
+}
+
+.order-body{
+  height: 20rem;
+  overflow-y: auto;
+}

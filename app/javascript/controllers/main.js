@@ -3,7 +3,6 @@ export function ola() {
 }
 
 export function showModal(dialog){
-  console.log(dialog);
   const id = dialog.id;
   saveModalContent(id);
   const modal = document.querySelector(`#${id}`);

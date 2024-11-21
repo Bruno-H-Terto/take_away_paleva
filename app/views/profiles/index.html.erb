@@ -2,15 +2,16 @@
   <%= link_to 'Home', root_path %>
 </div>
 
-<section>
-  <div>
+<section class="row mt-3">
+  <div class="col-4">
     <%= link_to 'Novo acesso', new_take_away_store_profile_path(@take_away_store) %>
   </div>
 
-  <div>
+  <div class="col">
     <% if @profiles.present? %>
       <% @profiles.each do |profile| %>
         <p><strong><%= profile.email %></strong> - <%= Profile.human_attribute_name(profile.status) %></p>
+        <hr>
       <% end %>
     <% end %>
   </div>
