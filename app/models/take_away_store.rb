@@ -12,6 +12,7 @@ class TakeAwayStore < ApplicationRecord
   after_create :ensure_unique_field
   validates :trade_name, :corporate_name, :register_number, :phone_number, :email,
             :street, :number, :state, :district, :city, :zip_code, presence: true
+  validate :state_must_be_an_uf
   validates :register_number, uniqueness: true 
   validate :address_must_be_uniq
   validates :email, format: { 
@@ -22,6 +23,12 @@ class TakeAwayStore < ApplicationRecord
   validates :zip_code, format: { with: /\A(\d){5}[-]?(\d){3}\z/, message: 'deve ser em um formato válido' }
   validates_with RegisterValidator, field: :register_number, length: 14, if: -> { register_number.present? }
   validates_with PhoneValidator, field: :phone_number, if: -> { phone_number.present? }
+
+  STATES = [
+    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", 
+    "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", 
+    "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+  ].freeze
 
   def business_name
     "#{trade_name} - #{corporate_name} - #{register_number}"
@@ -36,6 +43,12 @@ class TakeAwayStore < ApplicationRecord
   end
 
   private
+
+  def state_must_be_an_uf
+    unless STATES.include?(state)
+      errors.add(:state, 'deve ser uma UF')
+    end
+  end
 
   def generate_code
     self.code = SecureRandom.alphanumeric(6).upcase

@@ -32,7 +32,7 @@ describe 'Proprietário adiciona novos horários de funcionamento' do
     fill_in 'Número', with: '42'
     fill_in 'Bairro', with: 'Brooklyn'
     fill_in 'Cidade', with: 'Motta'
-    fill_in 'Estado', with: 'MG'
+    select 'MG', from: 'Estado'
     fill_in 'Telefone', with: '(11) 2100-0000'
     fill_in 'CEP', with: '11000-000'
     fill_in 'E-mail', with: 'bigboss@email.com'

@@ -155,6 +155,17 @@ RSpec.describe TakeAwayStore, type: :model do
       expect(store).not_to be_valid
     end
 
+    it 'estado deve ter formato de UF' do
+      owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
+            email: 'quadribol@email.com', password: 'treina_dev13')
+      store = owner.build_take_away_store(trade_name: 'Grifinória', corporate_name: 'Hogwarts LTDA',
+            register_number: '76.898.265/0001-10', phone_number: '(11) 98800-0000', street: 'Beco diagonal',
+            number: '13', district: 'Bolsão', city: 'Hogsmeade', state: 'Minas Gerais', zip_code: '11000-000', complement: 'Loja 1',
+            email: 'potter@email.com')
+
+      expect(store).not_to be_valid
+    end
+
     it 'CEP é obrigatório' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
             email: 'quadribol@email.com', password: 'treina_dev13')
