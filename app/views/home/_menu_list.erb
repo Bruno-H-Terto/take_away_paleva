@@ -6,7 +6,7 @@
         <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">
           <div class="menu-header">
             <%= link_to_if owner_signed_in?, menu.name, take_away_store_menu_path(@take_away_store, menu) do %>
-              <h3><%= menu.name %></h3>
+              <h6><%= menu.name %></h6>
             <% end %>
           </div>
           <div id="items">

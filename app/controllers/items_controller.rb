@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   def index
     if params[:select_tag].present?
-      tag = Characteristic.find(params[:select_tag])
+      tag = @take_away_store.characteristics.find(params[:select_tag])
       items = tag.items
 
       if items&.any?
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
       @dishes = @take_away_store.items.where(type: 'Dish')
       @beverages = @take_away_store.items.where(type: 'Beverage')
     end
-    @tags = Characteristic.all.order(quality_name: :asc)
+    @tags = @take_away_store.characteristics.order(quality_name: :asc)
   end
 
   def change_status

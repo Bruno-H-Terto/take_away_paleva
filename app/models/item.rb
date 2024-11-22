@@ -12,6 +12,7 @@ class Item < ApplicationRecord
   enum :status, { active: 0, inactive: 5 }
 
   validates :name, :description, presence: true
+  validate :name_must_be_text
   before_validation :name_must_be_uniqueness_for_same_store
 
   private

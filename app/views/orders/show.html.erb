@@ -1,3 +1,7 @@
+<div class="w-100 link-bar">
+  <%= link_to 'Home', root_path %> / <%= link_to t('order.my'), orders_path %>
+</div>
+
 <div>
   <h2>Detalhes do pedido <%= @order.code %></h2>
   <small>Solicitado em <%= @order.created_at_current.strftime("%d/%m/%Y %H:%M") %></small>

@@ -3,6 +3,7 @@ export function ola() {
 }
 
 export function showModal(id){
+  console.log(id)
   saveModalContent(id);
   const modal = document.querySelector(`#${id}`);
   modal.showModal();

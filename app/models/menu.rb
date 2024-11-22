@@ -4,6 +4,7 @@ class Menu < ApplicationRecord
   has_many :items, through: :item_menus
 
   validates :name, presence: true
+  validate :name_must_be_text
   validate :name_must_be_uniq_for_same_store, if: -> {take_away_store.present?}
 
   private

@@ -38,8 +38,8 @@
           </div>
         <% else %>
           <div>
-            <button onclick="showModal(modal_login)" class= "btn btn-primary mr-2"><%=t('user.sign_in')%></button> 
-            <button onclick="showModal(modal_signup)" class= "btn btn-primary mr-2"><%=t('user.become_a_partner')%></button> 
+            <button onclick="showModal('modal_login')" class= "btn btn-primary mr-2"><%=t('user.sign_in')%></button> 
+            <button onclick="showModal('modal_signup')" class= "btn btn-primary mr-2"><%=t('user.become_a_partner')%></button> 
           </div>
         <% end %>
     </div>
@@ -49,7 +49,7 @@
 <dialog class="col-4" id="modal_login">
   <div class="w-100">
     <div>
-      <button onclick="closeModal(modal_login)">&times;</button>
+      <button onclick="closeModal('modal_login')">&times;</button>
     </div>
     <%= turbo_frame_tag 'login' do %>
       <section class="row">
@@ -67,7 +67,7 @@
 <dialog class="col-4" id="modal_signup">
   <div class="w-100">
     <div>
-      <button onclick="closeModal(modal_signup)">&times;</button>
+      <button onclick="closeModal('modal_signup')">&times;</button>
     </div>
     <%= turbo_frame_tag 'signup' do %>
       <section class="row">

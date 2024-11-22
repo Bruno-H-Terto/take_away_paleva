@@ -31,14 +31,16 @@
 
   </div>
 
-  <div id="menu-details" class="col-4">
-    <div class="row">
-      <% if @menu.items&.any? %>
-        <h5>Itens cadastrados</h5>
+  <div id="menu-details" class="col">
+    <% if @menu.items&.any? %>
+      <h5>Itens cadastrados</h5>
+      <div class="row menu-items">
         <% @menu.items.each do |item| %>
-          <div class="col-3 card" style="width: 18rem;">
+          <div class="col-3 card menu-item-card">
             <% if item.photo.present? %>
               <%= image_tag item.photo %>
+            <% else %>
+              <%= image_tag 'default-item-img' %>
             <% end %>
             <div class="card-body">
               <h5 class="card-title">
@@ -58,7 +60,7 @@
             </div>
           </div>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </section>

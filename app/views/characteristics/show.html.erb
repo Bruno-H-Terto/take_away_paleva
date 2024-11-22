@@ -1,3 +1,7 @@
+<div class="w-100 link-bar">
+  <%= link_to 'Home', root_path %> / <%= link_to 'Marcadores', characteristics_path %>
+</div>
+
 <section class="row"> 
   <div class="col-6">
     <h3><%= Characteristic.model_name.human %> <%= @characteristic.quality_name_in_database %></h3>

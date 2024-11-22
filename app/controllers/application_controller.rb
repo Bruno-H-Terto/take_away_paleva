@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
   def prevent_double_access!
     active_user = owner_signed_in? || employee_signed_in?
     if active_user
@@ -94,8 +95,6 @@ class ApplicationController < ActionController::Base
   def clear_cart_session
     session.delete(:cart_items)
   end
-
-  private
 
   def find_cart_entities(order_item)
     menu = current_store.menus.find_by(id: order_item['menu'])
