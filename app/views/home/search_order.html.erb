@@ -1,0 +1,36 @@
+<div class="w-100 link-bar">
+  <%= link_to 'Home', root_path %>
+</div>
+
+<section>
+  <% if @order.present? %>
+    <h2><%= Order.model_name.human %> <%= @order.code %></h2>
+    <div class="col-6">
+      <dl>
+        <dt><%= @take_away_store.business_name %></dt>
+        <dl>Responsável: <%= @take_away_store.owner.full_name %></dl>
+      </dl>
+      <span>Contato: <%= @take_away_store.email %> | <%= @take_away_store.phone_number %></span>
+      <div class="container border mt-3">
+        <address><%= @take_away_store.street_number %></address>
+        <address><%= @take_away_store.city %>, <%= @take_away_store.state %></address>
+        <address><%= @take_away_store.district %></address>
+        <address><%= @take_away_store.complement %></address>
+        <address><%= @take_away_store.zip_code %></address>
+      </div>
+
+      <div class="mt-3">
+        <h2>Histórico</h2>
+        <div>
+          <% @order.historical_orders.each do |register| %>
+          <p>
+            <%= register.information %> - <%= register.time %>
+          </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <h3>Nenhum pedido localizado!</h3>
+  <% end %>
+</section>

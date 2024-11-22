@@ -471,9 +471,8 @@ dialog button:hover {
   top: 0;
   left: 0;
   z-index: -1;
-  max-width: 100%;
+  width: 100%;
   min-height: 100vh;
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -496,4 +495,13 @@ dialog button:hover {
   width: 21rem;
   display: flex;
   margin: 5px;
+}
+
+.form-home{
+
+  max-width: 20rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  text-align: center;
 }

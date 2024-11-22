@@ -10,5 +10,21 @@
       </div>
       <%= image_tag 'homepage', class: 'homepage' %>
     </div>
+
+    <div class="col form-home">
+      <h2 class="home-logo">Consulte seu pedido aqui</h2>
+      <div class="d-flex align-items-center">
+        <%= form_with url: search_order_path, method: :get, data: { turbo: false } do |form| %>
+          <div>
+            <%= form.label :query, 'Código', class: 'visually-hidden' %>
+            <%= form.text_field :query, placeholder: 'Código do Pedido', class: "mt-1 form-control" %>
+          </div>
+
+          <div>
+            <%= form.submit 'Buscar', class: "btn btn-primary d-flex w-100 mt-3" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </section>

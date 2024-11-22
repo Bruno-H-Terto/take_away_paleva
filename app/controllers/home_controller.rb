@@ -14,6 +14,11 @@ class HomeController < ApplicationController
 
   def sign_in_account; end
 
+  def search_order
+    @order = Order.find_by(code: params[:query])
+    @take_away_store = @order&.take_away_store
+  end
+
   def owner
     @owner = current_owner
   end

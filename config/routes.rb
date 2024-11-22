@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   }
 
   root "home#index"
+  get 'search_order', to: 'home#search_order', as: 'search_order'
   get "owner", to: "home#owner", as: 'owner'
   get 'create_account', to: 'home#create_account', as: 'new_registration'
   get 'sign_in_account', to: 'home#sign_in_account', as: 'new_session'
