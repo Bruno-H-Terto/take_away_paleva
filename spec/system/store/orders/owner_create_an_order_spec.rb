@@ -139,13 +139,13 @@ describe 'Proprietário registra um pedido' do
 
       login_as owner, scope: :owner
       visit root_path
-      within "##{dish.name}_menu_#{menu.id}" do
+      within "##{dish.name.parameterize}_menu_#{menu.id}" do
         select 'Média - R$ 70,00', from: 'portion_id'
         fill_in 'Quantidade', with: '2'
         fill_in 'Observação', with: 'Sem azeitonas'
         click_on 'Adicionar ao Carrinho'
       end
-      within "##{other_dish.name}_menu_#{menu.id}" do
+      within "##{other_dish.name.parameterize}_menu_#{menu.id}" do
         select 'Pequena - R$ 50,00', from: 'portion_id'
         fill_in 'Quantidade', with: '1'
         fill_in 'Observação', with: 'Completo'

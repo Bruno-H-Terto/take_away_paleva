@@ -464,3 +464,21 @@ dialog button:hover {
   height: 20rem;
   overflow-y: auto;
 }
+
+.homepage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  max-width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.home-logo{
+  color: var(--primary-color);
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+}

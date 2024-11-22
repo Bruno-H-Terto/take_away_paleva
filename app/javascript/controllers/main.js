@@ -2,15 +2,13 @@ export function ola() {
   console.log('ola');
 }
 
-export function showModal(dialog){
-  const id = dialog.id;
+export function showModal(id){
   saveModalContent(id);
   const modal = document.querySelector(`#${id}`);
   modal.showModal();
 }
 
-export function closeModal(dialog){
-  const id = dialog.id
+export function closeModal(id){
   const modal = document.querySelector(`#${id}`);
   modal.close();
   restoreModalContent(id);

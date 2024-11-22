@@ -45,13 +45,13 @@
                         <small><%= item.calories %> Calorias</small>
                       <% end %>
                     </div>
-                    <button onclick="showModal(<%= dom_id(menu, item.name) %>)" class="btn btn-primary d-flex justify-content-center w-100 mt-3">+ Carrinho</button>
+                    <button onclick="showModal('<%= dom_id(menu, item.name.parameterize) %>')" class="btn btn-primary d-flex justify-content-center w-100 mt-3">+ Carrinho</button>
                   </div>
-                  <dialog class="col-3" id="<%= dom_id(menu, item.name) %>">
+                  <dialog class="col-3" id="<%= dom_id(menu, item.name.parameterize) %>">
                     <div class="w-100">
                       <div>
-                        <button onclick="closeModal(<%= dom_id(menu, item.name) %>)">&times;</button>
-                      </div>
+                        <button onclick="closeModal('<%= dom_id(menu, item.name.parameterize) %>')">&times;</button>
+                      </div>'
                       <%= form_with url: new_item_path(menu, item), method: :get, class: 'row justify-content-center' do |form| %>
                         <strong class="mb-3"><%= t('order.make')%></strong>
                         <%= render 'shared/errors', object: @order %>
