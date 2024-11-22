@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Register, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context '#valid?' do
+    it {should belong_to(:order)}
+    it {should belong_to(:historical_order)}
+  end
 end
