@@ -4,15 +4,15 @@
       <div class="w-100">
         <div>
           <h3><%= item.name %></h3>
-          <p>Status: <strong><%= Item.human_attribute_name(item.status) %></strong></p>
-          <% if item.portions.none? %>
-            <p><strong>Nota:</strong> Cadastre uma porção para incluir seu item a um menu</p>
+          <p><%= t('status') %> <strong><%= Item.human_attribute_name(item.status) %></strong></p>
+          <% if item.portions.select(&:persisted?).none? %>
+            <p><strong><%= t('informations.note') %></strong> <%= t('informations.item.no_portion_list') %></p>
           <% end %>
         </div>
 
         <div class="row">
             <div class="d-inline-flex p-2 group-tags overflow-scroll">
-              <% if item.active? && item.characteristics.any? { |tag| tag.persisted? } %>
+              <% if item.characteristics.any? { |tag| tag.persisted? } %>
                   <% item.characteristics.select(&:persisted?).each do |tag| %>
                     <div class="tag">
                       <%= tag.quality_name %>
@@ -22,16 +22,16 @@
                     </div>
                   <% end %>
               <% else %>
-                <p>Sem marcadores ativos</p>
+                <p><%= t('informations.characteristic.no_tag_list') %></p>
               <% end %>
             </div>
         </div>
       </div>
 
       <div class="btn-group mt-3 gap-2">
-        <%= link_to 'Editar', edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
-        <%= button_to 'Alterar status', change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
-        <%= link_to 'Histórico', historical_take_away_store_item_path(take_away_store, item), class: 'btn btn-info' %>
+        <%= link_to t('buttons.edit'), edit_take_away_store_item_path(take_away_store, item), class: 'btn btn-primary' %>
+        <%= button_to t('buttons.status'), change_status_take_away_store_item_path(take_away_store, item), method: :patch, class: 'btn btn-warning' %>
+        <%= link_to t('buttons.historical'), historical_take_away_store_item_path(take_away_store, item), class: 'btn btn-info' %>
       </div>
     </div>
     <div class="container mt-3 row">
@@ -43,13 +43,13 @@
         <% end %>
       </div>
       <div class="col-6 box-item">
-        <small>Descrição:</small>
+        <small><%= Item.human_attribute_name(:description) %>:</small>
         <div class="row box-item__description overflow-auto">
           <span class="text-justify"><%= item.description %></span>
         </div>
         <div class="row mt-3 text-break">
           <% if item.calories.present? %>
-            <small><%= item.calories %> Calorias</small>
+            <small><%= item.calories %> <%= Item.human_attribute_name(:calories) %></small>
           <% end %>
         </div>
       </div>

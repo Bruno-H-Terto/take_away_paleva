@@ -42,7 +42,7 @@ describe 'Proprietário edita items do Menu' do
       
       expect(page).to have_content 'Pizza'
       expect(page).to have_content 'Ativo'
-      expect(page).to have_button 'Alterar status'
+      expect(page).to have_button 'Alterar Status'
       expect(page).to have_content 'Quatro queijos'
       expect(page).to have_content 'Editar'
     end
@@ -93,7 +93,7 @@ describe 'Proprietário edita items do Menu' do
 
       login_as owner, scope: :owner
       visit take_away_store_dish_path(store, dish)
-      click_on 'Alterar status'
+      click_on 'Alterar Status'
 
       expect(page).to have_content 'Pizza'
       expect(page).to have_content 'Inativo'
@@ -177,7 +177,7 @@ describe 'Proprietário edita items do Menu' do
       
       expect(page).to have_content 'Vinho tinto'
       expect(page).to have_content 'Inativo'
-      expect(page).to have_button 'Alterar status'
+      expect(page).to have_button 'Alterar Status'
       expect(page).to have_content '750ml'
       expect(page).to have_content 'Editar'
     end
@@ -229,7 +229,7 @@ describe 'Proprietário edita items do Menu' do
 
       login_as owner, scope: :owner
       visit take_away_store_beverage_path(store, drink)
-      click_on 'Alterar status'
+      click_on 'Alterar Status'
 
       expect(page).to have_content 'Vinho tinto'
       expect(page).to have_content 'Ativo'

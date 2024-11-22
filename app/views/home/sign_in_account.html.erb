@@ -1,8 +1,8 @@
 <section class="row">
   <div class="col">
-    <%= link_to 'Sou Proprietário', new_owner_session_path, class: 'btn btn-primary' %>
+    <%= link_to t('user.i_am', name: Owner.model_name.human) , new_owner_session_path, class: 'btn btn-primary' %>
   </div>
   <div class="col">
-    <%= link_to 'Sou Funcionário', new_employee_session_path, class: 'btn btn-primary' %>
+    <%= link_to t('user.i_am', name: Employee.model_name.human ), new_employee_session_path, class: 'btn btn-primary' %>
   </div>
 </section>

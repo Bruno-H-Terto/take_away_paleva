@@ -56,10 +56,10 @@ describe 'Proprietário acessa pedidos aguardando confirmação' do
     expect(page).to have_content 'Cliente: Jhon'
     expect(page).to have_content 'Contato: Sem telefone - jhon@email.com'
     expect(page).to have_content 'Itens do pedido'
-    expect(page).to have_content 'Menu: Fast Food'
-    expect(page).to have_content 'Item: Pizza'
+    expect(page).to have_content 'Cardápio: Fast Food'
+    expect(page).to have_content 'Produto: Pizza'
     expect(page).to have_content 'Quantidade: 1'
-    expect(page).to have_content 'Porção: Média - R$ 70,00'
+    expect(page).to have_content 'Porção: Média'
     expect(page).to have_content 'Observação: Completo'
     expect(page).to have_content 'Aguardando confirmação da cozinha'
   end

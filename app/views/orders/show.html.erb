@@ -11,11 +11,11 @@
     <h3 class="mb-3">Itens do pedido</h3>
     <% @order.order_items.each do |order_item| %>
       <div class="lh-1 overflow-auto">
-        <p><strong>Menu:</strong> <%= order_item.menu.name %></p>
-        <p><strong>Item:</strong> <%= order_item.item.name %></p>
-        <p><strong>Porção:</strong> <%= order_item.portion.menu_option_name %></p>
-        <p><strong>Quantidade:</strong> <%= order_item.quantity %></p>
-        <p><strong>Observação:</strong> <%= order_item.observation.presence || 'Nenhuma' %></p>
+        <p><strong><%= Menu.model_name.human %>:</strong> <%= order_item.menu.name %></p>
+        <p><strong><%= Item.model_name.human %>:</strong> <%= order_item.item.name %></p>
+        <p><strong><%= Portion.model_name.human %>:</strong> <%= order_item.portion.option_name %></p>
+        <p><strong><%= OrderItem.human_attribute_name(:quantity) %>:</strong> <%= order_item.quantity %></p>
+        <p><strong><%= OrderItem.human_attribute_name(:observation) %>:</strong> <%= order_item.observation.presence || 'Nenhuma' %></p>
         <hr>
       </div>
     <% end %>

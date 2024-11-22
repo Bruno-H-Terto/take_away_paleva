@@ -38,7 +38,7 @@ describe 'Proprietário cria menus' do
     expect(page).to have_content 'Cardápio Fast Food cadastrado com sucesso!'
     expect(page).to have_content 'Fast Food'
     within '#items' do
-      expect(page).to have_content 'Não existem items disponíveis'
+      expect(page).to have_content 'Não existem itens disponíveis'
       expect(page).to have_content 'Clique aqui para cadastrar seus produtos'
     end
   end
@@ -61,7 +61,7 @@ describe 'Proprietário cria menus' do
     fill_in 'Rótulo', with: 'Fast Food'
     click_on 'Salvar e continuar'
 
-    expect(page).to have_content 'Não existem items disponíveis'
+    expect(page).to have_content 'Não existem itens disponíveis'
   end
 
   it 'e falha ao não incluir o nome' do
@@ -181,7 +181,7 @@ describe 'Proprietário cria menus' do
     login_as owner, scope: :owner
     visit take_away_store_menu_path(store, menu)
 
-    expect(page).to have_content 'Não existem items disponíveis'
+    expect(page).to have_content 'Não existem itens disponíveis'
     expect(page).to have_content 'Clique aqui para cadastrar seus produtos'
   end
 end

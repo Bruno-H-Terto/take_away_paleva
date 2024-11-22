@@ -1,13 +1,13 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_owner_session_path, data: {turbo: false} %><br />
+  <%= link_to t('user.log_in'), new_owner_session_path, data: {turbo: false} %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Nova conta", new_owner_registration_path, data: {turbo: false}  %><br />
+  <%= link_to t('user.new_account'), new_owner_registration_path, data: {turbo: false}  %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), data: {turbo: false}  %><br />
+  <%= link_to t('user.forgot_your_password'), new_password_path(resource_name), data: {turbo: false}  %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

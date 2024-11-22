@@ -1,6 +1,6 @@
 <div class="mt-5 col-9 menu-list">
   <div>
-    <h6><strong>Nota:</strong> só serão exibidos itens ativos</h6>
+    <h6><strong><%= t('informations.note') %>:</strong> <%= t('informations.menu.no_list') %></h6>
     <% if menus&.exists?(&:persisted?) %>
       <% menus.select(&:persisted?).each do |menu| %>
         <div class="menu mt-1 p-3 border rounded" id="<%= dom_id(menu) %>">

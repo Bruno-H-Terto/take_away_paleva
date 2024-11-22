@@ -1,16 +1,16 @@
 <div class="row">
   <div class="col-6">
     <h3>Editar Item</h3>
-    <p><strong>Menu:</strong> <%= @item[:menu].name %></p>
-    <p><strong>Item:</strong> <%= @item[:item].name %></p>
-    <p><strong>Porção:</strong> <%= @item[:portion].menu_option_name %></p>
+    <p><strong><%= Menu.model_name.human %>:</strong> <%= @item[:menu].name %></p>
+    <p><strong><%= Item.model_name.human %>:</strong> <%= @item[:item].name %></p>
+    <p><strong><%= Portion.model_name.human %>:</strong> <%= @item[:portion].menu_option_name %></p>
     <%= form_with url: order_item_path(@item), method: :patch, scope: :order_item do |form| %>
       <div class="form-fields">
-        <%= form.label :observation, 'Observação' %>
+        <%= form.label :observation, OrderItem.human_attribute_name(:observation) %>
         <%= form.text_field :observation, class:'form-control' %>
       </div>
       <div class="form-fields">
-        <%= form.label :quantity, 'Quantidade' %>
+        <%= form.label :quantity, OrderItem.human_attribute_name(:quantity) %>
         <%= form.number_field :quantity, min: 1, class:'form-control' %>
       </div>
 

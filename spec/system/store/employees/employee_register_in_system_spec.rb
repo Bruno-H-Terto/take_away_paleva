@@ -19,7 +19,7 @@ describe 'Funcionário se registra' do
       click_on 'Sou Funcionário'
     end
 
-    expect(page).to have_content 'Crie sua conta'
+    expect(page).to have_content 'Conta Funcionário'
     expect(page).to have_field 'CPF'
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Sobrenome'
@@ -51,7 +51,7 @@ describe 'Funcionário se registra' do
     fill_in 'Sobrenome', with: 'Doe'
     fill_in 'Senha', with: 'treina_dev13'
     fill_in 'Confirme sua senha', with: 'treina_dev13'
-    click_on 'Criar Conta'
+    click_on 'Criar conta'
 
     expect(page).to have_content 'Bem vindo! Você realizou seu registro com sucesso.'
     expect(page).to have_content 'Pizza Dev - bob@email.com'
@@ -80,7 +80,7 @@ describe 'Funcionário se registra' do
     fill_in 'Sobrenome', with: ''
     fill_in 'Senha', with: 'treina_dev13'
     fill_in 'Confirme sua senha', with: 'treina_dev13'
-    click_on 'Criar Conta'
+    click_on 'Criar conta'
 
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Nome não pode ficar em branco'
@@ -109,7 +109,7 @@ describe 'Funcionário se registra' do
     fill_in 'Sobrenome', with: 'Doe'
     fill_in 'Senha', with: 'treina_dev13'
     fill_in 'Confirme sua senha', with: 'treina_dev13'
-    click_on 'Criar Conta'
+    click_on 'Criar conta'
 
     expect(page).to have_content 'Perfil não associado a um Estabelecimento ativo'
     expect(page).to have_content 'Perfil é obrigatório(a)'

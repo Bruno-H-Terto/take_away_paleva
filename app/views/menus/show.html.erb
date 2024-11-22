@@ -8,7 +8,7 @@
     <%= render 'shared/errors', object: @item_menu %>
     <% if @items&.any? %>
       <div>
-        <h3>Adicione items ao Cardápio</h3>
+        <h3>Adicione itens ao Cardápio</h3>
       </div>
       <div class="form-container">
         <%= form_with model: @menu.item_menus.build, url: take_away_store_menu_item_menus_path(@take_away_store, @menu) do |form| %>
@@ -23,7 +23,7 @@
         <% end %>
       </div>
     <% else %>
-      <h4>Não existem items disponíveis</h4>
+      <h4>Não existem itens disponíveis</h4>
       <%= link_to take_away_store_items_path do %>
         <small>Clique aqui para cadastrar seus produtos</small>
       <% end %>
@@ -34,7 +34,7 @@
   <div id="menu-details" class="col-4">
     <div class="row">
       <% if @menu.items&.any? %>
-        <h5>Items cadastrados</h5>
+        <h5>Itens cadastrados</h5>
         <% @menu.items.each do |item| %>
           <div class="col-3 card" style="width: 18rem;">
             <% if item.photo.present? %>

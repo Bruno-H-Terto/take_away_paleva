@@ -5,6 +5,7 @@ class ItemMenusController < ApplicationController
   def create
     @take_away_store = TakeAwayStore.find(params[:take_away_store_id])
     @menu = @take_away_store.menus.find(params[:menu_id])
+    @items = @take_away_store.items.select { |item| item.active? && item.portions.any? }
     @item = @take_away_store.items.find(item_menu_params[:item_id])
     @item_menu = @menu.item_menus.build(item: @item)
 

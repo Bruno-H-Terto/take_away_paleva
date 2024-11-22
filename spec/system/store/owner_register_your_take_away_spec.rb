@@ -30,7 +30,7 @@ describe 'Proprietário registra seu estabelecimento' do
       end
       fill_in 'E-mail', with: 'vito@email.com'
       fill_in 'Senha', with: 'treina_dev13'
-      click_on 'Log in'
+      click_on 'Entrar'
   
       expect(page).to have_content 'Conclua seu cadastro.'
       expect(page).to have_content 'Registre seu estabelecimento'
@@ -58,7 +58,7 @@ describe 'Proprietário registra seu estabelecimento' do
       click_on 'Criar Estabelecimento'
 
       expect(page).to have_content 'Big Boss Store registrado(a) com sucesso'
-      expect(page).to have_content 'Inclua seu horário de funcionamento'
+      expect(page).to have_content 'Adicione seu Horário de funcionamento'
     end
 
     it 'e falha ao não incluir campos obrigatórios' do

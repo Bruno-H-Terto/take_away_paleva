@@ -1,10 +1,33 @@
 pt-BR:
-  owner:
+  manage: "Gerencie seu %{name}"
+  manage_other: "Gerencie seus %{name}"
+  new_manege: "Adicione seu %{name}"
+  informations:
+    note: 'Observação'
+    menu:
+      no_list: 'só serão listados itens ativos'
+    item:
+      manage: 'Gerencie seu estoque e cadastre seus produtos para venda'
+      unlisted: 'Itens inativos e sem porção registrada não são listados no seu cardápio'
+      no_portion_list: 'Cadastre uma porção para incluir seu item a um menu'
+    characteristic:
+      no_tag_list: 'Sem marcadores ativos'
+  buttons:
+    edit: 'Editar'
+    status: 'Alterar Status'
+    historical: 'Histórico'
+  user:
+    i_am: "Sou %{name}"
     characters_minimum: 'caracteres mínimos'
-    account: 'Conta'
-    create: "Criar conta"
+    account: "Conta %{type}"
+    create: 'Criar conta'
     become_a_partner: 'Seja um parceiro'
     sign_in: 'Faça seu login'
+    sign_up: 'Criar conta'
+    log_in: 'Log in'
+    new_session: 'Entrar'
+    forgot_your_password: 'Esqueceu sua senha?'
+    new_account: 'Nova conta'
   register_validator:
     invalid_registration: 'inválido'
     out_range_length: "incorreto: digitado %{number} números, esperado %{length}"
@@ -37,6 +60,12 @@ pt-BR:
   business_hour:
     registration: 'Registrar horários'
   forms:
+    filter: 'Filtro'
+    submit_filter: 'Filtrar'
+    update: 'Atualizar'
+    new:
+      masculine_noun: 'Novo'
+      feminine_noun: 'Nova'
     select: 'Selecione uma opção'
     query: 'Buscar'
     items:
@@ -59,5 +88,16 @@ pt-BR:
       observation: 'Observação (max.: 30 caracteres)'
       quantity: 'Quantidade'
       new: 'Adicionar ao Carrinho'
+  item:
+    no_content: 'Nenhum item cadastrado'
+  historical:
+    no_content: 'Sem registros no momento'
+  characteristic:
+    new: "Novo %{name}"
+    no_content: 'Não foram localizados marcadores cadastrados'
+    items:
+      associated: 'Items associados'
+      no_associated: 'Sem items associados'
+
 
   

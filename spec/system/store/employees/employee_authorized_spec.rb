@@ -224,8 +224,8 @@ describe 'Funcionário registrado navega pela aplicação' do
       click_on 'Ir para o Carrinho'
   
       within '#order_item_1' do
-        expect(page).to have_content 'Menu: Fast Food'
-        expect(page).to have_content 'Item: Pizza'
+        expect(page).to have_content 'Cardápio: Fast Food'
+        expect(page).to have_content 'Produto: Pizza'
         expect(page).to have_content 'Quantidade: 2'
         expect(page).to have_content 'Porção: Média - R$ 70,00'
         expect(page).to have_content 'Observação: Sem azeitonas'
@@ -233,8 +233,8 @@ describe 'Funcionário registrado navega pela aplicação' do
         expect(page).to have_content 'Remover'
       end
       within '#order_item_2' do
-        expect(page).to have_content 'Menu: Gelados'
-        expect(page).to have_content 'Item: Sorvete'
+        expect(page).to have_content 'Cardápio: Gelados'
+        expect(page).to have_content 'Produto: Sorvete'
         expect(page).to have_content 'Quantidade: 1'
         expect(page).to have_content 'Porção: Pequena - R$ 50,00'
         expect(page).to have_content 'Observação: Cobertura de chocolate'
@@ -279,8 +279,8 @@ describe 'Funcionário registrado navega pela aplicação' do
       fill_in 'Quantidade', with: '1'
       click_on 'Salvar'
 
-      expect(page).to have_content 'Menu: Café da manhã'
-      expect(page).to have_content 'Item: Pizza'
+      expect(page).to have_content 'Cardápio: Café da manhã'
+      expect(page).to have_content 'Produto: Pizza'
       expect(page).to have_content 'Quantidade: 1'
       expect(page).to have_content 'Porção: Média - R$ 70,00'
       expect(page).to have_content 'Observação: Completo'
@@ -526,10 +526,10 @@ describe 'Funcionário registrado navega pela aplicação' do
       expect(page).to have_content 'Contato: (11) 999887744 - jhon@email.com'
       expect(page).to have_content 'Total do pedido: R$ 140,00'
       expect(page).to have_content 'Itens do pedido'
-      expect(page).to have_content 'Menu: Fast Food'
-      expect(page).to have_content 'Item: Pizza'
+      expect(page).to have_content 'Cardápio: Fast Food'
+      expect(page).to have_content 'Produto: Pizza'
       expect(page).to have_content 'Quantidade: 2'
-      expect(page).to have_content 'Porção: Média - R$ 70,00'
+      expect(page).to have_content 'Porção: Média'
       expect(page).to have_content 'Observação: Sem azeitonas'
       expect(page).to have_content 'Aguardando confirmação da cozinha'
     end

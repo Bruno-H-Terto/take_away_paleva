@@ -4,6 +4,11 @@ pt-BR:
       owner: 'Proprietário'
       take_away_store: 'Estabelecimento'
       business_hour: 'Horário de funcionamento'
+      item: 
+        one: 'Produto'
+        other: 'Produtos'
+      dish: 'Prato'
+      beverage: 'Bebida'
       portion: 'Porção'
       characteristic: 'Marcador'
       tag: 'Tag'
@@ -19,6 +24,7 @@ pt-BR:
         one: 'Funcionário'
         other: 'Funcionários'
       order_item: 'Item do pedido'
+      historic: 'Histórico'
     attributes:
       owner:
         register_number: 'CPF'
@@ -75,6 +81,9 @@ pt-BR:
         preparing: 'Em preparação'
         canceled: 'Cancelado'
         finished: 'Entregue'
+      order_item:
+        quantity: 'Quantidade'
+        observation: 'Observação'
       profile:
         register_number: 'CPF'
         email: 'E-mail'

@@ -41,7 +41,7 @@ describe 'Proprietário acessa área de produtos' do
     click_on 'Meus produtos'
 
     expect(page).to have_content 'Gerencie seu estoque e cadastre seus produtos para venda'
-    expect(page).to have_content 'Nota: Itens inativos e sem porção registrada não são listados no seu cardápio'
+    expect(page).to have_content 'Observação: Itens inativos e sem porção registrada não são listados no seu cardápio'
     expect(page).to have_content 'Pizza'
     expect(page).to have_content 'Hamburguer'
     expect(page).to have_content 'Coca-Cola'

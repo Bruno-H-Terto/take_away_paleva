@@ -20,7 +20,7 @@ describe 'Proprietário acessa listagem de tags registradas' do
     visit root_path
     click_on 'Marcadores'
 
-    expect(page).to have_content 'Gerencie seus marcadores'
+    expect(page).to have_content 'Gerencie seu Marcador'
     expect(page).to have_content 'Novo Marcador'
     expect(page).to have_content 'Doce'
     expect(page).to have_content 'Salgado'

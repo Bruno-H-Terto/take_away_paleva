@@ -3,20 +3,20 @@
 </div>
 
 <div>
-  <h2>Gerencie seus produtos</h2>
-  <p>Gerencie seu estoque e cadastre seus produtos para venda</p>
-  <small>Nota: Itens inativos e sem porção registrada não são listados no seu cardápio</small>
+  <h2><%= t('manage_other', name: Item.model_name.human.pluralize ) %></h2>
+  <p><%= t('informations.item.manage') %></p>
+  <small><%= t('informations.note') %>: <%= t('informations.item.unlisted') %></small>
 </div>
 
 <div>
   <%= form_with url: take_away_store_items_path(@take_away_store), method: :get,  class: 'd-inline-flex align-items-center' do |form| %>
     <div lass="form-group mb-0 me-2" >
-      <%= form.label :select_tag, 'Filtro', class: "visually-hidden" %>
+      <%= form.label :select_tag, t('forms.filter'), class: "visually-hidden" %>
       <%= form.collection_select :select_tag, @tags, :id, :quality_name, {prompt: 'Todos'}, class: 'form-select' %>
     </div>
 
     <div>
-      <%= form.submit 'Filtrar', class: 'btn btn-primary' %>
+      <%= form.submit t('forms.submit_filter'), class: 'btn btn-primary' %>
     </div>
   <% end %>
 </div>

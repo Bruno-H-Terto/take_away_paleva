@@ -1,8 +1,8 @@
 <% if @registers.any? %>
-  <h2>Histórico - <%= @item.name %></h2>
+  <h2><%= Historic.model_name.human %> - <%= @item.name %></h2>
   <% @registers.each do |portion, register| %>
     <%= link_to portion do %>
-      <small>Porção <%= portion.option_name %></small>
+      <small><%= Portion.model_name.human %> <%= portion.option_name %></small>
     <% end %>
     <div class="column border m-2 p-4 overflow-auto historical-list" id="<%= dom_id(portion) %>">
       <div class="column">
@@ -15,5 +15,5 @@
     </div>
   <% end %>
 <% else %>
-  <h5>Sem registros no momento</h5>
+  <h5><%= t('historical.no_content') %></h5>
 <% end %>

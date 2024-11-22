@@ -1,21 +1,21 @@
 <section class="row"> 
   <div class="col-6">
-    <h3>Marcador <%= @characteristic.quality_name_in_database %></h3>
+    <h3><%= Characteristic.model_name.human %> <%= @characteristic.quality_name_in_database %></h3>
     <div id="list_associeted_items">
       <% if @characteristic.items.any? %>
-        <h5>Items associados</h5>
+        <h5><%= t('characteristic.items.associated') %></h5>
         <div class="overflow-auto">
           <%= render 'items/items', items: @characteristic.items %>
         </div>
       <% else %>
-        <p>Sem items associados</p>
+        <p><%= t('characteristic.items.no_associated') %></p>
       <% end %>
     </div>
   </div>
   
   <div class="col-6">
     <%= render 'shared/errors', object: @characteristic %>
-    <small>Atualizar <%= @characteristic.quality_name_in_database %></small>
+    <small><%= t('forms.update') %> <%= @characteristic.quality_name_in_database %></small>
     <%= form_with model: @characteristic do |form| %>
       <div>
         <%= form.label :quality_name %>
