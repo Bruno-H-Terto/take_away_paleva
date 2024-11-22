@@ -14,6 +14,10 @@
           Justificativa: <%= @order.reason_cancel&.information %>
         </p>
       <% end %>
+
+      <% if @order.done? %>
+        <%= button_to 'Marcar como entregue', finished_order_path(@order), method: :patch, class: 'btn btn-primary mb-3' %>
+      <% end %>
       <p>Cliente: <%= @order.name %></p>
       <p>Contato: <%= @order.contact %></p>
     </div>

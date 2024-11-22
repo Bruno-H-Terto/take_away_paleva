@@ -53,6 +53,12 @@ class OrdersController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  def finished
+    order = current_store.orders.find(params[:id])
+    order.finished!
+    redirect_to order, notice: 'Pedido entregue com sucesso!'
+  end
+
   private
 
   def order_params
