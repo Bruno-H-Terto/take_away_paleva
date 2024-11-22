@@ -69,4 +69,48 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, notice: 'Requisição inválida'
   end
 
+  def load_cart_session
+    return [[], 0] unless session[:cart_items].present?
+
+    order_items = []
+    total_price = 0
+
+    begin
+      session[:cart_items].each do |order_item|
+        menu, item, portion = find_cart_entities(order_item)
+
+        if menu && item && portion
+          order_items << build_cart_item(menu, item, portion, order_item)
+          total_price += portion.value * order_item['quantity'].to_i
+        end
+      end
+      [order_items, money_value(total_price)]
+    rescue StandardError
+      session.delete(:cart_items)
+      [[], 0]
+    end
+  end
+
+  def clear_cart_session
+    session.delete(:cart_items)
+  end
+
+  private
+
+  def find_cart_entities(order_item)
+    menu = current_store.menus.find_by(id: order_item['menu'])
+    item = current_store.items.find_by(id: order_item['item'])
+    portion = Portion.find_by(id: order_item['portion_id'])
+    [menu, item, portion]
+  end
+
+  def build_cart_item(menu, item, portion, order_item)
+    {
+      menu: menu,
+      item: item,
+      portion: portion.menu_option_name,
+      observation: order_item['observation'],
+      quantity: order_item['quantity']
+    }
+  end
 end

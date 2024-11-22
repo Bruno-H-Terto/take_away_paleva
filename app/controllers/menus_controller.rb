@@ -12,6 +12,8 @@ class MenusController < ApplicationController
     end
 
     flash.now[:alert] = 'Não foi possível cadastrar o seu cardápio'
+    setup_store_context
+    @order_items, @price = load_cart_session
     render 'home/index', status: :unprocessable_entity
   end
 
@@ -33,5 +35,13 @@ class MenusController < ApplicationController
     if @owner != @take_away_store.owner
       return redirect_to root_path, notice: 'Acesso não autorizado. Não é permitido o acesso a dados de terceiros'
     end
+  end
+
+  def setup_store_context
+    @employee = current_employee if employee_signed_in?
+    @take_away_store = current_store
+    @owner = @take_away_store.owner
+    @menus = @owner.menus
+    @items = @take_away_store.items.select(&:active?)
   end
 end
