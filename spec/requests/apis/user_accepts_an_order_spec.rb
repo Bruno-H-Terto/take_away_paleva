@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário aceita um pedido' do
-  context 'PATCH /api/v1/stores/:store_code/orders/:code' do
+  context 'PATCH /api/v1/stores/:store_code/orders/:code/confirmed' do
     it 'com sucesso' do
       owner = Owner.create!(name: 'Harry', surname: 'Potter', register_number: '402.793.150-58',
           email: 'quadribol@email.com', password: 'treina_dev13')

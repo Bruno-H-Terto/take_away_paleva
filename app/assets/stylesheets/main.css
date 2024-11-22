@@ -142,7 +142,7 @@ nav .btn {
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
-  overflow: hidden;
+  overflow-y: auto;
   gap: 8px;
   height: 5rem;
 }

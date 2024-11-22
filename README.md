@@ -1,6 +1,6 @@
 # Take Away Palevá
 
-Está é uma aplicação para gerenciamento de Estabelecimentos do segmento Take Away, modelo oferecido no qual o consumidor opta por retirar seu pedido diretamente no estabelecimento. Este trabalho foi desenvolvido através do TreinaDev13 ministrado por Campus Code.
+Está é uma aplicação para gerenciamento de Estabelecimentos do segmento Take Away, modelo oferecido no qual o consumidor opta por retirar seu pedido diretamente no estabelecimento. Este trabalho foi desenvolvido por Bruno Herculano através do TreinaDev13 ministrado por Campus Code.
 
 ## Tecnologias Necessárias
 - [Ruby 3.2.1](https://www.ruby-lang.org/en/news/2023/02/08/ruby-3-2-1-released/)
@@ -105,7 +105,7 @@ Este endpoint retorna uma mensagem de solicitação para do código do Estabelec
 json
 {
   "error_message":"Informe o código do   Estabelecimento"
-  }
+}
 ```
 #### GET api/v1/stores/:code
 
@@ -114,11 +114,24 @@ Endpoint para acesso a um Estabelecimento específico. O parâmetro esperado é 
 * status: 200
 * content-type: application/json
 ```
-json{"store":
-  {"id":1,
-  "trade_name":"Pedra Filosofal","corporate_name":"Hogwarts LTDA","register_number":"76.898.265/0001-10","street":"Beco diagonal","number":"13","district":"Bolsão","city":"Hogsmeade","state":"SP","zip_code":"11000-000","complement":"","phone_number":"(11) 98800-0000","email":"potter@email.com","code":"GKUPCH","owner_id":1
-  }
-  }
+json
+{
+  "store":
+    {
+      "id":1,
+      "trade_name":"Pedra Filosofal",
+      "corporate_name":"Hogwarts LTDA",
+      "register_number":"76.898.265/0001-10",
+      "street":"Beco diagonal","number":"13",
+      "district":"Bolsão","city":"Hogsmeade",
+      "state":"SP","zip_code":"11000-000",
+      "complement":"",
+      "phone_number":"(11) 98800-0000",
+      "email":"potter@email.com",
+      "code":"GKUPCH",
+      "owner_id":1
+    }
+}
 ```
 * Resposta
   - id: id único do Estabelecimento;
@@ -146,8 +159,120 @@ Endpoint para listagem de pedidos de um Restaurante.
 
 ```
 json
+[
+  {
+    "id":1,
+    "code":"IPHF9Z1A",
+    "name":"Jhon",
+    "status":"waiting_confirmation",
+    "take_away_store_id":1,
+    "created_at_current":"2024-11-22T05:14:27.217-03:00",
+    "total":6000
+  },
+  {
+    "id":2,
+    "code":"BCDF9Z2A",
+    "name":"Maria",
+    "status":"done",
+    "take_away_store_id":1,
+    "created_at_current":"2024-11-22T05:14:27.217-03:00",
+    "total":8000
+  }
+]
+```
+
+* Resposta
+  - id: id único do Pedido;
+  - code: Código do Pedido;
+  - name: Nome do Cliente;
+  - status: Status do Pedido;
+  - take_away_store_id: id do Estabelecimento;
+  - created_at_current: data de Criação do pedido com fuso;
+  - total: Valor total do pedido;
+
+#### GET /api/v1/stores/:store_code/orders/status
+
+Endpoint destinado a filtragem na listagem de pedidos. Sua resposta segue as mesmas especificações da resposta para listagem geral. O filtro deve ser passago via parâmetro, sendo em caso de um parâmetro desconhecido ser passado o retorno será a listagem total.
+
+* Parâmetros aceitos
+- waiting_confirmation: para pedidos aguardando confirmação;
+- preparing: Pedidos confirmados;
+- done: Pedidos prontos;
+- canceled: Pedidos cancelados;
+- finished: Pedidos finalizados.
+
+* Exemplo de requisição
 
 ```
+http://localhost:3000/api/v1/stores/GKUPCH/orders/status?=waiting_confirmation
+```
+#### GET /api/v1/stores/:store_code/orders/:code
+
+Exibe Detalhes de um pedido através de seu código.
+
+* status: 200
+* content-type: application/json
+
+```
+json
+{
+  "order":
+  {
+    "id":1,
+    "code":"IPHF9Z1A",
+    "name":"Jhon",
+    "phone_number":"(11) 11111-1111",
+    "register_number":"",
+    "email":"",
+    "status":"waiting_confirmation",
+    "take_away_store_id":1,
+    "created_at_current":"22/11/24 - 05:14",
+    "total":6000
+  },
+  "order_items":
+    [
+      {
+        "menu":"Fast Food",
+        "item":"Hambúrguer caseiro simples",
+        "portion":"Média - R$ 60,00",
+        "observation":"ok",
+        "quantity":1
+      }
+    ]
+  }
+
+```
+
+* Resposta
+  - id: id único do Pedido;
+  - code: Código do Pedido;
+  - name: Nome do Cliente;
+  - status: Status do Pedido;
+  - take_away_store_id: id do Estabelecimento;
+  - created_at_current: data de Criação do pedido com fuso;
+  - total: Valor total do pedido;
+  - phone_number: Telefone do Cliente
+  - email: E-mail do Cliente;
+  - register_number: CPF do Cliente;
+  - Uma lista presente em order_items com todos o items do pedido, contendo: Cardápio, Produto, Porção, Observação e Quantidade.
+
+#### PATCH /api/v1/stores/:store_code/orders/:code/confirmed
+
+Endpoint para confirmação de Pedidos. Um pedido aguardando confirmação tem seu status alterado para 'preparing'. Não é necessário a passagem de nenhum parâmetro além dos já mencionados.
+
+* status: 200
+* content-type: application/json
+
+Sua resposta é idêntica a de detalhes do pedido, apenas com a diferença que o status é atualizado.
+
+#### PATCH /api/v1/stores/:store_code/orders/:code/done
+
+Endpoint para conclusão de Pedidos. Um pedido confirmado tem seu status alterado para 'done'. Não é necessário a passagem de nenhum parâmetro além dos já mencionados.
+
+* status: 200
+* content-type: application/json
+
+Sua resposta é idêntica a de detalhes do pedido, apenas com a diferença que o status é atualizado.
 
 ### Falhas
 
@@ -156,13 +281,17 @@ Em caso de falha para qualquer requisição com parâmetro não encontrado é re
   * content-type: application/json
   ```
   json
-  {"error_message":"Recurso não localizado"}
+  {
+    "error_message":"Recurso não localizado"
+  }
 ```
 Em uma eventual indisponibilidade do servidor é retornado a seguinte resposta:
  * status: 500
  * content-type: application/json
 
  ```
- json
- { error_message: 'Ocorreu um erro interno' }
+  json
+  { 
+    error_message: 'Ocorreu um erro interno' 
+  }
  ```
