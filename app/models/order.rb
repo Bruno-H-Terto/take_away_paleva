@@ -1,9 +1,14 @@
 class Order < ApplicationRecord
   belongs_to :take_away_store
   has_many :order_items
+  has_many :registers
+  has_many :historical_orders, through: :registers
+  has_one :reason_cancel
   validates :name, presence: true
   before_create :generate_code
   before_create :created_time_current
+  after_create :historical_order_create
+  after_update :historical_order
   before_validation :phone_or_email_must_be_present
   validates_with RegisterValidator, field: :register_number, length: 11, if: -> { register_number.present? }
   validates_with PhoneValidator, field: :phone_number, if: -> { phone_number.present? }
@@ -42,5 +47,25 @@ class Order < ApplicationRecord
     if phone_number.empty? && email.empty?
       errors.add(:base, 'Telefone ou email deve ser passado')
     end
+  end
+
+  def historical_order
+    return unless saved_change_to_status?
+
+    historical_orders.create!(
+      information: I18n.t(status),
+      time: formated_time
+    )
+  end
+
+  def historical_order_create
+    historical_orders.create!(
+      information: I18n.t(status),
+      time: formated_time
+    )
+  end
+
+  def formated_time
+    Time.now.strftime("%d/%m/%Y - %H:%M")
   end
 end

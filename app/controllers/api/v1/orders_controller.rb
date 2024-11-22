@@ -107,6 +107,35 @@ class Api::V1::OrdersController < Api::V1::ApiController
     render status: 200, json: response
   end
 
+  def canceled
+    order = @store.orders.find_by!(code: params[:code])
+
+    if (order.waiting_confirmation? || order.preparing?)
+      if params[:reason].present?
+        order.create_reason_cancel!(information: params[:reason], time: params[:time])
+        order.canceled!
+        response_order_items = order.order_items.map do |order_item|
+          {
+            menu: order_item.menu.name,
+            item: order_item.item.name,
+            portion: order_item.portion.menu_option_name,
+            observation: order_item.observation.presence || 'Nenhuma',
+            quantity: order_item.quantity
+          }
+        end
+        order_json = default_sanitizer_response(order)
+        order_json['created_at_current'] = I18n.l(order.created_at_current, format: "%d/%m/%y - %H:%M")
+        response = { order: order_json, order_items: response_order_items }
+      else
+        response = { message: 'Deve apresentar a justificava para o cancelamento' }
+      end
+    else
+      response = { message: 'Status do pedido inválido para o cancelamento' }
+    end
+    
+    render status: 200, json: response
+  end
+
   private
 
   def set_take_away_store

@@ -98,6 +98,9 @@ pt-BR:
     items:
       associated: 'Items associados'
       no_associated: 'Sem items associados'
-
-
+  waiting_confirmation: 'Pedido realizado'
+  preparing: 'Pedido aceito'
+  done: 'Pedido concluído'
+  finished: 'Pedido entregue'
+  canceled: 'Pedido cancelado'
   

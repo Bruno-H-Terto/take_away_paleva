@@ -43,6 +43,7 @@ Rails.application.routes.draw do
           get 'status', on: :collection
           patch 'confirmed', on: :member
           patch 'done', on: :member
+          patch 'canceled', on: :member
         end
       end
     end

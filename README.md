@@ -274,6 +274,21 @@ Endpoint para conclusão de Pedidos. Um pedido confirmado tem seu status alterad
 
 Sua resposta é idêntica a de detalhes do pedido, apenas com a diferença que o status é atualizado.
 
+#### PATCH /api/v1/stores/:store_code/orders/:code/canceled
+
+Endpoint para cancelamento de Pedidos. Um pedido confirmado ou aguardando confirmação tem seu status alterado para 'canceled'. É necessário a passagem de um parâmetro além dos já mencionados. O parâmetro esperado é "reason" (justificativa), sem esse parâmetro o cancelamento não pode ser realizado.
+
+* status: 200
+* content-type: application/json
+
+* Exemplo de requisição
+
+```
+http://localhost:3000/api/v1/stores/GKUPCH/orders/IPHF9Z1A/canceled?=Exemplo
+```
+
+Sua resposta é idêntica a de detalhes do pedido, apenas com a diferença que o status é atualizado.
+
 ### Falhas
 
 Em caso de falha para qualquer requisição com parâmetro não encontrado é retornado a seguinte resposta:

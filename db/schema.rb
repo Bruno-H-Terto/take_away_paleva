@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_20_172636) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_125200) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_172636) do
     t.index ["profile_id"], name: "index_employees_on_profile_id"
     t.index ["register_number"], name: "index_employees_on_register_number", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+  end
+
+  create_table "historical_orders", force: :cascade do |t|
+    t.text "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "time"
   end
 
   create_table "historics", force: :cascade do |t|
@@ -184,6 +191,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_172636) do
     t.index ["take_away_store_id"], name: "index_profiles_on_take_away_store_id"
   end
 
+  create_table "reason_cancels", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.text "information"
+    t.text "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_reason_cancels_on_order_id"
+  end
+
+  create_table "registers", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "historical_order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["historical_order_id"], name: "index_registers_on_historical_order_id"
+    t.index ["order_id"], name: "index_registers_on_order_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "characteristic_id", null: false
@@ -239,6 +264,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_20_172636) do
   add_foreign_key "orders", "take_away_stores"
   add_foreign_key "portions", "items"
   add_foreign_key "profiles", "take_away_stores"
+  add_foreign_key "reason_cancels", "orders"
+  add_foreign_key "registers", "historical_orders"
+  add_foreign_key "registers", "orders"
   add_foreign_key "tags", "characteristics"
   add_foreign_key "tags", "items"
   add_foreign_key "take_away_stores", "owners"

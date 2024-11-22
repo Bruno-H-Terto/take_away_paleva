@@ -2,26 +2,44 @@
   <%= link_to 'Home', root_path %> / <%= link_to t('order.my'), orders_path %>
 </div>
 
-<div>
-  <h2>Detalhes do pedido <%= @order.code %></h2>
-  <small>Solicitado em <%= @order.created_at_current.strftime("%d/%m/%Y %H:%M") %></small>
-  <small class="ms-3">Total do pedido: <%= @price %></small>
-  <div class="mt-3">
-    <strong><%= Order.human_attribute_name(@order.status) %></strong>
-    <p>Cliente: <%= @order.name %></p>
-    <p>Contato: <%= @order.contact %></p>
+<div class="row">
+  <div class="col-8">
+    <h2>Detalhes do pedido <%= @order.code %></h2>
+    <small>Solicitado em <%= @order.created_at_current.strftime("%d/%m/%Y %H:%M") %></small>
+    <small class="ms-3">Total do pedido: <%= @price %></small>
+    <div class="mt-3">
+      <strong><%= Order.human_attribute_name(@order.status) %></strong>
+      <% if @order.canceled? %>
+      <p>
+        Justificativa: <%= @order.reason_cancel.information %>
+      </p>
+      <% end %>
+      <p>Cliente: <%= @order.name %></p>
+      <p>Contato: <%= @order.contact %></p>
+    </div>
+    <div class="mt-3">
+      <h3 class="mb-3">Itens do pedido</h3>
+      <% @order.order_items.each do |order_item| %>
+        <div class="lh-1 overflow-auto">
+          <p><strong><%= Menu.model_name.human %>:</strong> <%= order_item.menu.name %></p>
+          <p><strong><%= Item.model_name.human %>:</strong> <%= order_item.item.name %></p>
+          <p><strong><%= Portion.model_name.human %>:</strong> <%= order_item.portion.option_name %></p>
+          <p><strong><%= OrderItem.human_attribute_name(:quantity) %>:</strong> <%= order_item.quantity %></p>
+          <p><strong><%= OrderItem.human_attribute_name(:observation) %>:</strong> <%= order_item.observation.presence || 'Nenhuma' %></p>
+          <hr>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="mt-3">
-    <h3 class="mb-3">Itens do pedido</h3>
-    <% @order.order_items.each do |order_item| %>
-      <div class="lh-1 overflow-auto">
-        <p><strong><%= Menu.model_name.human %>:</strong> <%= order_item.menu.name %></p>
-        <p><strong><%= Item.model_name.human %>:</strong> <%= order_item.item.name %></p>
-        <p><strong><%= Portion.model_name.human %>:</strong> <%= order_item.portion.option_name %></p>
-        <p><strong><%= OrderItem.human_attribute_name(:quantity) %>:</strong> <%= order_item.quantity %></p>
-        <p><strong><%= OrderItem.human_attribute_name(:observation) %>:</strong> <%= order_item.observation.presence || 'Nenhuma' %></p>
-        <hr>
-      </div>
-    <% end %>
+
+  <div class="col-4">
+    <h2>Histórico</h2>
+    <div>
+      <% @order.historical_orders.each do |register| %>
+      <p>
+        <%= register.information %> - <%= register.time %>
+      </p>
+      <% end %>
+    </div>
   </div>
 </div>
