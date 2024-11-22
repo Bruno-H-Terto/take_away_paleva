@@ -14,7 +14,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+  def authorized_user?
+    owner_signed_in? || employee_signed_in?
+  end
+
+  def unauthenticated_user!
+    return redirect_to root_path, alert: 'Acesso não autorizado' if authorized_user?
+  end
+
   def prevent_double_access!
     active_user = owner_signed_in? || employee_signed_in?
     if active_user
