@@ -55,8 +55,12 @@ class OrdersController < ApplicationController
 
   def finished
     order = current_store.orders.find(params[:id])
-    order.finished!
-    redirect_to order, notice: 'Pedido entregue com sucesso!'
+    if order.present? && order.done?
+      order.finished!
+      redirect_to order, notice: 'Pedido entregue com sucesso!'
+    else
+      redirect_to order, alert: 'Status do pedido indisponível para entrega'
+    end
   end
 
   private
